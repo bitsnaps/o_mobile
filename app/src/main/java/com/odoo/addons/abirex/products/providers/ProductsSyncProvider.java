@@ -19,7 +19,7 @@
  */
 package com.odoo.addons.abirex.products.providers;
 
-import com.odoo.base.addons.product.ProductProduct;
+import com.odoo.base.addons.abirex.product.ProductProduct;
 import com.odoo.core.orm.provider.BaseModelProvider;
 
 public class ProductsSyncProvider extends BaseModelProvider {

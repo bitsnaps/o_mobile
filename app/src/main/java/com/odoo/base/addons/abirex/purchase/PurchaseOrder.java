@@ -1,23 +1,4 @@
-/**
- * Odoo, Open Source Management Solution
- * Copyright (C) 2012-today Odoo SA (<http:www.odoo.com>)
- * <p/>
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version
- * <p/>
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details
- * <p/>
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http:www.gnu.org/licenses/>
- * <p/>
- * Created on 30/12/14 4:00 PM
- */
-package com.odoo.base.addons.product;
+package com.odoo.base.addons.abirex.purchase;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -25,46 +6,53 @@ import android.net.Uri;
 import android.util.Log;
 
 import com.odoo.BuildConfig;
-import com.odoo.OdooActivity;
-import com.odoo.base.addons.product.UoM;
 import com.odoo.base.addons.res.ResCompany;
-import com.odoo.core.orm.ODataRow;
+import com.odoo.base.addons.res.ResCurrency;
+import com.odoo.base.addons.res.ResPartner;
+import com.odoo.base.addons.res.ResUsers;
 import com.odoo.core.orm.OModel;
-import com.odoo.core.orm.OValues;
-import com.odoo.core.orm.annotation.Odoo;
 import com.odoo.core.orm.fields.OColumn;
-import com.odoo.core.orm.fields.types.OBlob;
-import com.odoo.core.orm.fields.types.OBoolean;
+import com.odoo.core.orm.fields.types.ODateTime;
 import com.odoo.core.orm.fields.types.OFloat;
-import com.odoo.core.orm.fields.types.OText;
+import com.odoo.core.orm.fields.types.OSelection;
 import com.odoo.core.orm.fields.types.OVarchar;
 import com.odoo.core.support.OUser;
-import static com.odoo.core.orm.fields.OColumn.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import static com.odoo.core.orm.fields.OColumn.RelationType;
 
-public class ProductProduct extends OModel {
+public class PurchaseOrder extends OModel {
 
-    public static final String TAG = ProductProduct.class.getSimpleName();
+    public static final String TAG = PurchaseOrder.class.getSimpleName();
     public static final String AUTHORITY = BuildConfig.APPLICATION_ID +
-            ".core.provider.content.sync.product_product";
+            ".core.provider.content.sync.purchase_order";
 
     OColumn name = new OColumn("Name", OVarchar.class).setSize(100).setRequired();
-    OColumn active = new OColumn("Active", OBoolean.class).setDefaultValue(false);
-    OColumn image = new OColumn("Image", OBlob.class).setDefaultValue(false);
-    OColumn image_small = new OColumn("Avatar", OBlob.class).setDefaultValue(false);
-    OColumn lst_price = new OColumn("Sale Price", OFloat.class);
-    OColumn default_code = new OColumn("Default Code", OVarchar.class);
-    OColumn code = new OColumn("Code", OVarchar.class);
-    OColumn product_tmpl_id = new OColumn(null, ProductTemplate.class, RelationType.ManyToOne);
+    OColumn origin = new OColumn("Origin", OVarchar.class);
+    OColumn partner_ref = new OColumn("Vendor Reference", OVarchar.class);
+    OColumn date_order = new OColumn("Order Date", ODateTime.class);
+    OColumn date_approve = new OColumn("Date Approved", ODateTime.class);
+    OColumn partner_id = new OColumn(null, ResPartner.class, RelationType.ManyToOne);
+    OColumn currency_id = new OColumn(null, ResCurrency.class, RelationType.ManyToOne);
+    OColumn state = new OColumn("Vendor Reference", OSelection.class)
+            .addSelection("draft", "RFQ")
+            .addSelection("sent", "RFQ Sent")
+            .addSelection("to approve", "To Approve")
+            .addSelection("purchase", "Purchase Order")
+            .addSelection("done", "Locked")
+            .addSelection("cancel", "Cancelled");
+    OColumn company_id = new OColumn("Company", ResCompany.class, RelationType.ManyToOne);
+    OColumn user_id = new OColumn(null, ResUsers.class, RelationType.ManyToOne);
+
+    OColumn amount_untaxed = new OColumn("Untaxed Amount", OFloat.class);
+    OColumn amount_tax = new OColumn("Taxes", OFloat.class);
+    OColumn amount_total = new OColumn("Total Amount", OFloat.class);
 
 //
-//    @Odoo.Domain("[['uom_id', '=', @uom_id]]")
+//    @Odoo.Domain("[['uom_id", "=', @uom_id]]")
 //    OColumn uom_id = new OColumn("UOM", UoM.class, OColumn.RelationType.ManyToOne);
 
-    public ProductProduct(Context context, OUser user) {
-        super(context, "product.product", user);
+    public PurchaseOrder(Context context, OUser user) {
+        super(context, "purchase.order", user);
         setHasMailChatter(true);
     }
 
@@ -118,11 +106,11 @@ public class ProductProduct extends OModel {
 
     @Override
     public void onSyncStarted(){
-        Log.e(TAG, "ProductProduct->onSyncStarted");
+        Log.e(TAG, "PurchaseOrder->onSyncStarted");
     }
 
     @Override
     public void onSyncFinished(){
-        Log.e(TAG, "ProductProduct->onSyncFinished");
+        Log.e(TAG, "PurchaseOrder->onSyncFinished");
     }
 }

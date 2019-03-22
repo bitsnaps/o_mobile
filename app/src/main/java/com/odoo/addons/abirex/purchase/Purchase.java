@@ -17,7 +17,7 @@
  * <p/>
  * Created on 30/12/14 3:28 PM
  */
-package com.odoo.addons.abirex.products;
+package com.odoo.addons.abirex.purchase;
 
 
 import android.content.Context;
@@ -41,8 +41,11 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.odoo.R;
-import com.odoo.base.addons.abirex.product.ProductProduct;
+import com.odoo.base.addons.abirex.purchase.PurchaseOrder;
+import com.odoo.base.addons.res.ResCompany;
 import com.odoo.core.orm.ODataRow;
+import com.odoo.core.orm.fields.OColumn;
+import com.odoo.core.orm.fields.types.OVarchar;
 import com.odoo.core.support.addons.fragment.BaseFragment;
 import com.odoo.core.support.addons.fragment.IOnSearchViewChangeListener;
 import com.odoo.core.support.addons.fragment.ISyncStatusObserverListener;
@@ -56,13 +59,13 @@ import com.odoo.core.utils.OCursorUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Products extends BaseFragment implements ISyncStatusObserverListener,
+public class Purchase extends BaseFragment implements ISyncStatusObserverListener,
 LoaderManager.LoaderCallbacks<Cursor>, SwipeRefreshLayout.OnRefreshListener,
 OCursorListAdapter.OnViewBindListener, IOnSearchViewChangeListener, View.OnClickListener,
 AdapterView.OnItemClickListener {
 
-    public static final String TAG = ProductProduct.class.getSimpleName();
-    public static final String KEY = Products.class.getSimpleName();
+    public static final String TAG = Purchase.class.getSimpleName();
+    public static final String KEY = Purchase.class.getSimpleName();
     public static final String EXTRA_KEY_TYPE = "extra_key_type";
     private View mView;
     private String mCurFilter = null;
@@ -84,7 +87,7 @@ AdapterView.OnItemClickListener {
         setHasSwipeRefreshView(view, R.id.swipe_container, this);
         mView = view;
         ListView mProductsList = (ListView) view.findViewById(R.id.listview);
-        mAdapter = new OCursorListAdapter(getActivity(), null, R.layout.product_row_item);
+        mAdapter = new OCursorListAdapter(getActivity(), null, R.layout.purchase_row_item);
         mAdapter.setOnViewBindListener(this);
         mAdapter.setHasSectionIndexers(true, "name");
         mProductsList.setAdapter(mAdapter);
@@ -97,19 +100,28 @@ AdapterView.OnItemClickListener {
 
     @Override
     public void onViewBind(View view, Cursor cursor, ODataRow row) {
-        Bitmap img;
-        if (row.getString("image_small").equals("false")) {
-            img = BitmapUtils.getAlphabetImage(getActivity(), row.getString("name"));
-        } else {
-            img = BitmapUtils.getBitmapImage(getActivity(), row.getString("image_small"));
+        String name =   getColumn(row, "partner_id.name", OVarchar.class);
+        String reference =  "IRef: " + row.getString("name") + " || ORef :" + row.getString("partner_ref");
+        String date =  "Ordered: " + row.getString("date_order") + " || Approved : " + row.getString("date_approve");
+        OControls.setText(view, R.id.company_name, reference);
+        OControls.setText(view, R.id.purchase_ref, name);
+        OControls.setText(view, R.id.other_details, date);
+    }
+
+    public static String getColumn(ODataRow row, String columnName, Class dataTypeClass) {
+        if(columnName.contains(".")){
+            String[] columnTokens = columnName.split("\\.");
+            columnName = columnTokens[1];
+            //ResCompany company = new ResCompany(con, null);
+            row = row.getM2ORecord(columnTokens[0]).browse();
         }
-        OControls.setImage(view, R.id.image_small, img);
-        OControls.setText(view, R.id.name, row.getString("name"));
-        //OControls.setText(view, R.id.default_code, (row.getString("default_code").equals("false"))
-        //        ? "" : row.getString("default_code"));
-        String sellingPrice =  "Selling Price: " + (!row.getString("lst_price").equals("false") ? row.getFloat("lst_price") : " Price not Set");
-        String qty =  " Qty: " + (!row.getString("product_qty").equals("false") ? row.getFloat("product_qty") : " 0");
-        OControls.setText(view,R.id.lst_price, sellingPrice + qty);
+//        return row.getInt(columnName).toString();
+        Object columnObject = row.get(columnName);
+        if(columnObject.toString() != "false"){
+            if(columnObject instanceof OVarchar)
+            return columnObject.toString();
+        }
+        return "";
     }
 
     @Override
@@ -137,7 +149,7 @@ AdapterView.OnItemClickListener {
                     OControls.setGone(mView, R.id.loadingProgress);
                     OControls.setVisible(mView, R.id.swipe_container);
                     OControls.setGone(mView, R.id.data_list_no_item);
-                    setHasSwipeRefreshView(mView, R.id.swipe_container, Products.this);
+                    setHasSwipeRefreshView(mView, R.id.swipe_container, Purchase.this);
 
                 }
             }, 500);
@@ -149,7 +161,7 @@ AdapterView.OnItemClickListener {
                     OControls.setGone(mView, R.id.loadingProgress);
                     OControls.setGone(mView, R.id.swipe_container);
                     OControls.setVisible(mView, R.id.data_list_no_item);
-                    setHasSwipeRefreshView(mView, R.id.data_list_no_item, Products.this);
+                    setHasSwipeRefreshView(mView, R.id.data_list_no_item, Purchase.this);
                     OControls.setImage(mView, R.id.icon, R.drawable.ic_action_products);
                     OControls.setText(mView, R.id.title, _s(R.string.label_no_product_found));
                     OControls.setText(mView, R.id.subTitle, "");
@@ -168,16 +180,16 @@ AdapterView.OnItemClickListener {
     }
 
     @Override
-    public Class<ProductProduct> database() {
-        return ProductProduct.class;
+    public Class<PurchaseOrder> database() {
+        return PurchaseOrder.class;
     }
 
     @Override
     public List<ODrawerItem> drawerMenus(Context context) {
         List<ODrawerItem> items = new ArrayList<>();
-        items.add(new ODrawerItem(KEY).setTitle("Products")
+        items.add(new ODrawerItem(KEY).setTitle("Purchase")
                 .setIcon(R.drawable.ic_action_products)
-                .setInstance(new Products()));
+                .setInstance(new Purchase()));
 
         return items;
     }
@@ -193,7 +205,7 @@ AdapterView.OnItemClickListener {
     @Override
     public void onRefresh() {
         if (inNetwork()) {
-            parent().sync().requestSync(ProductProduct.AUTHORITY);
+            parent().sync().requestSync(PurchaseOrder.AUTHORITY);
             setSwipeRefreshing(true);
         } else {
             hideRefreshingProgress();
@@ -243,7 +255,7 @@ AdapterView.OnItemClickListener {
         if (row != null) {
             data = row.getPrimaryBundleData();
         }
-        IntentUtils.startActivity(getActivity(), ProductDetails.class, data);
+        IntentUtils.startActivity(getActivity(), PurchaseDetails.class, data);
     }
 
 

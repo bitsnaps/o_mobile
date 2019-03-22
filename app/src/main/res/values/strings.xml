@@ -20,4 +20,7 @@
 
     <string name="label_no_product_found">No Product Found !</string>
     <string name="sync_label_products">Products</string>
+
+    <string name="label_no_purchase_found">No Purchase Found !</string>
+    <string name="sync_label_purchases">Purchase</string>
 </resources>

@@ -33,7 +33,6 @@ import android.text.TextPaint;
 import android.util.Base64;
 
 import com.odoo.R;
-import com.odoo.addons.abirex.products.utils.Utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

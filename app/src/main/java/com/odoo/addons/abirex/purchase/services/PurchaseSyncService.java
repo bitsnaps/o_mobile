@@ -17,22 +17,23 @@
  *
  * Created on 2/1/15 11:07 AM
  */
-package com.odoo.addons.abirex.products.services;
+package com.odoo.addons.abirex.purchase.services;
 
 import android.content.Context;
 import android.os.Bundle;
 
 import com.odoo.base.addons.abirex.product.ProductProduct;
+import com.odoo.base.addons.abirex.purchase.PurchaseOrder;
 import com.odoo.core.service.OSyncAdapter;
 import com.odoo.core.service.OSyncService;
 import com.odoo.core.support.OUser;
 
-public class ProductSyncService extends OSyncService {
-    public static final String TAG = ProductSyncService.class.getSimpleName();
+public class PurchaseSyncService extends OSyncService {
+    public static final String TAG = PurchaseSyncService.class.getSimpleName();
 
     @Override
     public OSyncAdapter getSyncAdapter(OSyncService service, Context context) {
-        return new OSyncAdapter(context, ProductProduct.class, this, true);
+        return new OSyncAdapter(context, PurchaseOrder.class, this, true);
     }
 
     @Override

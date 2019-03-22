@@ -17,7 +17,7 @@
  * <p/>
  * Created on 8/1/15 5:47 PM
  */
-package com.odoo.addons.abirex.products;
+package com.odoo.addons.abirex.purchase;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -51,9 +51,9 @@ import com.odoo.core.utils.OStringColorUtil;
 import odoo.controls.OField;
 import odoo.controls.OForm;
 
-public class ProductDetails extends OdooCompatActivity
+public class PurchaseDetails extends OdooCompatActivity
         implements View.OnClickListener, OField.IOnFieldValueChangeListener {
-    public static final String TAG = ProductDetails.class.getSimpleName();
+    public static final String TAG = PurchaseDetails.class.getSimpleName();
     public static String KEY_PARTNER_TYPE = "partner_type";
     private final String KEY_MODE = "key_edit_mode";
     private final String KEY_NEW_IMAGE = "key_new_image";
@@ -269,7 +269,7 @@ public class ProductDetails extends OdooCompatActivity
                                 if (type == OAlert.ConfirmType.POSITIVE) {
                                     // Deleting record and finishing activity if success.
                                     if (product.delete(record.getInt(OColumn.ROW_ID))) {
-                                        Toast.makeText(ProductDetails.this, R.string.toast_record_deleted,
+                                        Toast.makeText(PurchaseDetails.this, R.string.toast_record_deleted,
                                                 Toast.LENGTH_SHORT).show();
                                         finish();
                                     }

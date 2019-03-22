@@ -17,7 +17,7 @@
  *
  * Created on 15/1/15 4:52 PM
  */
-package com.odoo.addons.abirex.products.utils;
+package com.odoo.addons.products.utils;
 
 import android.content.Context;
 import android.content.Intent;
