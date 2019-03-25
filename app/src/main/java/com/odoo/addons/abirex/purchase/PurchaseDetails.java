@@ -33,7 +33,7 @@ import android.widget.Toast;
 
 import com.odoo.App;
 import com.odoo.R;
-import com.odoo.addons.products.utils.ShareUtil;
+import com.odoo.addons.customers.utils.ShareUtil;
 import com.odoo.base.addons.ir.feature.OFileManager;
 import com.odoo.base.addons.abirex.product.ProductProduct;
 import com.odoo.core.orm.ODataRow;

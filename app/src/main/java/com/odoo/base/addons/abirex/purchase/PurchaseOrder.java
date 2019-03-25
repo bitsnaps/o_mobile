@@ -31,8 +31,8 @@ public class PurchaseOrder extends OModel {
     OColumn partner_ref = new OColumn("Vendor Reference", OVarchar.class);
     OColumn date_order = new OColumn("Order Date", ODateTime.class);
     OColumn date_approve = new OColumn("Date Approved", ODateTime.class);
-    OColumn partner_id = new OColumn(null, ResPartner.class, RelationType.ManyToOne);
-    OColumn currency_id = new OColumn(null, ResCurrency.class, RelationType.ManyToOne);
+    OColumn partner_id = new OColumn("Partner Id", ResPartner.class, RelationType.ManyToOne);
+    OColumn currency_id = new OColumn("Currency", ResCurrency.class, RelationType.ManyToOne);
     OColumn state = new OColumn("Vendor Reference", OSelection.class)
             .addSelection("draft", "RFQ")
             .addSelection("sent", "RFQ Sent")

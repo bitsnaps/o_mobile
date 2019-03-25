@@ -1,22 +1,3 @@
-/**
- * Odoo, Open Source Management Solution
- * Copyright (C) 2012-today Odoo SA (<http:www.odoo.com>)
- * <p/>
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version
- * <p/>
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details
- * <p/>
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http:www.gnu.org/licenses/>
- * <p/>
- * Created on 30/12/14 3:28 PM
- */
 package com.odoo.addons.abirex.purchase;
 
 
@@ -40,9 +21,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.odoo.App;
 import com.odoo.R;
 import com.odoo.base.addons.abirex.purchase.PurchaseOrder;
 import com.odoo.base.addons.res.ResCompany;
+import com.odoo.base.addons.res.ResPartner;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.orm.fields.OColumn;
 import com.odoo.core.orm.fields.types.OVarchar;
@@ -112,13 +95,13 @@ AdapterView.OnItemClickListener {
         if(columnName.contains(".")){
             String[] columnTokens = columnName.split("\\.");
             columnName = columnTokens[1];
-            //ResCompany company = new ResCompany(con, null);
-            row = row.getM2ORecord(columnTokens[0]).browse();
+            ResPartner company = new ResPartner(App.getContext(), null);
+
+            row = company.browse(row.getInt(columnTokens[0]));
         }
 //        return row.getInt(columnName).toString();
         Object columnObject = row.get(columnName);
-        if(columnObject.toString() != "false"){
-            if(columnObject instanceof OVarchar)
+        if( columnObject != null && columnObject.toString() != "false"){
             return columnObject.toString();
         }
         return "";

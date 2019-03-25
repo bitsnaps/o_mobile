@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '27.0.3'
     defaultConfig {
         useLibrary 'org.apache.http.legacy'
         manifestPlaceholders = [applicationName: "Odoo"]
@@ -16,6 +15,7 @@ android {
         debug {
             minifyEnabled false
             shrinkResources false
+            multiDexEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
