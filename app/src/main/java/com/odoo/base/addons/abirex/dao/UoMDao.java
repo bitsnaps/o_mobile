@@ -1,4 +1,4 @@
-package com.odoo.base.addons.abirex.product;
+package com.odoo.base.addons.abirex.dao;
 
 import android.content.Context;
 
@@ -8,13 +8,13 @@ import com.odoo.core.orm.fields.types.OBoolean;
 import com.odoo.core.orm.fields.types.OVarchar;
 import com.odoo.core.support.OUser;
 
-public class UoM extends OModel {
+public class UoMDao extends OModel {
 
     OColumn name = new OColumn("Name", OVarchar.class);
-    OColumn category_id = new OColumn("UoM Category", OVarchar.class, OColumn.RelationType.ManyToOne);
+    OColumn category_id = new OColumn("UoMDao Category", OVarchar.class, OColumn.RelationType.ManyToOne);
     OColumn active = new OColumn("Active", OBoolean.class);
 
-    public UoM(Context context, OUser user) {
+    public UoMDao(Context context, OUser user) {
         super(context, "res.country.state", user);
     }
 }

@@ -1,116 +1,153 @@
 package com.odoo.base.addons.abirex.purchase;
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
-import android.util.Log;
+import com.odoo.core.orm.ODataRow;
 
-import com.odoo.BuildConfig;
-import com.odoo.base.addons.res.ResCompany;
-import com.odoo.base.addons.res.ResCurrency;
-import com.odoo.base.addons.res.ResPartner;
-import com.odoo.base.addons.res.ResUsers;
-import com.odoo.core.orm.OModel;
-import com.odoo.core.orm.fields.OColumn;
-import com.odoo.core.orm.fields.types.ODateTime;
-import com.odoo.core.orm.fields.types.OFloat;
-import com.odoo.core.orm.fields.types.OSelection;
-import com.odoo.core.orm.fields.types.OVarchar;
-import com.odoo.core.support.OUser;
+import java.util.Date;
 
-import static com.odoo.core.orm.fields.OColumn.RelationType;
-
-public class PurchaseOrder extends OModel {
-
-    public static final String TAG = PurchaseOrder.class.getSimpleName();
-    public static final String AUTHORITY = BuildConfig.APPLICATION_ID +
-            ".core.provider.content.sync.purchase_order";
-
-    OColumn name = new OColumn("Name", OVarchar.class).setSize(100).setRequired();
-    OColumn origin = new OColumn("Origin", OVarchar.class);
-    OColumn partner_ref = new OColumn("Vendor Reference", OVarchar.class);
-    OColumn date_order = new OColumn("Order Date", ODateTime.class);
-    OColumn date_approve = new OColumn("Date Approved", ODateTime.class);
-    OColumn partner_id = new OColumn("Partner Id", ResPartner.class, RelationType.ManyToOne);
-    OColumn currency_id = new OColumn("Currency", ResCurrency.class, RelationType.ManyToOne);
-    OColumn state = new OColumn("Vendor Reference", OSelection.class)
-            .addSelection("draft", "RFQ")
-            .addSelection("sent", "RFQ Sent")
-            .addSelection("to approve", "To Approve")
-            .addSelection("purchase", "Purchase Order")
-            .addSelection("done", "Locked")
-            .addSelection("cancel", "Cancelled");
-    OColumn company_id = new OColumn("Company", ResCompany.class, RelationType.ManyToOne);
-    OColumn user_id = new OColumn(null, ResUsers.class, RelationType.ManyToOne);
-
-    OColumn amount_untaxed = new OColumn("Untaxed Amount", OFloat.class);
-    OColumn amount_tax = new OColumn("Taxes", OFloat.class);
-    OColumn amount_total = new OColumn("Total Amount", OFloat.class);
-
-//
-//    @Odoo.Domain("[['uom_id", "=', @uom_id]]")
-//    OColumn uom_id = new OColumn("UOM", UoM.class, OColumn.RelationType.ManyToOne);
-
-    public PurchaseOrder(Context context, OUser user) {
-        super(context, "purchase.order", user);
-        setHasMailChatter(true);
-    }
-
-    @Override
-    public Uri uri() {
-
-        return buildURI(AUTHORITY);
-    }
-//
-//    public String storeCompanyName(OValues value) {
-//        try {
-//            if (!value.getString("parent_id").equals("false")) {
-//                List<Object> parent_id = (ArrayList<Object>) value.get("parent_id");
-//                return parent_id.get(1) + "";
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return "";
-//    }
-//
-//    public static String getContact(Context context, int row_id) {
-//        ODataRow row = new ProductProduct(context, null).browse(row_id);
-//        String contact;
-//        if (row.getString("mobile").equals("false")) {
-//            contact = row.getString("phone");
-//        } else {
-//            contact = row.getString("mobile");
-//        }
-//        return contact;
-//    }
-//
-//    public String getAddress(ODataRow row) {
-//        String add = "";
-//        if (!row.getString("street").equals("false"))
-//            add += row.getString("street") + ", ";
-//        if (!row.getString("street2").equals("false"))
-//            add += "\n" + row.getString("street2") + ", ";
-//        if (!row.getString("city").equals("false"))
-//            add += row.getString("city");
-//        if (!row.getString("zip").equals("false"))
-//            add += " - " + row.getString("zip") + " ";
-//        return add;
-//    }
-
-
-    @Override
-    public void onModelUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+public class PurchaseOrder {
+    public PurchaseOrder(){
 
     }
-
-    @Override
-    public void onSyncStarted(){
-        Log.e(TAG, "PurchaseOrder->onSyncStarted");
+    public PurchaseOrder(String name, String origin, String venderRef, Date orderDate, Date approvalDate, Integer vendorId, String currencyId, String state, Integer companyId, Integer userId, Float amountUntaxed, Float amountTax, Float amountTotal) {
+        this.name = name;
+        this.origin = origin;
+        this.venderRef = venderRef;
+        this.orderDate = orderDate;
+        this.approvalDate = approvalDate;
+        this.vendorId = vendorId;
+        this.currencyId = currencyId;
+        this.state = state;
+        this.companyId = companyId;
+        this.userId = userId;
+        this.amountUntaxed = amountUntaxed;
+        this.amountTax = amountTax;
+        this.amountTotal = amountTotal;
     }
 
-    @Override
-    public void onSyncFinished(){
-        Log.e(TAG, "PurchaseOrder->onSyncFinished");
+    String name; // = newString("Name", OVarchar.class).setSize(100).setRequired();
+    String origin; // = newString("Origin", OVarchar.class);
+    String venderRef; // = newString("Vendor Reference", OVarchar.class);
+    Date orderDate; // = newString("Order Date", ODateTime.class);
+    Date approvalDate; // = newString("Date Approved", ODateTime.class);
+    Integer vendorId; // = newString("Partner Id", ResPartner.class, RelationType.ManyToOne);
+    String currencyId; // = newString("Currency", ResCurrency.class, RelationType.ManyToOne);
+    String state; // = newString("Vendor Reference", OSelection.class)
+
+    Integer companyId; // = newString("Company", ResCompany.class, RelationType.ManyToOne);
+    Integer userId; // = newString(null, ResUsers.class, RelationType.ManyToOne);
+
+    Float amountUntaxed; // = newString("Untaxed Amount", OFloat.class);
+    Float amountTax; // = newString("Taxes", OFloat.class);
+    Float amountTotal; // = newString("Total Amount", OFloat.class);
+
+
+    public String getName() {
+        return name;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public String getVenderRef() {
+        return venderRef;
+    }
+
+    public void setVenderRef(String venderRef) {
+        this.venderRef = venderRef;
+    }
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public Date getApprovalDate() {
+        return approvalDate;
+    }
+
+    public void setApprovalDate(Date approvalDate) {
+        this.approvalDate = approvalDate;
+    }
+
+    public Integer getVendorId() {
+        return vendorId;
+    }
+
+    public void setVendorId(Integer vendorId) {
+        this.vendorId = vendorId;
+    }
+
+    public String getCurrencyId() {
+        return currencyId;
+    }
+
+    public void setCurrencyId(String currencyId) {
+        this.currencyId = currencyId;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public Integer getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Float getAmountUntaxed() {
+        return amountUntaxed;
+    }
+
+    public void setAmountUntaxed(Float amountUntaxed) {
+        this.amountUntaxed = amountUntaxed;
+    }
+
+    public Float getAmountTax() {
+        return amountTax;
+    }
+
+    public void setAmountTax(Float amountTax) {
+        this.amountTax = amountTax;
+    }
+
+    public Float getAmountTotal() {
+        return amountTotal;
+    }
+
+    public void setAmountTotal(Float amountTotal) {
+        this.amountTotal = amountTotal;
+    }
+
+    public PurchaseOrder fromRow(ODataRow row){
+        PurchaseOrder purchaseOrder = new PurchaseOrder();
+        return purchaseOrder;
+    }
+
 }

@@ -19,8 +19,7 @@
  */
 package com.odoo.addons.abirex.purchase.providers;
 
-import com.odoo.base.addons.abirex.product.ProductProduct;
-import com.odoo.base.addons.abirex.purchase.PurchaseOrder;
+import com.odoo.base.addons.abirex.dao.PurchaseOrderDao;
 import com.odoo.core.orm.provider.BaseModelProvider;
 
 public class PurchaseSyncProvider extends BaseModelProvider {
@@ -28,6 +27,6 @@ public class PurchaseSyncProvider extends BaseModelProvider {
 
     @Override
     public String authority() {
-        return PurchaseOrder.AUTHORITY;
+        return PurchaseOrderDao.AUTHORITY;
     }
 }

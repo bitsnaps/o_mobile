@@ -3,6 +3,7 @@ package com.odoo.base.addons.abirex.purchase;
 import android.content.Context;
 
 import com.odoo.base.addons.abirex.account.Tax;
+import com.odoo.base.addons.abirex.dao.PurchaseOrderDao;
 import com.odoo.core.orm.OModel;
 import com.odoo.core.orm.fields.OColumn;
 import com.odoo.core.orm.fields.types.OBlob;
@@ -32,7 +33,7 @@ public class PurchaseOrderLine extends OModel {
     OColumn price_total = new OColumn("Total", OFloat.class);
     OColumn price_tax = new OColumn("Tax", OFloat.class);
 
-    OColumn order_id = new OColumn("Order Ref", PurchaseOrder.class, OColumn.RelationType.ManyToOne);
+    OColumn order_id = new OColumn("Order Ref", PurchaseOrderDao.class, OColumn.RelationType.ManyToOne);
 
 
     OColumn date_order = new OColumn("Order Date", ODateTime.class);

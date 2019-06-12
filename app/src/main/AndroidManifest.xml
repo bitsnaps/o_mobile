@@ -129,7 +129,7 @@
             android:windowSoftInputMode="adjustPan" />
 
 
-        <!-- Purchase Sync Provider & Service  // -->
+        <!-- PurchaseList Sync Provider & Service  // -->
         <provider
             android:name="com.odoo.addons.abirex.purchase.providers.PurchaseSyncProvider"
             android:authorities="${applicationId}.core.provider.content.sync.purchase_order"

@@ -17,7 +17,7 @@
  * <p/>
  * Created on 30/12/14 4:00 PM
  */
-package com.odoo.base.addons.abirex.product;
+package com.odoo.base.addons.abirex.dao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -26,6 +26,7 @@ import android.util.Log;
 
 import com.odoo.BuildConfig;
 import com.odoo.core.orm.OModel;
+import com.odoo.core.orm.annotation.Odoo;
 import com.odoo.core.orm.fields.OColumn;
 import com.odoo.core.orm.fields.types.OBlob;
 import com.odoo.core.orm.fields.types.OBoolean;
@@ -34,9 +35,9 @@ import com.odoo.core.orm.fields.types.OVarchar;
 import com.odoo.core.support.OUser;
 import static com.odoo.core.orm.fields.OColumn.*;
 
-public class ProductProduct extends OModel {
+public class ProductProductDao extends OModel {
 
-    public static final String TAG = ProductProduct.class.getSimpleName();
+    public static final String TAG = ProductProductDao.class.getSimpleName();
     public static final String AUTHORITY = BuildConfig.APPLICATION_ID +
             ".core.provider.content.sync.product_product";
 
@@ -45,15 +46,18 @@ public class ProductProduct extends OModel {
     OColumn image = new OColumn("Image", OBlob.class).setDefaultValue(false);
     OColumn image_small = new OColumn("Avatar", OBlob.class).setDefaultValue(false);
     OColumn lst_price = new OColumn("Sale Price", OFloat.class);
+    OColumn qty_available = new OColumn("Quantity", OFloat.class);
     OColumn default_code = new OColumn("Default Code", OVarchar.class);
     OColumn code = new OColumn("Code", OVarchar.class);
-    OColumn product_tmpl_id = new OColumn(null, ProductTemplate.class, RelationType.ManyToOne);
+    OColumn product_tmpl_id = new OColumn(null, ProductTemplateDao.class, RelationType.ManyToOne)
+            .addDomain("active","=",true);
 
-//
-//    @Odoo.Domain("[['uom_id', '=', @uom_id]]")
-//    OColumn uom_id = new OColumn("UOM", UoM.class, OColumn.RelationType.ManyToOne);
 
-    public ProductProduct(Context context, OUser user) {
+
+    @Odoo.Domain("[['uom_id', '=', @uom_id]]")
+    OColumn uom_id = new OColumn("UOM", UoMDao.class, OColumn.RelationType.ManyToOne);
+
+    public ProductProductDao(Context context, OUser user) {
         super(context, "product.product", user);
         setHasMailChatter(true);
     }
@@ -77,7 +81,7 @@ public class ProductProduct extends OModel {
 //    }
 //
 //    public static String getContact(Context context, int row_id) {
-//        ODataRow row = new ProductProduct(context, null).browse(row_id);
+//        ODataRow row = new ProductProductDao(context, null).browse(row_id);
 //        String contact;
 //        if (row.getString("mobile").equals("false")) {
 //            contact = row.getString("phone");
@@ -108,11 +112,11 @@ public class ProductProduct extends OModel {
 
     @Override
     public void onSyncStarted(){
-        Log.e(TAG, "ProductProduct->onSyncStarted");
+        Log.e(TAG, "ProductProductDao->onSyncStarted");
     }
 
     @Override
     public void onSyncFinished(){
-        Log.e(TAG, "ProductProduct->onSyncFinished");
+        Log.e(TAG, "ProductProductDao->onSyncFinished");
     }
 }
