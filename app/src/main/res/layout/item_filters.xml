@@ -3,7 +3,7 @@
     android:orientation="horizontal" android:layout_width="1000dp"
     android:layout_height="wrap_content"
     android:padding="@dimen/default_16dp"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimaryDark">
 
     <Button
         android:id="@+id/filter_template"

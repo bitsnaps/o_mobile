@@ -25,7 +25,7 @@
         android:name="com.odoo.App"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:icon="@drawable/drug"
+        android:icon="@drawable/rx"
         android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity

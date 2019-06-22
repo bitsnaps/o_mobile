@@ -37,6 +37,7 @@ public class Addons extends AddonsHelper {
      */
 
     OAddon purchase = new OAddon(PurchaseList.class);
-    OAddon products = new OAddon(ProductList.class).setDefault();
+    OAddon products = new OAddon(ProductList.class);
+    OAddon productCategory = new OAddon(com.odoo.addons.abirex.customer.ProductList.class).setDefault();
     OAddon customers = new OAddon(Customers.class);
 }

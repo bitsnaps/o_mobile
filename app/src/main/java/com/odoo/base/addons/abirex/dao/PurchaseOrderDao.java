@@ -8,8 +8,7 @@ import android.net.Uri;
 import android.util.Log;
 
 import com.odoo.BuildConfig;
-import com.odoo.base.addons.abirex.purchase.PurchaseOrder;
-import com.odoo.base.addons.abirex.purchase.PurchaseOrderDate;
+import com.odoo.base.addons.abirex.model.PurchaseOrder;
 import com.odoo.base.addons.res.ResCompany;
 import com.odoo.base.addons.res.ResCurrency;
 import com.odoo.base.addons.res.ResPartner;
@@ -24,8 +23,6 @@ import com.odoo.core.support.OUser;
 import com.odoo.data.DataLoader;
 import com.odoo.data.LazyList;
 import com.odoo.data.PurchaseOrderProxy;
-
-import java.text.ParseException;
 
 import static com.odoo.core.orm.fields.OColumn.RelationType;
 

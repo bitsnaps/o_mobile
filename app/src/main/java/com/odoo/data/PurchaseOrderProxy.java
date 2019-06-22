@@ -3,7 +3,7 @@ package com.odoo.data;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 
-import com.odoo.base.addons.abirex.purchase.PurchaseOrder;
+import com.odoo.base.addons.abirex.model.PurchaseOrder;
 
 public class PurchaseOrderProxy extends CursorItemProxy {
 

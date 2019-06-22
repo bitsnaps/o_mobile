@@ -22,12 +22,12 @@
             android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/tv_purchase_time"
-                    android:text="@string/purchase_from_3_vendors"
+                    android:text="@string/stub_purchase_from_3_vendors"
                     android:textAppearance="@style/ListTitleText"
                     style="@style/ListTitleLayout"/>
                 <TextView
                     android:id="@+id/no_of_vendors"
-                    android:text="@string/thursday_7th_april_2019"
+                    android:text="@string/stub_thursday_7th_april_2019"
                     android:textAppearance="@style/ListSubtitleText"
                     style="@style/ListSubtitleLayout"/>
         </LinearLayout>
@@ -41,12 +41,12 @@
 
             <TextView
                 android:id="@+id/tv_no_of_products"
-                android:text="@string/_7"
+                android:text="@string/stub_7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/tv_total_amount"
-                android:text="@string/_5000_00"
+                android:text="@string/stub_5000_00"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"/>

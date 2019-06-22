@@ -6,7 +6,7 @@ android {
     compileSdkVersion 25
     defaultConfig {
         useLibrary 'org.apache.http.legacy'
-        manifestPlaceholders = [applicationName: "RxIt"]
+        manifestPlaceholders = [applicationName: "Rx Mart"]
         applicationId "com.odoo"
         minSdkVersion 16
         versionCode 7

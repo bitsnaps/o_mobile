@@ -25,7 +25,7 @@ import android.widget.Toast;
 import com.odoo.R;
 import com.odoo.base.addons.abirex.dao.PurchaseOrderDao;
 import com.odoo.base.addons.abirex.dao.PurchaseOrderDateDao;
-import com.odoo.base.addons.abirex.purchase.PurchaseOrderDate;
+import com.odoo.base.addons.abirex.model.PurchaseOrderDate;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.support.addons.fragment.BaseFragment;
 import com.odoo.core.support.addons.fragment.IOnSearchViewChangeListener;
@@ -120,7 +120,6 @@ AdapterView.OnItemClickListener {
         mAdapter.registerDataSetObserver(new MyDataSetObserver());
        mProductsList.setFastScrollAlwaysVisible(true);
         mProductsList.setOnItemClickListener(this);
-        ///setHasFloatingButton(view, R.id.fabButton, mProductsList, this);
         getLoaderManager().initLoader(0, null, this);
 
     }

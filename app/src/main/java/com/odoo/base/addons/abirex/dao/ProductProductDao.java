@@ -20,11 +20,15 @@
 package com.odoo.base.addons.abirex.dao;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.support.v4.content.Loader;
 import android.util.Log;
 
 import com.odoo.BuildConfig;
+import com.odoo.base.addons.abirex.Utils;
+import com.odoo.base.addons.abirex.model.Product;
 import com.odoo.core.orm.OModel;
 import com.odoo.core.orm.annotation.Odoo;
 import com.odoo.core.orm.fields.OColumn;
@@ -33,6 +37,9 @@ import com.odoo.core.orm.fields.types.OBoolean;
 import com.odoo.core.orm.fields.types.OFloat;
 import com.odoo.core.orm.fields.types.OVarchar;
 import com.odoo.core.support.OUser;
+import com.odoo.data.DataLoader;
+import com.odoo.data.LazyList;
+
 import static com.odoo.core.orm.fields.OColumn.*;
 
 public class ProductProductDao extends OModel {
@@ -62,48 +69,45 @@ public class ProductProductDao extends OModel {
         setHasMailChatter(true);
     }
 
+
+    public Loader<LazyList<Product>> selectAll() {
+        return new DataLoader(getContext(), uri(), null, null, null, null, getProductCreator());
+    }
+
+    private LazyList.ItemFactory getProductCreator(){
+        return new LazyList.ItemFactory<Product>() {
+            @Override
+            public Product create(Cursor cursor, int index) {
+                Product product = new Product();
+                cursor.moveToPosition(index);
+                int nameCol = cursor.getColumnIndex("name");
+                int activeCol = cursor.getColumnIndex("active");
+                int imageCol = cursor.getColumnIndex("image");
+                int imageSmallCol = cursor.getColumnIndex("image_small");
+                int priceCol = cursor.getColumnIndex("lst_price");
+                int quantityCol = cursor.getColumnIndex("qty_available");
+                int defaultCodeCol = cursor.getColumnIndex("default_code");
+                int codeCol = cursor.getColumnIndex("code");
+                product.setName(cursor.getString(nameCol));
+                product.setActive(Boolean.valueOf(cursor.getString(activeCol)));
+                product.setImage(Utils.getBitmapFromString(getContext(), cursor.getString(imageCol)));
+                product.setImageSmall(Utils.getBitmapFromString(getContext(), cursor.getString(imageSmallCol)));
+                product.setPrice(cursor.getFloat(priceCol));
+                product.setQuantity(cursor.getDouble(quantityCol));
+                product.setDefaultCode(cursor.getString(defaultCodeCol));
+                product.setCode(cursor.getString(codeCol));
+                //Not set
+                product.setProductType("Analgesic");
+                return product;
+            }
+        };
+    }
+
     @Override
     public Uri uri() {
 
         return buildURI(AUTHORITY);
     }
-//
-//    public String storeCompanyName(OValues value) {
-//        try {
-//            if (!value.getString("parent_id").equals("false")) {
-//                List<Object> parent_id = (ArrayList<Object>) value.get("parent_id");
-//                return parent_id.get(1) + "";
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return "";
-//    }
-//
-//    public static String getContact(Context context, int row_id) {
-//        ODataRow row = new ProductProductDao(context, null).browse(row_id);
-//        String contact;
-//        if (row.getString("mobile").equals("false")) {
-//            contact = row.getString("phone");
-//        } else {
-//            contact = row.getString("mobile");
-//        }
-//        return contact;
-//    }
-//
-//    public String getAddress(ODataRow row) {
-//        String add = "";
-//        if (!row.getString("street").equals("false"))
-//            add += row.getString("street") + ", ";
-//        if (!row.getString("street2").equals("false"))
-//            add += "\n" + row.getString("street2") + ", ";
-//        if (!row.getString("city").equals("false"))
-//            add += row.getString("city");
-//        if (!row.getString("zip").equals("false"))
-//            add += " - " + row.getString("zip") + " ";
-//        return add;
-//    }
-
 
     @Override
     public void onModelUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

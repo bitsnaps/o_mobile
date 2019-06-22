@@ -1,5 +1,10 @@
 package com.odoo.base.addons.abirex;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+
+import com.odoo.core.utils.BitmapUtils;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,6 +31,16 @@ public class Utils {
         calendar.set(Calendar.SECOND, 59);
         calendar.set(Calendar.MILLISECOND, 999);
         return format.format(calendar.getTime());
+    }
+
+    public static Bitmap getBitmapFromString(Context context, String bitmapString){
+        Bitmap bitmap;
+        if (bitmapString.equals("false") || bitmapString.isEmpty()) {
+            bitmap = BitmapUtils.getAlphabetImage(context, bitmapString);
+        } else {
+            bitmap = BitmapUtils.getBitmapImage(context, bitmapString);
+        }
+        return bitmap;
     }
 
 }

@@ -5,7 +5,7 @@ import android.support.v4.content.Loader;
 import android.util.Log;
 
 import com.odoo.base.addons.abirex.Utils;
-import com.odoo.base.addons.abirex.purchase.PurchaseOrderDate;
+import com.odoo.base.addons.abirex.model.PurchaseOrderDate;
 import com.odoo.core.orm.fields.OAggregate;
 import com.odoo.data.DataLoader;
 import com.odoo.data.LazyList;

@@ -29,7 +29,7 @@
             android:orientation="vertical">
                 <TextView
                     android:id="@+id/list_item_name"
-                    android:text="@string/_stub_product_name"
+                    android:text="@string/stub_product_name"
                     android:textAppearance="@style/ListTitleText"
                     style="@style/ListTitleLayout"/>
                 <TextView

@@ -5,7 +5,7 @@
         android:id="@+id/menu_product_edit"
         android:icon="@drawable/ic_action_edit"
         android:title="@string/label_edit"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_product_save"
         android:title="@string/label_save"
