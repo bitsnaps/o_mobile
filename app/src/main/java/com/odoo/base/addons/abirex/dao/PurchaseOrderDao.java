@@ -12,7 +12,6 @@ import com.odoo.base.addons.abirex.model.PurchaseOrder;
 import com.odoo.base.addons.res.ResCompany;
 import com.odoo.base.addons.res.ResCurrency;
 import com.odoo.base.addons.res.ResPartner;
-import com.odoo.base.addons.res.ResUsers;
 import com.odoo.core.orm.OModel;
 import com.odoo.core.orm.fields.OColumn;
 import com.odoo.core.orm.fields.types.ODateTime;
@@ -22,7 +21,6 @@ import com.odoo.core.orm.fields.types.OVarchar;
 import com.odoo.core.support.OUser;
 import com.odoo.data.DataLoader;
 import com.odoo.data.LazyList;
-import com.odoo.data.PurchaseOrderProxy;
 
 import static com.odoo.core.orm.fields.OColumn.RelationType;
 
@@ -47,7 +45,7 @@ public class PurchaseOrderDao extends OModel {
             .addSelection("done", "Locked")
             .addSelection("cancel", "Cancelled");
     OColumn company_id = new OColumn("Company", ResCompany.class, RelationType.ManyToOne);
-    OColumn user_id = new OColumn(null, ResUsers.class, RelationType.ManyToOne);
+    OColumn user_id = new OColumn(null, UserDao.class, RelationType.ManyToOne);
 
     OColumn amount_untaxed = new OColumn("Untaxed Amount", OFloat.class);
     OColumn amount_tax = new OColumn("Taxes", OFloat.class);
@@ -64,7 +62,7 @@ public class PurchaseOrderDao extends OModel {
         return buildURI(AUTHORITY);
     }
 
-    public Loader<LazyList<PurchaseOrderProxy>> selectAllPurchaseOrderProxy(Context context, Uri uri, String[] projection, String selection,
+    public Loader<LazyList<PurchaseOrder>> selectAllPurchaseOrderProxy(Context context, Uri uri, String[] projection, String selection,
                                                                             String[] selectionArgs, String sortOrder) {
         return new DataLoader(context, uri, null, selection, selectionArgs, sortOrder, getPurchaseOrderCreator());
 
@@ -78,7 +76,6 @@ public class PurchaseOrderDao extends OModel {
                 cursor.moveToPosition(index);
                 int columnIndex = cursor.getColumnIndex("name");
                 user.setName( cursor.getString(columnIndex));
-                // TODO add parsing other data from cursor
                 return user;
             }
         };

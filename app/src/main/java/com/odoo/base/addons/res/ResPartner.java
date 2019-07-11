@@ -24,6 +24,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
 import com.odoo.BuildConfig;
+import com.odoo.base.addons.abirex.model.Company;
+import com.odoo.base.addons.abirex.model.Customer;
+import com.odoo.base.addons.abirex.model.Partner;
+import com.odoo.base.addons.abirex.model.Staff;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.orm.OModel;
 import com.odoo.core.orm.OValues;
@@ -94,6 +98,26 @@ public class ResPartner extends OModel {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public Partner getCompany(Integer id) {
+         ODataRow row = browse(id);
+        return fromRow(row, Company.class);
+    }
+
+    public Partner getCustomer(Integer id) {
+        ODataRow row = browse(id);
+        return fromRow(row, Customer.class);
+    }
+
+
+    public Partner fromRow(ODataRow row, Class clazz) {
+        Integer id = row.getInt(OColumn.ROW_ID);
+        String name = row.getString(this.name.getName());
+        if(clazz.equals(Customer.class)){
+            return new Customer(id, name);
+        }
+        return new Company(id, name);
     }
 
     public static String getContact(Context context, int row_id) {

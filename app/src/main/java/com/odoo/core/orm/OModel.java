@@ -390,7 +390,7 @@ public class OModel implements ISyncServiceListener {
         return false;
     }
 
-    private void prepareFields() {
+    public void prepareFields() {
         mColumns.clear();
         mRelationColumns.clear();
         List<Field> fields = new ArrayList<>();
@@ -646,41 +646,7 @@ public class OModel implements ISyncServiceListener {
             if (cr != null && cr.moveToFirst()) {
                 do {
                     ODataRow row = OCursorUtils.toDatarow(cr);
-                    for (OColumn column : getRelationColumns(projection)) {
-                        if (!row.getString(column.getName()).equals("false")
-                                || column.getRelationType() == OColumn.RelationType.OneToMany
-                                || column.getRelationType() == OColumn.RelationType.ManyToMany) {
-                            switch (column.getRelationType()) {
-                                case ManyToMany:
-                                    OM2MRecord m2mRecords = new OM2MRecord(this, column, row.getInt(OColumn.ROW_ID));
-                                    row.put(column.getName(), m2mRecords);
-                                    break;
-                                case ManyToOne:
-                                    OM2ORecord m2ORecord = new OM2ORecord(this, column, row.getInt(column.getName()));
-                                    row.put(column.getName(), m2ORecord);
-                                    break;
-                                case OneToMany:
-                                    OO2MRecord o2MRecord = new OO2MRecord(this, column, row.getInt(OColumn.ROW_ID));
-                                    row.put(column.getName(), o2MRecord);
-                                    break;
-                            }
-                        }
-                    }
-                    for (OColumn column : getFunctionalColumns(projection)) {
-                        List<String> depends = column.getFunctionalStoreDepends();
-                        if (depends != null && depends.size() > 0) {
-                            ODataRow values = new ODataRow();
-                            for (String depend : depends) {
-                                if (row.contains(depend)) {
-                                    values.put(depend, row.get(depend));
-                                }
-                            }
-                            if (values.size() == depends.size()) {
-                                Object value = getFunctionalMethodValue(column, values);
-                                row.put(column.getName(), value);
-                            }
-                        }
-                    }
+                    populateRelatedColumns(projection, row);
                     rows.add(row);
                 } while (cr.moveToNext());
             }
@@ -689,6 +655,45 @@ public class OModel implements ISyncServiceListener {
         }
         return rows;
     }
+
+    public void populateRelatedColumns(String[] projection, ODataRow row){
+        for (OColumn column : getRelationColumns(projection)) {
+            if (!row.getString(column.getName()).equals("false")
+                    || column.getRelationType() == OColumn.RelationType.OneToMany
+                    || column.getRelationType() == OColumn.RelationType.ManyToMany) {
+                switch (column.getRelationType()) {
+                    case ManyToMany:
+                        OM2MRecord m2mRecords = new OM2MRecord(this, column, row.getInt(OColumn.ROW_ID));
+                        row.put(column.getName(), m2mRecords);
+                        break;
+                    case ManyToOne:
+                        OM2ORecord m2ORecord = new OM2ORecord(this, column, row.getInt(column.getName()));
+                        row.put(column.getName(), m2ORecord);
+                        break;
+                    case OneToMany:
+                        OO2MRecord o2MRecord = new OO2MRecord(this, column, row.getInt(OColumn.ROW_ID));
+                        row.put(column.getName(), o2MRecord);
+                        break;
+                }
+            }
+        }
+        for (OColumn column : getFunctionalColumns(projection)) {
+            List<String> depends = column.getFunctionalStoreDepends();
+            if (depends != null && depends.size() > 0) {
+                ODataRow values = new ODataRow();
+                for (String depend : depends) {
+                    if (row.contains(depend)) {
+                        values.put(depend, row.get(depend));
+                    }
+                }
+                if (values.size() == depends.size()) {
+                    Object value = getFunctionalMethodValue(column, values);
+                    row.put(column.getName(), value);
+                }
+            }
+        }
+    }
+
 
     public Object getFunctionalMethodValue(OColumn column, Object record) {
         if (column.isFunctionalColumn()) {

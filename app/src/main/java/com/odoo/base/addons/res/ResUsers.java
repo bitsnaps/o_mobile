@@ -21,6 +21,8 @@ package com.odoo.base.addons.res;
 
 import android.content.Context;
 
+import com.odoo.base.addons.abirex.model.User;
+import com.odoo.core.orm.ODataRow;
 import com.odoo.core.orm.OModel;
 import com.odoo.core.orm.fields.OColumn;
 import com.odoo.core.orm.fields.types.OVarchar;
@@ -55,4 +57,19 @@ public class ResUsers extends OModel {
         ResUsers users = new ResUsers(context, null);
         return users.selectRowId(users.getUser().getUserId());
     }
-}
+
+    public User get(int id){
+        ODataRow oDataRow = browse(id);
+        return fromRow(oDataRow);
+
+    }
+
+
+    User fromRow(ODataRow row) {
+        Integer id = row.getInt(OColumn.ROW_ID);
+        String userName = row.getString(name.getName());
+        String loginName = row.getString(login.getName());
+        return new User(id, userName, loginName);
+    }
+
+    }

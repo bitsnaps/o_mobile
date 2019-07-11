@@ -3,12 +3,12 @@ package com.odoo.data;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 
-abstract class CursorItemProxy {
+abstract class CursorItemProxyp {
 
     private Cursor mCursor;
     private int mIndex;
 
-    public CursorItemProxy(@NonNull Cursor cursor, int index) {
+    public CursorItemProxyp(@NonNull Cursor cursor, int index) {
         mCursor = cursor;
         mIndex = index;
     }

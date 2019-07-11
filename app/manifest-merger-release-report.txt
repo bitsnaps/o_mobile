@@ -327,7 +327,7 @@ ADDED from AndroidManifest.xml:95:9
 		ADDED from AndroidManifest.xml:97:13
 	android:name
 		ADDED from AndroidManifest.xml:96:13
-provider#com.odoo.addons.customers.providers.CustomersSyncProvider
+provider#com.odoo.addons.abirex.providers.CustomersSyncProvider
 ADDED from AndroidManifest.xml:101:9
 	android:label
 		ADDED from AndroidManifest.xml:104:13
@@ -337,7 +337,7 @@ ADDED from AndroidManifest.xml:101:9
 		ADDED from AndroidManifest.xml:103:13
 	android:name
 		ADDED from AndroidManifest.xml:102:13
-service#com.odoo.addons.customers.services.CustomerSyncService
+service#com.odoo.addons.abirex.services.CustomerSyncService
 ADDED from AndroidManifest.xml:107:9
 	android:process
 		ADDED from AndroidManifest.xml:110:13
@@ -357,7 +357,7 @@ ADDED from AndroidManifest.xml:115:13
 		ADDED from AndroidManifest.xml:117:17
 	android:name
 		ADDED from AndroidManifest.xml:116:17
-activity#com.odoo.addons.customers.CustomerDetails
+activity#com.odoo.addons.abirex.form.CustomerDetails
 ADDED from AndroidManifest.xml:120:9
 	android:windowSoftInputMode
 		ADDED from AndroidManifest.xml:122:13

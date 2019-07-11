@@ -2,11 +2,15 @@ package com.odoo.base.addons.abirex.dao;
 
 import android.content.Context;
 
+import com.odoo.base.addons.abirex.model.Product;
+import com.odoo.base.addons.abirex.model.ProductTemplate;
+import com.odoo.core.orm.ODataRow;
 import com.odoo.core.orm.OModel;
 import com.odoo.core.orm.fields.OColumn;
 import com.odoo.core.orm.fields.types.OBoolean;
 import com.odoo.core.orm.fields.types.OVarchar;
 import com.odoo.core.support.OUser;
+import com.odoo.core.utils.OCursorUtils;
 
 public class ProductTemplateDao extends OModel {
 
@@ -16,5 +20,19 @@ public class ProductTemplateDao extends OModel {
 
     public ProductTemplateDao(Context context, OUser user) {
         super(context, "product.template", user);
+    }
+
+    public ProductTemplate get(int id){
+        return fromRow(browse(id));
+    }
+
+    public static ProductTemplate fromRow(ODataRow row){
+        int id = row.getInt("id");
+        String name = row.getString("name");
+        Boolean active = row.getBoolean("active");
+        String productType = row.getString("product_type");
+
+        ProductTemplate productTemplate = new ProductTemplate(id, name, active,productType);
+        return  productTemplate;
     }
 }

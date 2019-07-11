@@ -1,7 +1,5 @@
 package com.odoo.base.addons.abirex.model
 
-
-import com.odoo.base.addons.abirex.model.PurchaseOrder
 import com.odoo.data.LazyList
 
 import java.text.DecimalFormat

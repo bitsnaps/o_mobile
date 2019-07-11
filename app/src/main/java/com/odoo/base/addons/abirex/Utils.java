@@ -43,4 +43,8 @@ public class Utils {
         return bitmap;
     }
 
+    public static Date dateFromString(String dateString){
+        return  new Date();
+    }
+
 }

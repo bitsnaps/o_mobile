@@ -26,6 +26,7 @@ import com.odoo.core.orm.ODataRow;
 public class OCursorUtils {
     public static final String TAG = OCursorUtils.class.getSimpleName();
 
+
     public static ODataRow toDatarow(Cursor cr) {
         ODataRow row = new ODataRow();
         for (String col : cr.getColumnNames()) {
@@ -33,6 +34,7 @@ public class OCursorUtils {
         }
         return row;
     }
+
 
     public static Object cursorValue(String column, Cursor cr) {
         Object value = false;

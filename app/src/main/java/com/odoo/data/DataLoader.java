@@ -22,7 +22,7 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.Arrays;
 
-public class DataLoader<D extends CursorItemProxy> extends AsyncTaskLoader<LazyList<D>> implements Loader.OnLoadCompleteListener {
+public class DataLoader<D> extends AsyncTaskLoader<LazyList<D>> implements Loader.OnLoadCompleteListener {
 
     CancellationSignal mCancellationSignal;
 

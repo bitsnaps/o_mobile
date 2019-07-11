@@ -81,13 +81,13 @@
 
         <!-- Sync Provider & Service  // -->
         <provider
-            android:name="com.odoo.addons.customers.providers.CustomersSyncProvider"
+            android:name="com.odoo.addons.abirex.providers.CustomersSyncProvider"
             android:authorities="${applicationId}.core.provider.content.sync.res_partner"
             android:label="@string/sync_label_customers"
             android:multiprocess="true" />
 
         <service
-            android:name="com.odoo.addons.customers.services.CustomerSyncService"
+            android:name="com.odoo.addons.abirex.services.CustomerSyncService"
             android:exported="true"
             android:process=":sync_customer">
             <intent-filter>
@@ -100,19 +100,19 @@
         </service>
 
         <activity
-            android:name="com.odoo.addons.customers.CustomerDetails"
+            android:name="com.odoo.addons.abirex.form.CustomerDetails"
             android:windowSoftInputMode="adjustPan" />
 
 
         <!-- Product Sync Provider & Service  // -->
         <provider
-            android:name="com.odoo.addons.abirex.products.providers.ProductsSyncProvider"
+            android:name=".addons.abirex.providers.ProductsSyncProvider"
             android:authorities="${applicationId}.core.provider.content.sync.product_product"
             android:label="@string/sync_label_products"
             android:multiprocess="true" />
 
         <service
-            android:name="com.odoo.addons.abirex.products.services.ProductSyncService"
+            android:name="com.odoo.addons.abirex.services.ProductSyncService"
             android:exported="true"
             android:process=":sync_product">
             <intent-filter>
@@ -125,19 +125,19 @@
         </service>
 
         <activity
-            android:name="com.odoo.addons.abirex.products.ProductDetails"
+            android:name="com.odoo.addons.abirex.form.ProductDetails"
             android:windowSoftInputMode="adjustPan" />
 
 
         <!-- PurchaseList Sync Provider & Service  // -->
         <provider
-            android:name="com.odoo.addons.abirex.purchase.providers.PurchaseSyncProvider"
+            android:name=".addons.abirex.providers.PurchaseSyncProvider"
             android:authorities="${applicationId}.core.provider.content.sync.purchase_order"
             android:label="@string/sync_label_purchases"
             android:multiprocess="true" />
 
         <service
-            android:name="com.odoo.addons.abirex.purchase.services.PurchaseSyncService"
+            android:name="com.odoo.addons.abirex.services.PurchaseSyncService"
             android:exported="true"
             android:process=":sync_purchase">
             <intent-filter>
@@ -148,6 +148,28 @@
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/purchase_sync_adapter" />
         </service>
+
+
+        <!-- PosOrderList Sync Provider & Service  // -->
+        <provider
+            android:name=".addons.abirex.providers.PosOrderSyncProvider"
+            android:authorities="${applicationId}.core.provider.content.sync.pos_order"
+            android:label="@string/sync_label_point_of_sale"
+            android:multiprocess="true" />
+
+        <service
+            android:name="com.odoo.addons.abirex.services.PosOrderSyncService"
+            android:exported="true"
+            android:process=":sync_point_of_sale">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/point_of_sale_sync_adapter" />
+        </service>
+
 
     </application>
 

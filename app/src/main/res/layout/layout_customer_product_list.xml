@@ -4,14 +4,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/data_list_no_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <include layout="@layout/base_no_items_view" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
     <include
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         layout="@layout/layout_list_title"/>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_products"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        android:longClickable="true"/>
+        android:scrollbars="vertical"/>
+
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>
