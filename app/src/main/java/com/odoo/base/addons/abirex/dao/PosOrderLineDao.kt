@@ -37,7 +37,7 @@ class PosOrderLineDao(context: Context, user: OUser?) : OModel(context, "pos.ord
 
     var companyDao: CompanyDao = CompanyDao(context, user)
     var productDao: ProductDao = ProductDao(context, user)
-    var posOrderDao: PosOrderDao = PosOrderDao(context, user)
+    //var posOrderDao: PosOrderDao = PosOrderDao(context, user)
 
    fun  posOrderLineCreator(): ItemFactory<OrderLine> {
        return object : ItemFactory<OrderLine> {
@@ -72,9 +72,9 @@ class PosOrderLineDao(context: Context, user: OUser?) : OModel(context, "pos.ord
         val subTotal = row.getFloat("price_subtotal")
         val subTotalIncl = row.getFloat("price_subtotal_incl")
         val discount = row.getFloat("price_unit")
-        val orderId = row.getInt("order_id")
-        val order = posOrderDao.get(orderId)
-        val posOrderLine = OrderLine(id, company, product, name, notice, unitPrice, quantity, subTotal, subTotalIncl, discount, order)
+        val orderId = ""//row.getInt("order_id")
+
+        val posOrderLine = OrderLine(id, company, product, name, notice, unitPrice, quantity, subTotal, subTotalIncl, discount, orderId)
         return posOrderLine
     }
 
