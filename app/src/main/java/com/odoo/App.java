@@ -33,6 +33,7 @@ import com.odoo.core.support.OUser;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
+import java.util.Map;
 
 public class App extends Application {
 
@@ -129,4 +130,37 @@ public class App extends Application {
     public ModelRegistryUtils getModelRegistry() {
         return modelRegistryUtils;
     }
+
+    private static Map<String, Map<Class, OModel>> usersOModelInstances = new HashMap<>();
+    private static  Map<Class, OModel> initDaos(String username, boolean force){
+        Map<Class, OModel> userOModelInstances = usersOModelInstances.get(username);
+        if(force || userOModelInstances == null){
+            userOModelInstances = new HashMap<>();
+            for (Map.Entry<String, Class<? extends OModel>> entry : modelRegistryUtils.getModels().entrySet()){
+                String oModelName = entry.getKey();
+                Class<? extends OModel> oModelClass = entry.getValue();
+                OModel oModelInstance = OModel.get(getContext(), oModelName, username);
+                oModelInstance.prepareFields();
+                userOModelInstances.put(oModelClass, oModelInstance);
+            }
+            usersOModelInstances.put(username, userOModelInstances);
+        }
+        return userOModelInstances;
+    }
+
+    public static <T> T getDao(Class<? extends OModel> klazz){
+        if(getContext() != null){
+            OUser oUser = OUser.current(getContext());
+            String username = oUser != null ? oUser.getUsername() : "";
+            Map<Class, OModel> userOModelInstances = usersOModelInstances.get(username);
+            if(!username.isEmpty() && userOModelInstances == null) {
+                userOModelInstances = initDaos(username, true);
+                return (T) userOModelInstances.get(klazz);
+            } else if(!username.isEmpty() && userOModelInstances != null){
+                return  (T) userOModelInstances.get(klazz);
+            }
+        }
+        return null;
+   }
+
 }

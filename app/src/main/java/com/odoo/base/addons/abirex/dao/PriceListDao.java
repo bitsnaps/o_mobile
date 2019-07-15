@@ -23,7 +23,6 @@ public class PriceListDao extends OModel {
             .addSelection("adjustment", "Adjustment");
     OColumn active = new OColumn("Active", OBoolean.class);
     OColumn company_id = new OColumn(null, ResCompany.class, OColumn.RelationType.ManyToOne);
-    OColumn children_tax_ids = new OColumn(null, PriceListDao.class, OColumn.RelationType.ManyToMany);
 
     public PriceListDao(Context context, OUser user) {
         super(context, "product.pricelist", user);

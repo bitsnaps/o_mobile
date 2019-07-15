@@ -22,7 +22,7 @@ import com.odoo.core.orm.fields.OColumn.RelationType
 import com.odoo.core.utils.OCursorUtils
 import com.odoo.data.LazyList.ItemFactory
 
-class PosOrderLineDao(context: Context, user: OUser?) : OModel(context, "pos.order.line", user) {
+class PosOrderLineDao(context: Context?, user: OUser?) : OModel(context, "pos.order.line", user) {
 
     internal var company_id = OColumn("Company", ResCompany::class.java, RelationType.ManyToOne)
     internal var name = OColumn("Name", OVarchar::class.java).setSize(100).setRequired()
@@ -33,9 +33,9 @@ class PosOrderLineDao(context: Context, user: OUser?) : OModel(context, "pos.ord
     internal var price_subtotal = OColumn("Subtotal w/o Tax", OFloat::class.java)
     internal var price_subtotal_incl = OColumn("Subtotal with Tax", OFloat::class.java)
     internal var discount = OColumn("Discount", OFloat::class.java)
-    internal var order_id = OColumn("Order", PosOrderDao::class.java)
+    internal var order_id = OColumn("Order", PosOrderDao::class.java, RelationType.ManyToOne)
 
-    var companyDao: CompanyDao = CompanyDao(context, user)
+    var companyDao: ResCompany = ResCompany(context, user)
     var productDao: ProductDao = ProductDao(context, user)
     //var posOrderDao: PosOrderDao = PosOrderDao(context, user)
 
@@ -57,7 +57,6 @@ class PosOrderLineDao(context: Context, user: OUser?) : OModel(context, "pos.ord
     fun fromPosOrder(posOrderId: Int): List<OrderLine> {
         return select(null, "id = ?",  arrayOf("$posOrderId")).map { fromRow(it) }
     }
-
 
     fun fromRow(row: ODataRow): OrderLine{
         val id = row.getInt("id")
@@ -102,8 +101,8 @@ class PosOrderLineDao(context: Context, user: OUser?) : OModel(context, "pos.ord
     }
 
     companion object {
-
         val TAG = PosOrderLineDao::class.java.simpleName
-        val AUTHORITY = BuildConfig.APPLICATION_ID + ".core.provider.content.sync.pos_order_line"
+        @JvmField
+        var AUTHORITY = BuildConfig.APPLICATION_ID + ".core.provider.content.sync.pos_order_line"
     }
 }

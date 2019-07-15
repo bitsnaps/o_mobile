@@ -43,6 +43,7 @@
             android:name="com.odoo.OdooActivity"
             android:label="${applicationName}" />
         <activity android:name="odoo.controls.SearchableItemActivity" />
+        <activity android:name="com.odoo.addons.abirex.form.PosOrderDetails" />
         <activity android:name="com.odoo.SettingsActivity" />
         <activity
             android:name="com.odoo.core.account.AppIntro"
@@ -133,6 +134,12 @@
         <provider
             android:name=".addons.abirex.providers.PurchaseSyncProvider"
             android:authorities="${applicationId}.core.provider.content.sync.purchase_order"
+            android:label="@string/sync_label_purchases"
+            android:multiprocess="true" />
+
+        <provider
+            android:name=".addons.abirex.providers.PosOrderLineSyncProvider"
+            android:authorities="${applicationId}.core.provider.content.sync.pos_order_line"
             android:label="@string/sync_label_purchases"
             android:multiprocess="true" />
 

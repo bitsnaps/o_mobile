@@ -12,6 +12,7 @@ import com.odoo.base.addons.abirex.model.PurchaseOrder;
 import com.odoo.base.addons.res.ResCompany;
 import com.odoo.base.addons.res.ResCurrency;
 import com.odoo.base.addons.res.ResPartner;
+import com.odoo.base.addons.res.ResUsers;
 import com.odoo.core.orm.OModel;
 import com.odoo.core.orm.fields.OColumn;
 import com.odoo.core.orm.fields.types.ODateTime;
@@ -41,11 +42,11 @@ public class PurchaseOrderDao extends OModel {
             .addSelection("draft", "RFQ")
             .addSelection("sent", "RFQ Sent")
             .addSelection("to approve", "To Approve")
-            .addSelection("purchase", "PurchaseList Order")
+            .addSelection("purchase", "Purchase List Order")
             .addSelection("done", "Locked")
             .addSelection("cancel", "Cancelled");
     OColumn company_id = new OColumn("Company", ResCompany.class, RelationType.ManyToOne);
-    OColumn user_id = new OColumn(null, UserDao.class, RelationType.ManyToOne);
+    OColumn user_id = new OColumn(null, ResUsers.class, RelationType.ManyToOne);
 
     OColumn amount_untaxed = new OColumn("Untaxed Amount", OFloat.class);
     OColumn amount_tax = new OColumn("Taxes", OFloat.class);

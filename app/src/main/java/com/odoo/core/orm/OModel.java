@@ -660,6 +660,7 @@ public class OModel implements ISyncServiceListener {
         for (OColumn column : getRelationColumns(projection)) {
             if (!row.getString(column.getName()).equals("false")
                     || column.getRelationType() == OColumn.RelationType.OneToMany
+                    || column.getRelationType() == OColumn.RelationType.ManyToOne
                     || column.getRelationType() == OColumn.RelationType.ManyToMany) {
                 switch (column.getRelationType()) {
                     case ManyToMany:

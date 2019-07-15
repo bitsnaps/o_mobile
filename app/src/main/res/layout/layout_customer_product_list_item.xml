@@ -3,7 +3,11 @@
     android:id="@+id/cvProduct"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?attr/selectableItemBackground"
+    >
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"

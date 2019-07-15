@@ -36,7 +36,7 @@ class PosConfigDao(context: Context, user: OUser?) : OModel(context, "pos.config
     }
 
     companion object {
-        val TAG = CurrencyDao::class.java.simpleName
+        val TAG = PosConfigDao::class.java.simpleName
     }
 
 }

@@ -64,8 +64,8 @@ public class ResUsers extends OModel {
 
     }
 
-
-    User fromRow(ODataRow row) {
+    public User fromRow(ODataRow row) {
+        if(row == null)return new User(0, "", "");
         Integer id = row.getInt(OColumn.ROW_ID);
         String userName = row.getString(name.getName());
         String loginName = row.getString(login.getName());

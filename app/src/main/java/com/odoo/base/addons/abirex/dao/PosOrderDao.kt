@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.support.v4.content.Loader
 import android.util.Log
+import com.odoo.App
 import com.odoo.BuildConfig
 
 import com.odoo.base.addons.abirex.Utils
@@ -13,6 +14,7 @@ import com.odoo.base.addons.abirex.model.*
 import com.odoo.base.addons.res.ResCompany
 import com.odoo.base.addons.res.ResCurrency
 import com.odoo.base.addons.res.ResPartner
+import com.odoo.base.addons.res.ResUsers
 import com.odoo.core.orm.ODataRow
 import com.odoo.core.orm.OModel
 import com.odoo.core.orm.fields.OColumn
@@ -25,7 +27,7 @@ import com.odoo.core.orm.fields.OColumn.RelationType
 import com.odoo.core.orm.fields.types.*
 import com.odoo.core.utils.OCursorUtils
 
-class PosOrderDao(context: Context, user: OUser?) : OModel(context, "pos.order", user) {
+class PosOrderDao(context: Context?, user: OUser?) : OModel(context, "pos.order", user) {
 
     internal var name = OColumn("Name", OVarchar::class.java).setSize(100).setRequired()
     internal var sequence_number = OColumn("Sequence Number", OInteger::class.java)
@@ -42,7 +44,7 @@ class PosOrderDao(context: Context, user: OUser?) : OModel(context, "pos.order",
             .addSelection("done", "Locked")
             .addSelection("cancel", "Cancelled")
     internal var company_id = OColumn("Company", ResCompany::class.java, RelationType.ManyToOne)
-    internal var user_id = OColumn(null, UserDao::class.java, RelationType.ManyToOne)
+    internal var user_id = OColumn(null, ResUsers::class.java, RelationType.ManyToOne)
 
     internal var amount_tax = OColumn("Taxes", OFloat::class.java)
     internal var amount_total = OColumn("Total Amount", OFloat::class.java)
@@ -55,15 +57,27 @@ class PosOrderDao(context: Context, user: OUser?) : OModel(context, "pos.order",
     internal var picking_id = OColumn("Picking", OInteger::class.java)//Picking ID
     internal var picking_type_id = OColumn("Operation Type", OInteger::class.java)//Picking ID
     internal var location_id = OColumn("Location", OInteger::class.java)//Location
+    internal var lines = OColumn("Order Lines", PosOrderLineDao::class.java, RelationType.OneToMany)
+            .setRelatedColumn("order_id")
 
-    //TODO: Move all Daos into a container than can be loaded when app starts
-    var companyDao = CompanyDao(context, user)
-    var partnerDao = ResPartner(context, user)
-    var sessionDao = PosSessionDao(context, user)
-    var currencyDao = CurrencyDao(context, user)
-    var userDao = UserDao(context, user)
-    var priceListDao = PriceListDao(context, user)
-    var posOrderLineDao = PosOrderLineDao(context, user)
+    lateinit var companyDao : ResCompany
+    lateinit var partnerDao : ResPartner
+    lateinit var sessionDao : PosSessionDao
+    lateinit var currencyDao : ResCurrency
+    lateinit var userDao : ResUsers
+    lateinit var priceListDao: PriceListDao
+
+    var inited : Boolean = false
+
+    fun initDaos() {
+        companyDao = App.getDao(ResCompany::class.java)
+        partnerDao = App.getDao(ResPartner::class.java)
+        sessionDao = App.getDao(PosSessionDao::class.java)
+        currencyDao = App.getDao(ResCurrency::class.java)
+        userDao = App.getDao(ResUsers::class.java)
+        priceListDao = App.getDao(PriceListDao::class.java)
+        inited = true
+    }
 
     fun  posOrderCreator(): LazyList.ItemFactory<PosOrder> {
         return object : LazyList.ItemFactory<PosOrder> {
@@ -76,13 +90,15 @@ class PosOrderDao(context: Context, user: OUser?) : OModel(context, "pos.order",
     }
 
     public fun fromRow(row: ODataRow): PosOrder {
-        prepareFields()
+        if(!inited){
+            initDaos()
+        }
 
         populateRelatedColumns(relationColumns.map{it.name}.toTypedArray(), row)
         val id = row.getInt(ROW_ID)
         val seqNo = row.getInt(sequence_number.name)
         val name = row.getString(name.name)
-        val session = sessionDao.get(row.getInt(session_id.name))
+        val session = sessionDao.fromRow(row.getM2ORecord(session_id.name).browse())
         val customer = partnerDao.getCustomer(row.getInt(partner_id.name )) as Customer
         val priceList = priceListDao.fromRow(row.getM2ORecord(pricelist_id.name).browse())
         val company = companyDao.fromRow(row.getM2ORecord(company_id.name ).browse())
@@ -97,10 +113,6 @@ class PosOrderDao(context: Context, user: OUser?) : OModel(context, "pos.order",
         val posOrder = PosOrder(id, name, session, customer, amountTaxed, amountTotal, amountPaid,
                 amountReturn, seqNo, priceList)
         return posOrder
-    }
-
-    internal fun getOrderLines(id: Int): List<OrderLine>{
-        return posOrderLineDao.fromPosOrder(id)
     }
 
     fun ci(cursor: Cursor, columnName: String): Int{

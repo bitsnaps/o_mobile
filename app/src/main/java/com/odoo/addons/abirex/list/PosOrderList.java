@@ -24,12 +24,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.odoo.App;
 import com.odoo.R;
 import com.odoo.addons.abirex.form.PosOrderDetails;
 import com.odoo.base.addons.abirex.adapter.PosOrderListAdapter;
 import com.odoo.base.addons.abirex.dao.PosOrderDao;
 import com.odoo.base.addons.abirex.model.PosOrder;
-import com.odoo.core.orm.ODataRow;
 import com.odoo.core.support.addons.fragment.BaseFragment;
 import com.odoo.core.support.addons.fragment.IOnSearchViewChangeListener;
 import com.odoo.core.support.addons.fragment.ISyncStatusObserverListener;
@@ -134,7 +134,7 @@ public class PosOrderList extends BaseFragment implements ISyncStatusObserverLis
 
     @Override
     public Loader<LazyList<PosOrder>> onCreateLoader(int id, Bundle data) {
-        posOrderDao = new PosOrderDao(getContext(), null);
+        posOrderDao = App.getDao(PosOrderDao.class);
         Loader<LazyList<PosOrder>> lazyListLoader = (Loader<LazyList<PosOrder>>) posOrderDao.selectAll();
         return lazyListLoader;
     }
@@ -172,7 +172,7 @@ public class PosOrderList extends BaseFragment implements ISyncStatusObserverLis
             }, 500);
             if (db().isEmptyTable() && !syncRequested) {
                 syncRequested = true;
-                //onRefresh();
+                onRefresh();
             }
         }
     }
@@ -206,7 +206,7 @@ public class PosOrderList extends BaseFragment implements ISyncStatusObserverLis
     @Override
     public void onRefresh() {
         if (inNetwork()) {
-            parent().sync().requestSync(".core.provider.content.sync.pos_order");
+            parent().sync().requestSync(PosOrderDao.AUTHORITY);
             setSwipeRefreshing(true);
         } else {
             hideRefreshingProgress();

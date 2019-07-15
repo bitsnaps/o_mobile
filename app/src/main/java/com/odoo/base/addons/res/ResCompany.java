@@ -21,6 +21,7 @@ package com.odoo.base.addons.res;
 
 import android.content.Context;
 
+import com.odoo.base.addons.abirex.model.Company;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.orm.OModel;
 import com.odoo.core.orm.fields.OColumn;
@@ -42,6 +43,17 @@ public class ResCompany extends OModel {
         ResCompany company = new ResCompany(context, null);
         int row_id = company.selectRowId(company.getUser().getCompanyId());
         return company.browse(row_id).getM2ORecord("currency_id").browse();
+    }
+
+    public Company get(int id){
+        ODataRow oDataRow = browse(id);
+        return fromRow(oDataRow);
+    }
+
+    public Company fromRow(ODataRow row){
+        Integer id = row.getInt(OColumn.ROW_ID);
+        String name = row.getString(this.name.getName());
+        return new Company(id, name);
     }
 
     @Override
