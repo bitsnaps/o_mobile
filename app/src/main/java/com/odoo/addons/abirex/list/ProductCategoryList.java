@@ -206,7 +206,7 @@ AdapterView.OnItemClickListener, ProductCategoryListAdapter.ContextMenuCallback 
 
     @Override
     public void onLoaderReset(Loader<LazyList<Product>> lazyListLoader) {
-       mAdapter.changeList(null);
+       mAdapter.changeList(new LazyList<Product>(null, null));
     }
 
     @Override

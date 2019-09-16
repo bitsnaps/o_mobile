@@ -45,11 +45,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.odoo.App;
 import com.odoo.R;
 import com.odoo.addons.abirex.form.ProductDetails;
 import com.odoo.base.addons.abirex.dao.ProductDao;
-import com.odoo.base.addons.abirex.dao.UoMDao;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.support.addons.fragment.BaseFragment;
 import com.odoo.core.support.addons.fragment.IOnSearchViewChangeListener;
@@ -170,8 +168,8 @@ AdapterView.OnItemClickListener {
         String productName = row.getString("name");
         productName = productName.length() > 30 ? productName.substring(0,25) + "..." : productName;
         OControls.setText(view, R.id.list_item_name, productName);
-        UoMDao uomModel = new UoMDao(App.getContext(), null);
-        String uom = uomModel.browse(row.getInt("uom_id")).getString("name");
+        //UoMDao uomModel = new UoMDao(App.getContext(), null);
+        //String uom = uomModel.browse(row.getInt("uom_id")).getString("name");
         String sellingPrice = "" + (!row.getString("lst_price").equals("false") ? row.getFloat("lst_price") : "0.00");
         Float qty = !row.getString("qty_available").equals("false") ? row.getFloat("qty_available"): 0F;
         OControls.setText(view,R.id.list_item_price, "₦"+sellingPrice);
@@ -318,7 +316,6 @@ AdapterView.OnItemClickListener {
         }
         IntentUtils.startActivity(getActivity(), ProductDetails.class, data);
     }
-
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

@@ -41,7 +41,7 @@ class PosOrderDetails : OdooCompatActivity() {
     }
 
     private fun setupView() {
-        tvPosName = findViewById(R.id.tv_pos_name) as TextView
+        tvPosName = findViewById(R.id.tv_pos_order_title) as TextView
         tvStaffName = findViewById(R.id.tv_staff_name) as TextView
         tvCustomerName = findViewById(R.id.tv_customer_name) as TextView
         lvSalesList = findViewById(R.id.lv_sales_list) as ListView

@@ -121,6 +121,18 @@ public class BitmapUtils {
 
     }
 
+    public static Bitmap getBitmapImageOrFalse(Context context, String base64) {
+        if(base64 == "false"){
+            byte[] imageAsBytes = Base64.decode(base64.getBytes(), 5);
+            return BitmapFactory.decodeByteArray(imageAsBytes, 0,
+                    imageAsBytes.length);
+        }else{
+            return getAlphabetImage(context, "O");
+        }
+    }
+
+
+
     public static Bitmap getAlphabetImage(Context context, String content) {
         Resources res = context.getResources();
         Bitmap mDefaultBitmap =  BitmapFactory.decodeResource(res, R.drawable.avatar);

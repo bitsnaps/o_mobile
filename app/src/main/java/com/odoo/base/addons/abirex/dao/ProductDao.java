@@ -62,12 +62,12 @@ public class ProductDao extends OModel {
     OColumn qty_available = new OColumn("Quantity", OFloat.class);
     OColumn default_code = new OColumn("Default Code", OVarchar.class);
     OColumn code = new OColumn("Code", OVarchar.class);
-    OColumn product_tmpl_id = new OColumn(null, ProductTemplateDao.class, RelationType.ManyToOne)
-            .addDomain("active","=",true);
+    OColumn product_tmpl_id = new OColumn(null, ProductTemplateDao.class, RelationType.ManyToOne);
+            //.addDomain("active","=",true);
 
 
 
-    @Odoo.Domain("[['uom_id', '=', @uom_id]]")
+    //@Odoo.Domain("[['uom_id', '=', @uom_id]]")
     OColumn uom_id = new OColumn("UOM", UoMDao.class, OColumn.RelationType.ManyToOne);
 
     public ProductDao(Context context, OUser user) {
@@ -79,8 +79,8 @@ public class ProductDao extends OModel {
         ODataRow oDataRow = browse(id);
         String name = oDataRow.getString("name");
         Boolean active = oDataRow.getBoolean("active");
-        Bitmap imageSmall = BitmapUtils.getBitmapImage(getContext(), oDataRow.getString("image_small"));
-        Bitmap image = BitmapUtils.getBitmapImage(getContext(), oDataRow.getString("image"));
+        Bitmap imageSmall = BitmapUtils.getBitmapImageOrFalse(getContext(), oDataRow.getString("image_small"));
+        Bitmap image = BitmapUtils.getBitmapImageOrFalse(getContext(), oDataRow.getString("image"));
         Float lastPrice = oDataRow.getFloat("lst_price");
         Float qtyAvailable = oDataRow.getFloat("qty_available");
         String defaultCode = oDataRow.getString("default_code");

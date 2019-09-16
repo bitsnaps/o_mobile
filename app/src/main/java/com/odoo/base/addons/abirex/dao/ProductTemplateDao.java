@@ -2,7 +2,6 @@ package com.odoo.base.addons.abirex.dao;
 
 import android.content.Context;
 
-import com.odoo.base.addons.abirex.model.Product;
 import com.odoo.base.addons.abirex.model.ProductTemplate;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.orm.OModel;
@@ -10,7 +9,6 @@ import com.odoo.core.orm.fields.OColumn;
 import com.odoo.core.orm.fields.types.OBoolean;
 import com.odoo.core.orm.fields.types.OVarchar;
 import com.odoo.core.support.OUser;
-import com.odoo.core.utils.OCursorUtils;
 
 public class ProductTemplateDao extends OModel {
 
@@ -35,4 +33,20 @@ public class ProductTemplateDao extends OModel {
         ProductTemplate productTemplate = new ProductTemplate(id, name, active,productType);
         return  productTemplate;
     }
+
+    @Override
+    public boolean allowCreateRecordOnServer() {
+        return false;
+    }
+
+    @Override
+    public boolean allowUpdateRecordOnServer() {
+        return false;
+    }
+
+    @Override
+    public boolean allowDeleteRecordInLocal() {
+        return false;
+    }
+
 }

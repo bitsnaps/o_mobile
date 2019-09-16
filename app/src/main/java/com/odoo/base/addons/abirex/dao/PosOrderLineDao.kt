@@ -55,7 +55,7 @@ class PosOrderLineDao(context: Context?, user: OUser?) : OModel(context, "pos.or
     }
 
     fun fromPosOrder(posOrderId: Int): List<OrderLine> {
-        return select(null, "id = ?",  arrayOf("$posOrderId")).map { fromRow(it) }
+        return select(null, "order_id = ?",  arrayOf("$posOrderId")).map { fromRow(it) }
     }
 
     fun fromRow(row: ODataRow): OrderLine{
