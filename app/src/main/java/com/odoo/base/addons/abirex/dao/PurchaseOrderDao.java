@@ -8,7 +8,7 @@ import android.net.Uri;
 import android.util.Log;
 
 import com.odoo.BuildConfig;
-import com.odoo.base.addons.abirex.model.PurchaseOrder;
+import com.odoo.base.addons.abirex.dto.PurchaseOrder;
 import com.odoo.base.addons.res.ResCompany;
 import com.odoo.base.addons.res.ResCurrency;
 import com.odoo.base.addons.res.ResPartner;
@@ -22,6 +22,7 @@ import com.odoo.core.orm.fields.types.OVarchar;
 import com.odoo.core.support.OUser;
 import com.odoo.data.DataLoader;
 import com.odoo.data.LazyList;
+import com.odoo.data.abirex.ModelNames;
 
 import static com.odoo.core.orm.fields.OColumn.RelationType;
 
@@ -53,7 +54,7 @@ public class PurchaseOrderDao extends OModel {
     OColumn amount_total = new OColumn("Total Amount", OFloat.class);
 
     public PurchaseOrderDao(Context context, OUser user) {
-        super(context, "purchase.order", user);
+        super(context, ModelNames.PURCHASE_ORDER, user);
         setHasMailChatter(true);
     }
 

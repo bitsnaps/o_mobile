@@ -24,10 +24,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
 import com.odoo.BuildConfig;
-import com.odoo.base.addons.abirex.model.Company;
-import com.odoo.base.addons.abirex.model.Customer;
-import com.odoo.base.addons.abirex.model.Partner;
-import com.odoo.base.addons.abirex.model.Staff;
+import com.odoo.base.addons.abirex.dto.Company;
+import com.odoo.base.addons.abirex.dto.Customer;
+import com.odoo.base.addons.abirex.dto.DTO;
+import com.odoo.base.addons.abirex.dto.Partner;
+import com.odoo.base.addons.abirex.dto.PosOrder;
+import com.odoo.base.addons.abirex.dto.Staff;
+import com.odoo.base.addons.abirex.dto.User;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.orm.OModel;
 import com.odoo.core.orm.OValues;
@@ -38,6 +41,7 @@ import com.odoo.core.orm.fields.types.OBoolean;
 import com.odoo.core.orm.fields.types.OText;
 import com.odoo.core.orm.fields.types.OVarchar;
 import com.odoo.core.support.OUser;
+import com.odoo.data.abirex.Columns;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +69,7 @@ public class ResPartner extends OModel {
     OColumn state_id = new OColumn("State", ResCountryState.class, OColumn.RelationType.ManyToOne);
     OColumn country_id = new OColumn("Country", ResCountry.class, OColumn.RelationType.ManyToOne);
     OColumn customer = new OColumn("Customer", OBoolean.class).setDefaultValue("true");
+    //OColumn employee = new OColumn("Employee", OBoolean.class).setDefaultValue("false");
     OColumn supplier = new OColumn("Supplier", OBoolean.class).setDefaultValue("false");
     OColumn comment = new OColumn("Internal Note", OText.class);
     @Odoo.Functional(store = true, depends = {"parent_id"}, method = "storeCompanyName")
@@ -100,25 +105,18 @@ public class ResPartner extends OModel {
         return "";
     }
 
-    public Partner getCompany(Integer id) {
-         ODataRow row = browse(id);
-        return fromRow(row, Company.class);
+    public Partner fromRow(final ODataRow row) {
+        Partner partner = new Partner(row.getInt(Columns.id), row.getInt(Columns.server_id), row.getString(Columns.Partner.display_name));
+
+        return  partner;
     }
 
-    public Partner getCustomer(Integer id) {
-        ODataRow row = browse(id);
-        return fromRow(row, Customer.class);
+    public Partner get(int id)
+    {
+        ODataRow oDataRow = browse(id);
+        return fromRow(oDataRow);
     }
 
-
-    public Partner fromRow(ODataRow row, Class clazz) {
-        Integer id = row.getInt(OColumn.ROW_ID);
-        String name = row.getString(this.name.getName());
-        if(clazz.equals(Customer.class)){
-            return new Customer(id, name);
-        }
-        return new Company(id, name);
-    }
 
     public static String getContact(Context context, int row_id) {
         ODataRow row = new ResPartner(context, null).browse(row_id);

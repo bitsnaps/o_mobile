@@ -39,7 +39,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.odoo.R;
-import com.odoo.addons.abirex.form.CustomerDetails;
+import com.odoo.addons.abirex.detail.CustomerDetails;
 import com.odoo.base.addons.res.ResPartner;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.support.addons.fragment.BaseFragment;
@@ -88,7 +88,7 @@ public class CustomerList extends BaseFragment implements ISyncStatusObserverLis
         mView = view;
         mType = Type.valueOf(getArguments().getString(EXTRA_KEY_TYPE));
         ListView mPartnersList = (ListView) view.findViewById(R.id.listview);
-        mAdapter = new OCursorListAdapter(getActivity(), null, R.layout.customer_row_item);
+        mAdapter = new OCursorListAdapter(getActivity(), null, R.layout.layout_list_item_customer);
         mAdapter.setOnViewBindListener(this);
         mAdapter.setHasSectionIndexers(true, "name");
         mPartnersList.setAdapter(mAdapter);

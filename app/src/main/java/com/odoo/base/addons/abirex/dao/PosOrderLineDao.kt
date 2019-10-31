@@ -6,9 +6,10 @@ import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.support.v4.content.Loader
 import android.util.Log
+import com.odoo.App
 
 import com.odoo.BuildConfig
-import com.odoo.base.addons.abirex.model.OrderLine
+import com.odoo.base.addons.abirex.dto.*
 import com.odoo.base.addons.res.ResCompany
 import com.odoo.core.orm.ODataRow
 import com.odoo.core.orm.OModel
@@ -21,8 +22,10 @@ import com.odoo.data.LazyList
 import com.odoo.core.orm.fields.OColumn.RelationType
 import com.odoo.core.utils.OCursorUtils
 import com.odoo.data.LazyList.ItemFactory
+import com.odoo.data.abirex.Columns
+import com.odoo.data.abirex.ModelNames
 
-class PosOrderLineDao(context: Context?, user: OUser?) : OModel(context, "pos.order.line", user) {
+class PosOrderLineDao(context: Context?, user: OUser?) : OModel(context, ModelNames.POS_ORDER_LINE, user) {
 
     internal var company_id = OColumn("Company", ResCompany::class.java, RelationType.ManyToOne)
     internal var name = OColumn("Name", OVarchar::class.java).setSize(100).setRequired()
@@ -34,57 +37,64 @@ class PosOrderLineDao(context: Context?, user: OUser?) : OModel(context, "pos.or
     internal var price_subtotal_incl = OColumn("Subtotal with Tax", OFloat::class.java)
     internal var discount = OColumn("Discount", OFloat::class.java)
     internal var order_id = OColumn("Order", PosOrderDao::class.java, RelationType.ManyToOne)
+    lateinit var companyDao: ResCompany
+    lateinit var productDao: ProductDao
+    lateinit var posOrderDao: PosOrderDao
 
-    var companyDao: ResCompany = ResCompany(context, user)
-    var productDao: ProductDao = ProductDao(context, user)
-    //var posOrderDao: PosOrderDao = PosOrderDao(context, user)
-
-   fun  posOrderLineCreator(): ItemFactory<OrderLine> {
-       return object : ItemFactory<OrderLine> {
-           override fun create(cursor: Cursor, index: Int): OrderLine {
+   fun  posOrderLineCreator(posOrder: PosOrder): ItemFactory<PosOrderLine> {
+       return object : ItemFactory<PosOrderLine> {
+           override fun create(cursor: Cursor, index: Int): PosOrderLine {
                cursor.moveToPosition(index)
                val row = OCursorUtils.toDatarow(cursor)
-               val orderLine = fromRow(row)
+               val orderLine = fromRow(row, posOrder)
                 return orderLine
            }
        }
    }
 
+    override fun initDaos() {
+        companyDao = App.getDao(ResCompany::class.java)
+        productDao = App.getDao(ProductDao::class.java)
+        posOrderDao = App.getDao(PosOrderDao::class.java)
+    }
+
     init {
         setHasMailChatter(true)
     }
 
-    fun fromPosOrder(posOrderId: Int): List<OrderLine> {
-        return select(null, "order_id = ?",  arrayOf("$posOrderId")).map { fromRow(it) }
+    fun fromPosOrder(posOrder: PosOrder): List<PosOrderLine> {
+        return select(null, "order_id = ?",  arrayOf("${posOrder.id}")).map { fromRow(it, posOrder) }
     }
 
-    fun fromRow(row: ODataRow): OrderLine{
-        val id = row.getInt("id")
-        val name = row.getString("name")
-        val notice = row.getString("notice")
-        val companyId = row.getInt("company_id")
-        val company = companyDao.get(companyId)
-        val productId = row.getInt("product_id")
-        val product = productDao.get(productId)
-        val unitPrice = row.getFloat("price_unit")
-        val quantity = row.getFloat("qty")
-        val subTotal = row.getFloat("price_subtotal")
-        val subTotalIncl = row.getFloat("price_subtotal_incl")
-        val discount = row.getFloat("price_unit")
-        val orderId = ""//row.getInt("order_id")
+    fun searchProduct(name: String): Loader<*>{
+        return productDao.searchByName(name)
+    }
 
-        val posOrderLine = OrderLine(id, company, product, name, notice, unitPrice, quantity, subTotal, subTotalIncl, discount, orderId)
-        return posOrderLine
+    fun fromRow(row: ODataRow, order: PosOrder?): PosOrderLine{
+        val id = row.getInt(Columns.id)
+        val name = row.getString(Columns.name)
+        val notice = row.getString(Columns.PosOrderLine.notice)
+        val companyId = row.getInt(Columns.PosOrderLine.company_id)
+        val company = companyDao.get(companyId)
+        val productId = row.getInt(Columns.PosOrderLine.product_id)
+        val product = productDao.get(productId)
+        val unitPrice = row.getFloat(Columns.PosOrderLine.price_unit)
+        val quantity = row.getFloat(Columns.PosOrderLine.qty)
+        val subTotal = row.getFloat(Columns.PosOrderLine.price_subtotal)
+        val subTotalIncl = row.getFloat(Columns.PosOrderLine.price_subtotal_incl)
+        val discount = row.getFloat("price_unit")
+        val realPosOrder = if (order?.id == null) { posOrderDao.get(row.getInt(Columns.PosOrderLine.order_id)) } else {  order }
+        return PosOrderLine(id, name, company, product, notice, unitPrice, quantity,
+                subTotal, subTotalIncl, discount, realPosOrder)
     }
 
     override fun uri(): Uri {
-
         return buildURI(AUTHORITY)
     }
 
     fun selectAll(context: Context, uri: Uri, projection: Array<String>, selection: String,
-                                    selectionArgs: Array<String>, sortOrder: String): Loader<LazyList<OrderLine>> {
-        return DataLoader(context, uri, null, selection, selectionArgs, sortOrder, posOrderLineCreator())
+                                    selectionArgs: Array<String>, sortOrder: String, order: PosOrder): Loader<LazyList<PosOrderLine>> {
+        return DataLoader(context, uri, projection, selection, selectionArgs, sortOrder, posOrderLineCreator(order))
 
     }
 

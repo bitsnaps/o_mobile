@@ -1,22 +1,13 @@
 package com.odoo.data;
 
-import android.content.ContentProviderClient;
-import android.database.ContentObserver;
 import android.database.Cursor;
-import android.database.DataSetObserver;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Handler;
 import android.support.v4.content.AsyncTaskLoader;
 import android.content.Context;
 import android.net.Uri;
-import android.support.v4.content.ContentResolverCompat;
-import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.os.CancellationSignal;
 import android.support.v4.os.OperationCanceledException;
 import android.util.Log;
-
-import com.odoo.core.orm.OModel;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -52,7 +43,7 @@ public class DataLoader<D> extends AsyncTaskLoader<LazyList<D>> implements Loade
 
     @Override
     public void onLoadComplete(Loader loader, Object data) {
-
+            loader.takeContentChanged();
     }
 
     @Override
@@ -108,6 +99,7 @@ public class DataLoader<D> extends AsyncTaskLoader<LazyList<D>> implements Loade
                 mCancellationSignal.cancel();
             }
         }
+
     }
 
     /**

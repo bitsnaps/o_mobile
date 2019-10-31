@@ -46,7 +46,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.odoo.R;
-import com.odoo.addons.abirex.form.ProductDetails;
+import com.odoo.addons.abirex.detail.ProductDetails;
 import com.odoo.base.addons.abirex.dao.ProductDao;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.support.addons.fragment.BaseFragment;
@@ -94,7 +94,7 @@ AdapterView.OnItemClickListener {
 
     private void setupView(){
         activeFilterButton =
-                (Button) getActivity().findViewById(R.id.filter_template);
+                (Button) getActivity().findViewById(R.id.btn_filter_template);
         activeFilterButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_active, 0, 0,0);
         activeFilterButton.setText(getString(R.string.active));
 

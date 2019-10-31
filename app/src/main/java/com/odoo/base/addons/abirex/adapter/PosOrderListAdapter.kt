@@ -9,9 +9,9 @@ import android.widget.ImageButton
 import com.odoo.App
 
 import com.odoo.R
-import com.odoo.addons.abirex.form.PosOrderDetails
+import com.odoo.addons.abirex.detail.PosOrderDetails
 import com.odoo.addons.abirex.viewholder.PosOrderViewHolder
-import com.odoo.base.addons.abirex.model.PosOrder
+import com.odoo.base.addons.abirex.dto.PosOrder
 import com.odoo.core.utils.IntentUtils
 import com.odoo.data.LazyList
 
@@ -22,30 +22,29 @@ class PosOrderListAdapter constructor(private val contextMenuCallback: ContextMe
     private var listStyle = true
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PosOrderViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(if (listStyle) R.layout.layout_customer_product_list_item else R.layout.layout_customer_product_grid_item, null)
+        val itemView = LayoutInflater.from(parent.context).inflate(if (listStyle) R.layout.layout_list_item_customer_product else R.layout.layout_grid_item_customer_product, null)
 
         return PosOrderViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: PosOrderViewHolder, position: Int) {
         val posOrder = posOrderLazyList[position]
+        holder.id.text = posOrder.id.toString()
         holder.name.text = posOrder.name
-        holder.customerName.text = posOrder.customer.name
+        holder.customerName.text = posOrder.customer.displayName
         holder.sessionName.text = posOrder.session.name
-        holder.amountTaxInc .text = "₦ ${posOrder.amountTax}"
+        holder.amountTaxInc.text = "₦ ${posOrder.amountTax}"
         holder.amountPaid.text = "₦ ${posOrder.amountPaid}"
         holder.amountReturn.text = "₦ ${posOrder.amountReturn}"
         holder.totalAmount.text = "₦ ${posOrder.amountTotal}"
-        holder.itemView.setOnClickListener(
-                View.OnClickListener {
-                    val posOrderId = position
-                    val data = Bundle()
-                    if (posOrderId != null) {
-                        data.putInt("pos_order_id", posOrderId)
-                    }
-                    IntentUtils.startActivity(App.getContext(), PosOrderDetails::class.java, data)
-                }
-        )
+        holder.itemView.setOnClickListener {
+            val posOrderId = posOrderLazyList[position].id
+            val data = Bundle()
+            if (posOrderId != null) {
+                data.putInt("pos_order_id", posOrderId)
+            }
+            IntentUtils.startActivity(App.getContext(), PosOrderDetails::class.java, data)
+        }
     }
 
     override fun getItemCount(): Int {

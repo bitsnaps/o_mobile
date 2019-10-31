@@ -11,7 +11,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,10 +25,11 @@ import android.widget.Toast;
 
 import com.odoo.App;
 import com.odoo.R;
-import com.odoo.addons.abirex.form.PosOrderDetails;
+import com.odoo.addons.abirex.form.PosOrderEdit;
+import com.odoo.addons.abirex.detail.PosOrderDetails;
 import com.odoo.base.addons.abirex.adapter.PosOrderListAdapter;
 import com.odoo.base.addons.abirex.dao.PosOrderDao;
-import com.odoo.base.addons.abirex.model.PosOrder;
+import com.odoo.base.addons.abirex.dto.PosOrder;
 import com.odoo.core.support.addons.fragment.BaseFragment;
 import com.odoo.core.support.addons.fragment.IOnSearchViewChangeListener;
 import com.odoo.core.support.addons.fragment.ISyncStatusObserverListener;
@@ -40,6 +40,7 @@ import com.odoo.data.LazyList;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class PosOrderList extends BaseFragment implements ISyncStatusObserverListener,
@@ -57,6 +58,7 @@ public class PosOrderList extends BaseFragment implements ISyncStatusObserverLis
 
     //Action Views
     Button activeFilterButton;
+    Button newPOSOrderButton;
 
     //Filter tokens
     private String activeFilter = "";
@@ -71,47 +73,24 @@ public class PosOrderList extends BaseFragment implements ISyncStatusObserverLis
 
     private void setupView(){
         activeFilterButton =
-                (Button) getActivity().findViewById(R.id.filter_template);
+                (Button) getActivity().findViewById(R.id.btn_filter_template);
+        newPOSOrderButton =
+                (Button) getActivity().findViewById(R.id.btn_new);
         activeFilterButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_active, 0, 0,0);
         activeFilterButton.setText(getString(R.string.active));
 
-        activeFilterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Button button = ((Button)v);
-                String text = button.getText().toString();
-                String inactive = getString(R.string.inactive);
-                String active = getString(R.string.active);
-                String all = getString(R.string.all);
-                if (text.equals(active)) {
-                    text = inactive;
-                    activeFilter = inactive;
-                    setButtonTint(R.color.colorAccent);
-                }else if(text.equals(inactive)){
-
-                    text = all;
-                    activeFilter = all;
-                    setButtonTint(R.color.colorPrimaryGrey);
-                }else if( text.equals(all)){
-                    text = active;
-                    activeFilter = active;
-                    setButtonTint(R.color.colorPrimaryWhite);
-                }
-                button.setText(text);
-                reload();
-            }
-        });
+        activeFilterButton.setOnClickListener(this);
         mAdapter = new PosOrderListAdapter(this);
         setListStyle();
+        newPOSOrderButton.setOnClickListener(this);
 
     }
 
     private void setListStyle(){
-        recyclerView = (RecyclerView) getActivity().findViewById(R.id.rv_products);
+        recyclerView = (RecyclerView) getActivity().findViewById(R.id.rv_customer_product);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
-
     }
 
     private void reload(){
@@ -135,7 +114,12 @@ public class PosOrderList extends BaseFragment implements ISyncStatusObserverLis
     @Override
     public Loader<LazyList<PosOrder>> onCreateLoader(int id, Bundle data) {
         posOrderDao = App.getDao(PosOrderDao.class);
-        Loader<LazyList<PosOrder>> lazyListLoader = (Loader<LazyList<PosOrder>>) posOrderDao.selectAll();
+        Calendar thisMonth = Calendar.getInstance();
+        thisMonth.set(Calendar.YEAR, 2000);
+
+        Calendar now = Calendar.getInstance();
+
+        Loader<LazyList<PosOrder>> lazyListLoader = (Loader<LazyList<PosOrder>>) posOrderDao.selectAll(thisMonth.getTime(), now.getTime());
         return lazyListLoader;
     }
 
@@ -145,7 +129,6 @@ public class PosOrderList extends BaseFragment implements ISyncStatusObserverLis
         mAdapter.changeList(productLazyList);
         if (productLazyList.size() > 0) {
             TextView listTitle = (TextView) mView.findViewById(R.id.list_title);
-            Log.d(TAG, "Count is...." + productLazyList.size());
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -157,7 +140,6 @@ public class PosOrderList extends BaseFragment implements ISyncStatusObserverLis
                 }
             }, 500);
         } else {
-            Log.d(TAG, "None Count is...." + productLazyList.size());
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -190,10 +172,9 @@ public class PosOrderList extends BaseFragment implements ISyncStatusObserverLis
     @Override
     public List<ODrawerItem> drawerMenus(Context context) {
         List<ODrawerItem> items = new ArrayList<>();
-        items.add(new ODrawerItem(KEY).setTitle("PosOrder Category")
+        items.add(new ODrawerItem(KEY).setTitle("PosOrder")
                 .setIcon(R.drawable.ic_action_products)
                 .setInstance(new PosOrderList()));
-
         return items;
     }
 
@@ -248,15 +229,45 @@ public class PosOrderList extends BaseFragment implements ISyncStatusObserverLis
 //            loadActivity(null);
 //            break;
 //        }
+
+        if(v.getId() == R.id.btn_new){
+            IntentUtils.startActivity(getActivity(), PosOrderEdit.class, new Bundle());
+        } else if(v.getId() == R.id.btn_filter_template){
+            Button button = ((Button)v);
+            String text = button.getText().toString();
+            String inactive = getString(R.string.inactive);
+            String active = getString(R.string.active);
+            String all = getString(R.string.all);
+            if (text.equals(active)) {
+                text = inactive;
+                activeFilter = inactive;
+                setButtonTint(R.color.colorAccent);
+            }else if(text.equals(inactive)){
+
+                text = all;
+                activeFilter = all;
+                setButtonTint(R.color.colorPrimaryGrey);
+            }else if( text.equals(all)){
+                text = active;
+                activeFilter = active;
+                setButtonTint(R.color.colorPrimaryWhite);
+            }
+            button.setText(text);
+            reload();
+        }
+
     }
 
     private void loadActivity(PosOrder posOrder) {
         Bundle data = new Bundle();
         if (posOrder != null) {
             data.putInt("pos_order_id", posOrder.getId());
+            IntentUtils.startActivity(getActivity(), PosOrderDetails.class, data);
+        } else {
+            IntentUtils.startActivity(getActivity(), PosOrderEdit.class, data);
         }
-        IntentUtils.startActivity(getActivity(), PosOrderDetails.class, data);
     }
+
 
 
     @Override
@@ -264,6 +275,7 @@ public class PosOrderList extends BaseFragment implements ISyncStatusObserverLis
         PosOrder posOrder = mAdapter.getItem(position);
         loadActivity(posOrder);
     }
+
 
     @Override
     public void onContextMenuClick(@NotNull ImageButton view, int id, @NotNull String title) {

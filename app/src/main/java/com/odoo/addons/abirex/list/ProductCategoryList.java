@@ -26,10 +26,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.odoo.R;
-import com.odoo.addons.abirex.form.ProductDetails;
+import com.odoo.addons.abirex.detail.ProductDetails;
 import com.odoo.base.addons.abirex.adapter.ProductCategoryListAdapter;
 import com.odoo.base.addons.abirex.dao.ProductDao;
-import com.odoo.base.addons.abirex.model.Product;
+import com.odoo.base.addons.abirex.dto.Product;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.support.addons.fragment.BaseFragment;
 import com.odoo.core.support.addons.fragment.IOnSearchViewChangeListener;
@@ -81,7 +81,7 @@ AdapterView.OnItemClickListener, ProductCategoryListAdapter.ContextMenuCallback 
 
     private void setupView(){
         activeFilterButton =
-                (Button) getActivity().findViewById(R.id.filter_template);
+                (Button) getActivity().findViewById(R.id.btn_filter_template);
         ibListStyle =
                 (ImageButton) getActivity().findViewById(R.id.ib_list_style);
         activeFilterButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_active, 0, 0,0);
@@ -125,7 +125,7 @@ AdapterView.OnItemClickListener, ProductCategoryListAdapter.ContextMenuCallback 
     }
 
     private void setListStyle(int style){
-        recyclerView = (RecyclerView) getActivity().findViewById(R.id.rv_products);
+        recyclerView = (RecyclerView) getActivity().findViewById(R.id.rv_customer_product);
         if(style == 1) {
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             mAdapter.changeToGrid(false);
@@ -206,7 +206,7 @@ AdapterView.OnItemClickListener, ProductCategoryListAdapter.ContextMenuCallback 
 
     @Override
     public void onLoaderReset(Loader<LazyList<Product>> lazyListLoader) {
-       mAdapter.changeList(new LazyList<Product>(null, null));
+      // mAdapter.changeList(new LazyList<Product>(null, null));
     }
 
     @Override

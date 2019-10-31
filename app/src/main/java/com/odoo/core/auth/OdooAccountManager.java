@@ -81,6 +81,14 @@ public class OdooAccountManager {
     public static boolean isValidUserObj(Context context, OUser user) {
         OPreferenceManager pref = new OPreferenceManager(context);
         int version = pref.getInt(userObjectKEY(user), 0);
+        boolean allConfigSet = user.getCompanyId()  != null && user.getCompanyId() > 0
+                && user.getCurrencyId() != null && user.getCurrencyId() > 0
+                && user.getPosSessionId() != null &&  user.getPosSessionId() > 0
+                && user.getPartnerId() != null && user.getPartnerId() > 0
+                && user.getPriceListId() != null && user.getPriceListId() > 0;
+//        if(!allConfigSet){
+//            new ServerDefaultsService().updateUserConfig(context, user);
+//        }
         if (version == 0) {
             updateUserData(context, user, user);
             version = OUser.USER_ACCOUNT_VERSION;
@@ -270,6 +278,8 @@ public class OdooAccountManager {
                 AccountManager accountManager = AccountManager.get(context);
                 accountManager.setUserData(user.getAccount(), "isactive", "false");
                 Log.i(TAG, user.getName() + " Logged out successfully");
+                // Clearing old cache of the system
+                OCacheUtils.clearSystemCache(context);
                 return true;
             }
         }

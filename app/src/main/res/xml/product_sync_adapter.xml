@@ -3,4 +3,5 @@
     android:contentAuthority="com.odoo.core.provider.content.sync.product_product"
     android:supportsUploading="true"
     android:userVisible="true"
+    android:isAlwaysSyncable="true"
     />

@@ -2,8 +2,7 @@ package com.odoo.base.addons.abirex.dao;
 
 import android.content.Context;
 
-import com.odoo.base.addons.abirex.model.Account;
-import com.odoo.base.addons.abirex.model.Location;
+import com.odoo.base.addons.abirex.dto.Account;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.orm.OModel;
 import com.odoo.core.orm.fields.OColumn;
@@ -24,7 +23,8 @@ public class AccountDao extends OModel {
 
     }
 
-    private Account fromRow(ODataRow row){
+    @Override
+    public Account fromRow(ODataRow row){
         Integer id = row.getInt(OColumn.ROW_ID);
         String name = row.getString(this.name.getName());
         return new Account(id, name);

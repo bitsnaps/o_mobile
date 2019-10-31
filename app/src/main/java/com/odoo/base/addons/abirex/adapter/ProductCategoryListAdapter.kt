@@ -7,7 +7,7 @@ import android.widget.ImageButton
 
 import com.odoo.R
 import com.odoo.addons.abirex.viewholder.ProductCategoryViewHolder
-import com.odoo.base.addons.abirex.model.Product
+import com.odoo.base.addons.abirex.dto.Product
 import com.odoo.data.LazyList
 
 class ProductCategoryListAdapter public constructor(private val contextMenuCallback: ContextMenuCallback
@@ -17,7 +17,7 @@ class ProductCategoryListAdapter public constructor(private val contextMenuCallb
     private var listStyle = true
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductCategoryViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(if (listStyle) R.layout.layout_customer_product_list_item else R.layout.layout_customer_product_grid_item, null)
+        val itemView = LayoutInflater.from(parent.context).inflate(if (listStyle) R.layout.layout_list_item_customer_product else R.layout.layout_grid_item_customer_product, null)
         return ProductCategoryViewHolder(itemView)
     }
 

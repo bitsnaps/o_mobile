@@ -22,13 +22,16 @@ package com.odoo.core.orm;
 import android.content.ContentValues;
 import android.os.Bundle;
 
+import com.odoo.base.addons.abirex.util.DateUtils;
 import com.odoo.core.orm.fields.OColumn;
 import com.odoo.core.orm.fields.utils.DomainFilterParser;
 import com.odoo.core.utils.OObjectUtils;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -131,9 +134,14 @@ public class OValues implements Serializable {
                 }
             } else if (val instanceof byte[]) {
                 values.put(key, (byte[]) val);
+            } else if (val instanceof Date) {
+                try {
+                    values.put(key, DateUtils.parseToDB((Date)val));
+                }catch (ParseException pe){ throw new RuntimeException("Invalid date supplied" + val.toString());}
             } else if (val != null) {
                 values.put(key, val.toString());
             }
+
         }
         return values;
     }

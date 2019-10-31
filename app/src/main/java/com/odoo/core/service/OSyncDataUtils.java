@@ -58,6 +58,10 @@ public class OSyncDataUtils {
     private HashMap<String, List<Integer>> updateToServerRecords = new HashMap<>();
     private Boolean mCreateRelationRecords = true;
 
+    private String SERVER_ID_FIELD = "id";
+    private String SERVER_NAME_FIELD = "name";
+    private ISyncServiceProgressListener isspl;
+
     public OSyncDataUtils(Context context, Odoo odoo) {
         mContext = context;
         mOdoo = odoo;
@@ -73,8 +77,8 @@ public class OSyncDataUtils {
         handleResult(updateInLocal);
     }
 
-
     private List<OdooRecord> checkLocalUpdatedRecords() {
+
         // Array of records which are new or need to update in local
         List<OdooRecord> finalRecords = new ArrayList<>();
         try {
@@ -83,9 +87,9 @@ public class OSyncDataUtils {
             HashMap<String, OdooRecord> serverIdRecords = new HashMap<>();
             List<OdooRecord> records = response.getRecords();
             for (OdooRecord record : records) {
-                if (mModel.hasServerRecord(record.getInt("id"))
-                        && mModel.isServerRecordDirty(record.getInt("id"))) {
-                    int server_id = record.getInt("id");
+                if (mModel.hasServerRecord(record.getInt(SERVER_ID_FIELD))
+                        && mModel.isServerRecordDirty(record.getInt(SERVER_ID_FIELD))) {
+                    int server_id = record.getInt(SERVER_ID_FIELD);
                     serverIds.add(server_id);
                     serverIdRecords.put("key_" + server_id, record);
                 } else {
@@ -96,7 +100,7 @@ public class OSyncDataUtils {
             // getting local dirty records if server records length = 0
             for (ODataRow row : mModel.select(new String[]{}, "_is_dirty = ? and _is_active = ? and id != ?",
                     new String[]{"true", "true", "0"})) {
-                serverIds.add(row.getInt("id"));
+                serverIds.add(row.getInt(SERVER_ID_FIELD));
             }
             // Comparing dirty (updated) record
             List<Integer> updateToServerIds = new ArrayList<>();
@@ -139,7 +143,7 @@ public class OSyncDataUtils {
             if (model.getColumn("write_date") != null) {
                 OdooFields fields = new OdooFields("write_date");
                 ODomain domain = new ODomain();
-                domain.add("id", "in", ids);
+                domain.add(SERVER_ID_FIELD, "in", ids);
                 OdooResult response =
                         mOdoo.searchRead(model.getModelName(), fields, domain, 0, 0, null);
                 result = response.getRecords();
@@ -151,7 +155,7 @@ public class OSyncDataUtils {
 
             if (!result.isEmpty()) {
                 for (OdooRecord record : result) {
-                    map.put("key_" + record.getInt("id"), record.getString("write_date"));
+                    map.put("key_" + record.getInt(SERVER_ID_FIELD), record.getString("write_date"));
                 }
             }
         } catch (Exception e) {
@@ -163,13 +167,16 @@ public class OSyncDataUtils {
     private void handleResult(List<OdooRecord> records) {
         try {
             recordsId.clear();
-            int counter = records.size();
+            int counter = 0;
+            int size = records.size();
             List<OColumn> columns = mModel.getColumns(false);
             columns.addAll(mModel.getFunctionalColumns());
+            Log.d(TAG, "Syncing model "+ mModel.getModelName() + " ---  " + records.size() + " records into DB");
             for (OdooRecord record : records) {
-                if (!recentSyncIds.contains(mModel.getModelName() + ":" + record.getInt("id"))) {
+                Log.d(TAG, "Processing " + counter + " of " + size );
+                if (!recentSyncIds.contains(mModel.getModelName() + ":" + record.getInt(SERVER_ID_FIELD))) {
                     OValues values = new OValues();
-                    recordsId.add(mModel.getModelName() + "_" + record.getInt("id"));
+                    recordsId.add(mModel.getModelName() + "_" + record.getInt(SERVER_ID_FIELD));
                     for (OColumn column : columns) {
                         String name = column.getSyncColumn();
                         String lName = column.getName();
@@ -198,17 +205,17 @@ public class OSyncDataUtils {
                                     case ManyToOne:
                                         OdooRecord m2oData = record.getM20(name);
                                         OModel m2o_model = mModel.createInstance(column.getType());
-                                        String recKey = m2o_model.getModelName() + "_" + m2oData.getInt("id");
+                                        String recKey = m2o_model.getModelName() + "_" + m2oData.getInt(SERVER_ID_FIELD);
                                         int m2oRowId;
                                         if (!recordsId.contains(recKey)) {
                                             OValues m2oValue = new OValues();
-                                            m2oValue.put("id", m2oData.getInt("id"));
-                                            m2oValue.put(m2o_model.getDefaultNameColumn(), m2oData.getString("name"));
+                                            m2oValue.put(SERVER_ID_FIELD, m2oData.getInt(SERVER_ID_FIELD));
+                                            m2oValue.put(m2o_model.getDefaultNameColumn(), m2oData.getString(SERVER_NAME_FIELD));
                                             m2oValue.put("_is_dirty", "false");
-                                            m2oRowId = m2o_model.insertOrUpdate(m2oData.getInt("id"),
+                                            m2oRowId = m2o_model.insertOrUpdate(m2oData.getInt(SERVER_ID_FIELD),
                                                     m2oValue);
                                         } else {
-                                            m2oRowId = m2o_model.selectRowId(m2oData.getInt("id"));
+                                            m2oRowId = m2o_model.selectRowId(m2oData.getInt(SERVER_ID_FIELD));
                                         }
 
                                         values.put(lName, m2oRowId);
@@ -218,7 +225,7 @@ public class OSyncDataUtils {
                                                     || (m2o_model.getColumns(false).size() > 4
                                                     && mModel.getOdooVersion().getVersionNumber() > 7)) {
                                                 List<Integer> m2oIds = new ArrayList<>();
-                                                m2oIds.add(m2oData.getInt("id"));
+                                                m2oIds.add(m2oData.getInt(SERVER_ID_FIELD));
                                                 addUpdateRelationRecord(mModel, m2o_model.getTableName(),
                                                         column.getType(), name, null,
                                                         column.getRelationType(), m2oIds);
@@ -241,7 +248,7 @@ public class OSyncDataUtils {
                                             int r_id;
                                             if (!recordsId.contains(recKey)) {
                                                 OValues m2mValues = new OValues();
-                                                m2mValues.put("id", id);
+                                                m2mValues.put(SERVER_ID_FIELD, id);
                                                 m2mValues.put("_is_dirty", "false");
                                                 r_id = m2mModel.insertOrUpdate(id, m2mValues);
                                             } else {
@@ -273,15 +280,15 @@ public class OSyncDataUtils {
                         }
                     }
                     // Some default values
-                    values.put("id", record.getInt("id"));
+                    values.put(SERVER_ID_FIELD, record.getInt(SERVER_ID_FIELD));
                     values.put("_write_date", ODateUtils.getUTCDate());
                     values.put("_is_active", "true");
                     values.put("_is_dirty", "false");
-                    mModel.insertOrUpdate(record.getInt("id"), values);
+                    mModel.insertOrUpdate(record.getInt(SERVER_ID_FIELD), values);
 
                     // Fixed issue of multiple time sync same record. Performance improved
                     // Adding to recent sync list for avoiding duplicate process for record
-                    recentSyncIds.add(mModel.getModelName() + ":" + record.getInt("id"));
+                    recentSyncIds.add(mModel.getModelName() + ":" + record.getInt(SERVER_ID_FIELD));
                     mResult.stats.numEntries++;
                     counter++;
                 }
@@ -310,7 +317,7 @@ public class OSyncDataUtils {
                     if (adapter.validateRelationRecords(model, record)) {
                         mOdoo.updateRecord(model.getModelName(), OdooRecordUtils
                                         .createRecordValues(model, record),
-                                record.getInt("id"));
+                                record.getInt(SERVER_ID_FIELD));
                         OValues value = new OValues();
                         value.put("_is_dirty", "false");
                         value.put("_write_date", ODateUtils.getUTCDate());
@@ -424,7 +431,6 @@ public class OSyncDataUtils {
         public void updateIds(List<Integer> ids) {
             this.serverIds.addAll(ids);
         }
-
 
         public List<Integer> getUniqueIds() {
             List<Integer> ids = new ArrayList<>();

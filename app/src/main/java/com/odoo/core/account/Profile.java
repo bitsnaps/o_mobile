@@ -26,7 +26,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import com.odoo.App;
 import com.odoo.R;
+import com.odoo.base.addons.abirex.dao.PosSessionDao;
+import com.odoo.base.addons.abirex.dao.PriceListDao;
+import com.odoo.base.addons.abirex.dto.Currency;
+import com.odoo.base.addons.res.ResCompany;
+import com.odoo.base.addons.res.ResCurrency;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.support.OUser;
 import com.odoo.core.utils.BitmapUtils;
@@ -37,6 +43,10 @@ import odoo.controls.OForm;
 
 public class Profile extends AppCompatActivity {
     public static final String TAG = Profile.class.getSimpleName();
+    ResCompany companyDao = App.getDao(ResCompany.class);
+    PriceListDao priceListDao = App.getDao(PriceListDao.class);
+    PosSessionDao posSessionDao = App.getDao(PosSessionDao.class);
+    ResCurrency currencyDao = App.getDao(ResCurrency.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +64,11 @@ public class Profile extends AppCompatActivity {
         userData.put("database", user.getDatabase());
         userData.put("version", user.getOdooVersion().getServerSerie());
         userData.put("timezone", user.getTimezone());
+        userData.put("company", companyDao.get(companyDao.selectRowId(user.getCompanyId())).getName());
+        userData.put("price_list", priceListDao.get(priceListDao.selectRowId(user.getPriceListId())).getName());
+        userData.put("pos_session", posSessionDao.get(posSessionDao.selectRowId(user.getPosSessionId())).getName());
+        Currency currency = currencyDao.get(currencyDao.selectRowId(user.getCurrencyId()));
+        userData.put("currency", currency.getName() + " (" + currency.getSymbol() + ")");
         form.initForm(userData);
 
         CollapsingToolbarLayout collapsing_toolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);

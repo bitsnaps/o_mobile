@@ -21,11 +21,21 @@ package com.odoo.config;
 
 import android.content.Context;
 
+import com.odoo.App;
+import com.odoo.core.account.ConfigurationException;
+import com.odoo.core.auth.ServerDefaultsService;
 import com.odoo.core.support.OUser;
 
 public class FirstLaunchConfig {
 
-    public static void onFirstLaunch(Context context, OUser user) {
+    public static void onFirstLaunch(Context context, OUser user)  throws ConfigurationException {
+
+        App.initDaos(user.getUsername());
+        if(!new ServerDefaultsService().updateUserConfig(context, user)){
+            Throwable throwable = new Throwable();
+            throwable.fillInStackTrace();
+            throw new ConfigurationException("Unable to finish updating user configuration Data",  throwable);
+        }
 
     }
 

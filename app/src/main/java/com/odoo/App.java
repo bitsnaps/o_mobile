@@ -24,16 +24,36 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
+import com.odoo.base.addons.abirex.Defaults;
+import com.odoo.base.addons.abirex.dao.AccountDao;
+import com.odoo.base.addons.abirex.dao.LocationDao;
+import com.odoo.base.addons.abirex.dao.PosConfigDao;
+import com.odoo.base.addons.abirex.dao.PosOrderDao;
+import com.odoo.base.addons.abirex.dao.PosOrderLineDao;
+import com.odoo.base.addons.abirex.dao.PosSessionDao;
+import com.odoo.base.addons.abirex.dao.PriceListDao;
+import com.odoo.base.addons.abirex.dao.ProductDao;
+import com.odoo.base.addons.abirex.dao.ProductTemplateDao;
+import com.odoo.base.addons.abirex.dao.PurchaseOrderDao;
+import com.odoo.base.addons.abirex.dao.PurchaseOrderLineDao;
+import com.odoo.base.addons.abirex.dao.StockPickingDao;
+import com.odoo.base.addons.abirex.dao.StockPickingTypeDao;
+import com.odoo.base.addons.abirex.dto.Company;
+import com.odoo.base.addons.abirex.dto.ProductTemplate;
+import com.odoo.base.addons.res.ResCompany;
 import com.odoo.core.orm.ModelRegistryUtils;
 import com.odoo.core.orm.OModel;
 import com.odoo.core.orm.OSQLite;
 import com.odoo.core.rpc.Odoo;
 import com.odoo.core.support.OUser;
+import com.odoo.data.abirex.ModelNames;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class App extends Application {
 
@@ -132,11 +152,13 @@ public class App extends Application {
     }
 
     private static Map<String, Map<Class, OModel>> usersOModelInstances = new HashMap<>();
-    private static  Map<Class, OModel> initDaos(String username, boolean force){
+
+    private static  Map<Class, OModel> initDaoInstances(String username) {
+        Set<Map.Entry<String, Class<? extends OModel>>> registryModelsEntrySet = modelRegistryUtils.getModels().entrySet();
         Map<Class, OModel> userOModelInstances = usersOModelInstances.get(username);
-        if(force || userOModelInstances == null){
+        if(userOModelInstances == null){
             userOModelInstances = new HashMap<>();
-            for (Map.Entry<String, Class<? extends OModel>> entry : modelRegistryUtils.getModels().entrySet()){
+            for (Map.Entry<String, Class<? extends OModel>> entry : registryModelsEntrySet){
                 String oModelName = entry.getKey();
                 Class<? extends OModel> oModelClass = entry.getValue();
                 OModel oModelInstance = OModel.get(getContext(), oModelName, username);
@@ -149,18 +171,64 @@ public class App extends Application {
     }
 
     public static <T> T getDao(Class<? extends OModel> klazz){
-        if(getContext() != null){
+        Context context = getContext();
+        if (context != null) {
             OUser oUser = OUser.current(getContext());
-            String username = oUser != null ? oUser.getUsername() : "";
+            String username = oUser != null ? oUser.getUsername() : "topzy20@yahoo.com";
             Map<Class, OModel> userOModelInstances = usersOModelInstances.get(username);
-            if(!username.isEmpty() && userOModelInstances == null) {
-                userOModelInstances = initDaos(username, true);
+            if (userOModelInstances != null)
                 return (T) userOModelInstances.get(klazz);
-            } else if(!username.isEmpty() && userOModelInstances != null){
-                return  (T) userOModelInstances.get(klazz);
-            }
         }
         return null;
+   }
+
+//   private static Map<String, Class> modelMap = new HashMap<String, Class>() {{
+//       put(ModelNames.ACCOUNT, AccountDao.class);
+//       put(ModelNames.STOCK_LOCATION, LocationDao.class);
+//       put(ModelNames.POS_CONFIG, PosConfigDao.class);
+//       put(ModelNames.POS_ORDER, PosOrderDao.class);
+//       put(ModelNames.POS_ORDER_LINE, PosOrderLineDao.class);
+//       put(ModelNames.POS_SESSION, PosSessionDao.class);
+//       put(ModelNames.PRODUCT_PRICELIST, PriceListDao.class);
+//       put((ModelNames.PRODUCT_TEMPLATE, ProductTemplateDao.class);
+//       put((ModelNames.PURCHASE_ORDER, PurchaseOrderDao.class);
+//       put((ModelNames.POS_ORDER_LINE, PurchaseOrderLineDao.class);
+//       put((ModelNames.STOCK_PICKING, StockPickingDao.class);
+//       put((ModelNames.STOCK_PICKING_TYPE, StockPickingTypeDao.class);
+//   }};
+
+   private static Class getModelClass(String modelName) {
+        return modelRegistryUtils.getModel(modelName);
+   }
+
+    public static <T> T getDao(String modelName){
+        Class modelClass = getModelClass(modelName);
+        OUser oUser = OUser.current(getContext());
+        String username = oUser.getUsername();
+        Map<Class, OModel> userOModelInstances = usersOModelInstances.get(username);
+        return (T) userOModelInstances.get(modelClass);
+    }
+
+   public static void initDaos(String username){
+       initDaoInstances(username);
+       initDaoChildInstances(username);
+       Log.i(TAG,"Daos initialised...");
+   }
+
+   private static void initDaoChildInstances(String username){
+       Set<Map.Entry<String, Class<? extends OModel>>> registryModelsEntrySet = modelRegistryUtils.getModels().entrySet();
+       for (Map.Entry<String, Class<? extends OModel>> entry : registryModelsEntrySet){
+           Map<Class, OModel> userOModelInstances = usersOModelInstances.get(username);
+           if (userOModelInstances != null) {
+               OModel oModelInstance =  userOModelInstances.get(entry.getValue());
+               oModelInstance.initDaos();
+           }
+       }
+   }
+
+   public static Company getCompany(){
+       ResCompany companyDao = getDao(ResCompany.class);
+       return companyDao.get(companyDao.selectRowId(Defaults.getAppCompany()));
    }
 
 }

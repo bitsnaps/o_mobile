@@ -39,7 +39,7 @@
             android:layout_height="wrap_content">
 
             <include
-                layout="@layout/layout_customer_product_grid_item"
+                layout="@layout/layout_grid_item_customer_product"
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="@dimen/default_8dp" />
@@ -48,7 +48,7 @@
                 android:layout_marginLeft="@dimen/default_8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                layout="@layout/layout_customer_product_grid_item"/>
+                layout="@layout/layout_grid_item_customer_product"/>
         </LinearLayout>
 
     <LinearLayout

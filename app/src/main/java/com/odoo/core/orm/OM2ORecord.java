@@ -20,12 +20,13 @@
 package com.odoo.core.orm;
 
 import com.odoo.core.orm.fields.OColumn;
+import com.odoo.data.abirex.Columns;
 
 public class OM2ORecord {
     public static final String TAG = OM2ORecord.class.getSimpleName();
-    private OColumn mCol = null;
-    private Integer record_id = 0;
-    private OModel base_model = null;
+    private OColumn mCol;
+    private Integer record_id;
+    private OModel base_model;
     private OModel rel_model = null;
 
     public OM2ORecord(OModel base, OColumn col, Integer rec_id) {
@@ -40,8 +41,8 @@ public class OM2ORecord {
 
     public String getName() {
         rel_model = base_model.createInstance(mCol.getType());
-        return rel_model.browse(new String[]{"name"}, OColumn.ROW_ID + "=?",
-                new String[]{record_id + ""}).getString("name");
+        return rel_model.browse(new String[]{Columns.name}, OColumn.ROW_ID + "=?",
+                new String[]{record_id + ""}).getString(Columns.name);
     }
 
     public ODataRow browse(OModel rel_model) {
@@ -55,6 +56,19 @@ public class OM2ORecord {
         rel_model = base_model.createInstance(mCol.getType());
         return browse(rel_model);
     }
+
+    public ODataRow browseServerId(OModel rel_model) {
+        if (record_id != null) {
+            return rel_model.browseServerId(record_id);
+        }
+        return null;
+    }
+
+    public ODataRow browseServerId() {
+        rel_model = base_model.createInstance(mCol.getType());
+        return browseServerId(rel_model);
+    }
+
 
     @Override
     public String toString() {

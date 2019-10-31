@@ -36,7 +36,7 @@ public class OUser {
     public static final int USER_ACCOUNT_VERSION = 2;
     private Account account;
     private String username, name, timezone, avatar, database, host, password;
-    private Integer userId, partnerId, companyId;
+    private Integer userId, partnerId, companyId, posSessionId = 0, priceListId = 0, currencyId = 0;
     private Boolean isActive = false, allowForceConnect = false;
     private OdooVersion odooVersion;
 
@@ -58,6 +58,27 @@ public class OUser {
 
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
+    }
+
+
+    public Integer getPosSessionId() { return posSessionId; }
+
+    public void setPosSessionId(Integer posSessionId) {
+        this.posSessionId = posSessionId;
+    }
+
+    public Integer getCurrencyId() { return currencyId; }
+
+    public void setCurrencyId(Integer currencyId) {
+        this.currencyId = currencyId;
+    }
+
+    public Integer getPriceListId() {
+        return priceListId;
+    }
+
+    public void setPriceListId(Integer priceListId) {
+        this.priceListId = priceListId;
     }
 
     public Integer getCompanyId() {
@@ -173,6 +194,11 @@ public class OUser {
         data.putInt("user_id", getUserId());
         data.putInt("partner_id", getPartnerId());
         data.putInt("company_id", getCompanyId());
+        //Newly Added
+        data.putInt("pricelist_id", getPriceListId());
+        data.putInt("pos_session_id", getPosSessionId());
+        data.putInt("currency_id", getCurrencyId());
+        //End
         data.putBoolean("is_active", isActive());
         data.putBoolean("allow_force_connect", isAllowForceConnect());
         if (odooVersion != null) {
@@ -206,6 +232,15 @@ public class OUser {
             setPartnerId(data.getInt("partner_id"));
         if (OBundleUtils.hasKey(data, "company_id"))
             setCompanyId(data.getInt("company_id"));
+        //Newly Added
+
+        if (OBundleUtils.hasKey(data, "pos_session_id"))
+            setPosSessionId(data.getInt("pos_session_id"));
+        if (OBundleUtils.hasKey(data, "currency_id"))
+            setCompanyId(data.getInt("currency_id"));
+        if (OBundleUtils.hasKey(data, "pricelist_id"))
+            setCompanyId(data.getInt("pricelist_id"));
+
         if (OBundleUtils.hasKey(data, "is_active"))
             setIsActive(data.getBoolean("is_active"));
         if (OBundleUtils.hasKey(data, "allow_force_connect"))
@@ -231,6 +266,11 @@ public class OUser {
         setHost(accMgr.getUserData(account, "host"));
         setPassword(accMgr.getUserData(account, "password"));
         setCompanyId(Integer.parseInt(accMgr.getUserData(account, "company_id")));
+        //Newly Added
+        setPosSessionId(Integer.parseInt(accMgr.getUserData(account, "pos_session_id")));
+        setCurrencyId(Integer.parseInt(accMgr.getUserData(account, "currency_id")));
+        setPriceListId(Integer.parseInt(accMgr.getUserData(account, "pricelist_id")));
+
         setAllowForceConnect(Boolean.parseBoolean(accMgr.getUserData(account, "allow_self_signed_ssl")));
         try {
             OdooVersion version = new OdooVersion();

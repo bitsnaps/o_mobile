@@ -19,7 +19,17 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.WRITE_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_MMS"/>
+    <uses-permission android:name="android.provider.Telephony.SMS_RECEIVED" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <application
         android:name="com.odoo.App"
@@ -43,7 +53,8 @@
             android:name="com.odoo.OdooActivity"
             android:label="${applicationName}" />
         <activity android:name="odoo.controls.SearchableItemActivity" />
-        <activity android:name="com.odoo.addons.abirex.form.PosOrderDetails" />
+        <activity android:name="com.odoo.addons.abirex.detail.PosOrderDetails" />
+        <activity android:name="com.odoo.addons.abirex.form.PosOrderEdit" />
         <activity android:name="com.odoo.SettingsActivity" />
         <activity
             android:name="com.odoo.core.account.AppIntro"
@@ -61,9 +72,29 @@
         <activity android:name="com.odoo.core.account.About" />
         <activity android:name="com.odoo.core.account.Profile" />
 
-        <!-- Reminder Receivers// -->
+         <!--Reminder Receivers//-->
         <receiver android:name="com.odoo.core.utils.reminder.ReminderReceiver" />
         <receiver android:name="com.odoo.core.utils.reminder.ReminderActionReceiver" />
+
+        <!--&lt;!&ndash; SMS Receiver &ndash;&gt;-->
+        <!--<receiver-->
+            <!--android:name="com.klinker.android.send_message.SentReceiver"-->
+            <!--android:taskAffinity="[insert package name here].SMS_SENT"/>-->
+
+        <!--<receiver-->
+            <!--android:name="com.klinker.android.send_message.DeliveredReceiver"-->
+            <!--android:taskAffinity="[insert package name here].SMS_DELIVERED"/>-->
+
+        <receiver
+            android:name=".sms.SmsReceiver"
+            android:permission="android.permission.BROADCAST_SMS">
+        <intent-filter android:priority="999" >
+            <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+        </intent-filter>
+        </receiver>
+
+        <service android:name="com.android.mms.transaction.TransactionService"/>
+
 
         <service android:name="com.odoo.core.auth.OdooAuthService">
             <intent-filter>
@@ -82,13 +113,13 @@
 
         <!-- Sync Provider & Service  // -->
         <provider
-            android:name="com.odoo.addons.abirex.providers.CustomersSyncProvider"
+            android:name="com.odoo.base.addons.abirex.providers.CustomersSyncProvider"
             android:authorities="${applicationId}.core.provider.content.sync.res_partner"
             android:label="@string/sync_label_customers"
             android:multiprocess="true" />
 
         <service
-            android:name="com.odoo.addons.abirex.services.CustomerSyncService"
+            android:name="com.odoo.base.addons.abirex.services.CustomerSyncService"
             android:exported="true"
             android:process=":sync_customer">
             <intent-filter>
@@ -101,19 +132,19 @@
         </service>
 
         <activity
-            android:name="com.odoo.addons.abirex.form.CustomerDetails"
+            android:name="com.odoo.addons.abirex.detail.CustomerDetails"
             android:windowSoftInputMode="adjustPan" />
 
 
         <!-- Product Sync Provider & Service  // -->
         <provider
-            android:name=".addons.abirex.providers.ProductsSyncProvider"
+            android:name=".base.addons.abirex.providers.ProductsSyncProvider"
             android:authorities="${applicationId}.core.provider.content.sync.product_product"
             android:label="@string/sync_label_products"
             android:multiprocess="true" />
 
         <service
-            android:name="com.odoo.addons.abirex.services.ProductSyncService"
+            android:name="com.odoo.base.addons.abirex.services.ProductSyncService"
             android:exported="true"
             android:process=":sync_product">
             <intent-filter>
@@ -126,25 +157,19 @@
         </service>
 
         <activity
-            android:name="com.odoo.addons.abirex.form.ProductDetails"
+            android:name="com.odoo.addons.abirex.detail.ProductDetails"
             android:windowSoftInputMode="adjustPan" />
 
 
         <!-- PurchaseList Sync Provider & Service  // -->
         <provider
-            android:name=".addons.abirex.providers.PurchaseSyncProvider"
+            android:name=".base.addons.abirex.providers.PurchaseSyncProvider"
             android:authorities="${applicationId}.core.provider.content.sync.purchase_order"
             android:label="@string/sync_label_purchases"
             android:multiprocess="true" />
 
-        <provider
-            android:name=".addons.abirex.providers.PosOrderLineSyncProvider"
-            android:authorities="${applicationId}.core.provider.content.sync.pos_order_line"
-            android:label="@string/sync_label_purchases"
-            android:multiprocess="true" />
-
         <service
-            android:name="com.odoo.addons.abirex.services.PurchaseSyncService"
+            android:name="com.odoo.base.addons.abirex.services.PurchaseSyncService"
             android:exported="true"
             android:process=":sync_purchase">
             <intent-filter>
@@ -156,16 +181,15 @@
                 android:resource="@xml/purchase_sync_adapter" />
         </service>
 
-
         <!-- PosOrderList Sync Provider & Service  // -->
         <provider
-            android:name=".addons.abirex.providers.PosOrderSyncProvider"
+            android:name=".base.addons.abirex.providers.PosOrderSyncProvider"
             android:authorities="${applicationId}.core.provider.content.sync.pos_order"
-            android:label="@string/sync_label_point_of_sale"
+            android:label="@string/sync_label_pos_order"
             android:multiprocess="true" />
 
         <service
-            android:name="com.odoo.addons.abirex.services.PosOrderSyncService"
+            android:name="com.odoo.base.addons.abirex.services.PosOrderSyncService"
             android:exported="true"
             android:process=":sync_point_of_sale">
             <intent-filter>
@@ -174,9 +198,48 @@
 
             <meta-data
                 android:name="android.content.SyncAdapter"
-                android:resource="@xml/point_of_sale_sync_adapter" />
+                android:resource="@xml/pos_sync_adapter" />
         </service>
 
+        <!-- PosOrderLine Sync Provider & Service  // -->
+        <provider
+            android:name=".base.addons.abirex.providers.PosOrderLineSyncProvider"
+            android:authorities="${applicationId}.core.provider.content.sync.pos_order_line"
+            android:label="@string/sync_label_pos_order_line"
+            android:multiprocess="true" />
+
+        <service
+            android:name="com.odoo.base.addons.abirex.services.PosOrderLineSyncService"
+            android:exported="true"
+            android:process=":sync_pos_order_line">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/pos_order_line_sync_adapter" />
+        </service>
+
+        <!-- PosConfigLine Sync Provider & Service  // -->
+        <provider
+            android:name=".base.addons.abirex.providers.PosConfigSyncProvider"
+            android:authorities="${applicationId}.core.provider.content.sync.pos_config"
+            android:label="@string/sync_label_pos_config"
+            android:multiprocess="true" />
+
+        <service
+            android:name="com.odoo.base.addons.abirex.services.PosConfigSyncService"
+            android:exported="true"
+            android:process=":sync_pos_config">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/pos_config_sync_adapter" />
+        </service>
 
     </application>
 

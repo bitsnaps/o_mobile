@@ -6,14 +6,14 @@ import android.view.ViewGroup
 
 import com.odoo.R
 import com.odoo.addons.abirex.viewholder.PosOrderDateViewHolder
-import com.odoo.base.addons.abirex.model.PosOrderDate
+import com.odoo.base.addons.abirex.dto.PosOrderDate
 import com.odoo.data.LazyList
 
 class PosOrderDateListAdapter public constructor(private var posOrderDateLazyList: LazyList<PosOrderDate>
                                                      ) : RecyclerView.Adapter<PosOrderDateViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PosOrderDateViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.layout_customer_product_list_item, null)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.layout_list_item_customer_product, null)
         return PosOrderDateViewHolder(itemView)
     }
 

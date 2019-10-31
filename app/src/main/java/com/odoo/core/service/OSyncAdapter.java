@@ -29,6 +29,9 @@ import android.util.Log;
 
 import com.odoo.App;
 import com.odoo.R;
+import com.odoo.base.addons.abirex.Defaults;
+import com.odoo.base.addons.abirex.dto.SyncModel;
+import com.odoo.base.addons.abirex.util.DateUtils;
 import com.odoo.base.addons.ir.IrModel;
 import com.odoo.base.addons.res.ResCompany;
 import com.odoo.core.account.About;
@@ -52,7 +55,10 @@ import com.odoo.core.utils.OdooRecordUtils;
 import com.odoo.core.utils.logger.OLog;
 import com.odoo.datas.OConstants;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 
@@ -110,9 +116,10 @@ public class OSyncAdapter extends AbstractThreadedSyncAdapter {
     public void onPerformSync(Account account, Bundle extras, String authority,
                               ContentProviderClient provider, SyncResult syncResult) {
         // Creating model Object
-        mModel = new OModel(mContext, null, OdooAccountManager.getDetails(mContext, account.name))
+        mModel =  new OModel(mContext, null, OdooAccountManager.getDetails(mContext, account.name))
                 .createInstance(mModelClass);
         OUser mUser = mModel.getUser();
+
         if (OdooAccountManager.isValidUserObj(mContext, mUser)) {
             // Creating Odoo instance
             mOdoo = createOdooInstance(mContext, mUser);
@@ -140,64 +147,136 @@ public class OSyncAdapter extends AbstractThreadedSyncAdapter {
 
     private void syncData(OModel model, OUser user, ODomain domain_filter,
                           SyncResult result, Boolean checkForDataLimit, Boolean createRelationRecords) {
-        Log.v(TAG, "Sync for (" + model.getModelName() + ") Started at " + ODateUtils.getDate());
-        model.onSyncStarted();
-        try {
-            ODomain domain = new ODomain();
-            domain.append(model.defaultDomain());
-            if (domain_filter != null) {
-                domain.append(domain_filter);
-            }
+        syncData(model, user, domain_filter, result, checkForDataLimit, createRelationRecords, 0, 0);
+    }
 
-            if (checkForWriteCreateDate) {
-                List<Integer> serverIds = model.getServerIds();
-                // Model Create date domain filters
-                if (model.checkForCreateDate() && checkForDataLimit) {
-                    if (serverIds.size() > 0) {
-                        if (model.checkForWriteDate()
-                                && !model.isEmptyTable()) {
-                            domain.add("|");
-                        }
-                        if (model.checkForWriteDate() && !model.isEmptyTable()
-                                && createRelationRecords && model.getLastSyncDateTime() != null)
-                            domain.add("&");
-                    }
-                    int data_limit = preferenceManager.getInt("sync_data_limit", 360);
-                    domain.add("create_date", ">=", ODateUtils.getDateBefore(data_limit));
-                    if (serverIds.size() > 0) {
-                        domain.add("id", "not in", serverIds);
-                    }
-                }
-                // Model write date domain filters
-                if (model.checkForWriteDate() && !model.isEmptyTable() && createRelationRecords) {
-                    String last_sync_date = model.getLastSyncDateTime();
-                    if (last_sync_date != null) {
-                        domain.add("write_date", ">", last_sync_date);
-                    }
-                }
-            }
-            // Getting data
+    private void syncData(final OModel model, OUser user, ODomain domain_filter,
+                          SyncResult result, Boolean checkForDataLimit, Boolean createRelationRecords,
+                          int offset, int limit) {
+
+//        ISyncServiceProgressListener ispl = new ISyncServiceProgressListener() {
+//
+//            IrModel syncModelDao;
+//            SyncModel syncModel;
+//            SyncModel relationModel;
+//            Deque<String> messageStack;
+//
+//            @Override
+//            public void onSyncStarted(OModel oModel) {
+//                syncModelDao = App.getDao(IrModel.class);
+//                relationModel = syncModelDao.getSyncModel(oModel.getModelName());
+//                String msg = "Sync for (" + oModel.getModelName() + ") Started at " + ODateUtils.getDate() ;
+//                if (syncModel == null) {
+//                    syncModel = new SyncModel(0, oModel.getModelName(), oModel.authority(), Defaults.getSyncLimit(oModel.getModelName()), true, 0, 0, SyncModel.Companion.getSYNCED(), msg, DateUtils.now(), Arrays.asList(new SyncModel()));
+//                }
+//                messageStack = new ArrayDeque<>();
+//            }
+//
+//            @Override
+//            public void onServerListCounted(int serverCount) {
+//                //Update DB Sync Info
+//                syncModel.setServerCount(serverCount);
+//                syncModel.setStatus(SyncModel.Companion.getSYNCING());
+//                syncModel.setStatusDetail("Total count on server " + serverCount);
+//                syncModelDao.updateSyncModel(syncModel);
+//
+//            }
+//
+//            @Override
+//            public void onServerListFetched(int totalFetched) {
+//                //Update DB Sync Info
+//                syncModel.setServerCount(totalFetched);
+//                syncModel.setStatus(SyncModel.Companion.getSYNCING());
+//                messageStack.add("Fetched " + totalFetched + " records from server, now processing...");
+//                syncModelDao.updateSyncModel(syncModel);
+//            }
+//
+//            @Override
+//            public void onServerListProcessing(int current, int total) {
+//                int percentageSynced = (current / total) * 100;
+//                syncModel.setPercentageSynced(percentageSynced);
+//                syncModel.setStatus(SyncModel.Companion.getSYNCING());
+//                syncModel.setStatusDetail("Saved " + current + " of " + total + "records fetched from server");
+//                syncModelDao.updateSyncModel(syncModel);
+//            }
+//
+//            @Override
+//            public void onUpdatingRelations(int totalPercentageUpdated) {
+//
+//            }
+//
+//            @Override
+//            public void onSyncFailed(String errorMessage) {
+//                //Update DB Sync Info
+//                syncModel.setStatus(SyncModel.Companion.getERROR());
+//                syncModel.setStatusDetail("Error response from server " + errorMessage);
+//                syncModelDao.updateSyncModel(syncModel);
+//            }
+//
+//            @Override
+//            public void onSyncTimedOut() {
+//                //Update DB Sync Info
+//                syncModel.setStatus(SyncModel.Companion.getNETWORKISH());
+//                syncModel.setStatusDetail("Null response from server, could be issue with network or timeout");
+//                syncModelDao.updateSyncModel(syncModel);
+//            }
+//
+//            @Override
+//            public void onSyncFinished() {
+//                //Update DB Sync Info
+//                syncModel.setStatus(SyncModel.Companion.getSYNCED());
+//                syncModel.setStatusDetail("Finished Syncing Model");
+//                syncModelDao.updateSyncModel(syncModel);
+//            }
+//
+//        };
+
+        String msg = "Sync for (" + model.getModelName() + ") Started at " + ODateUtils.getDate();
+
+        Log.v(TAG, msg);
+        model.onSyncStarted();
+        //ispl.onSyncStarted(model);
+
+        try {
+
+            ODomain domain = getODomain(model, domain_filter, checkForDataLimit, createRelationRecords);
+
+            // Getting count data
+//
+//                 .searchCount(model.getModelName(), domain);
+            //ispl.onServerListCounted(serverCount);
+
+            // Getting list data
             OdooResult response = mOdoo
                     .withRetryPolicy(OConstants.RPC_REQUEST_TIME_OUT, OConstants.RPC_REQUEST_RETRIES)
                     .searchRead(model.getModelName(), getFields(model)
                             , domain, 0, mSyncDataLimit, "create_date DESC");
+
             if (response == null) {
                 // FIXME: Check in library. May be timeout issue with slow network.
                 Log.w(TAG, "Response null from server.");
                 model.onSyncTimedOut();
-                return;
-            }
-            if (response.containsKey("error")) {
-                app.setOdoo(null, user);
-                OPreferenceManager pref = new OPreferenceManager(mContext);
-                if (pref.getBoolean(About.DEVELOPER_MODE, false)) {
-                    OdooResult error = response.getMap("error");
-                    OLog.log("ERROR ERROR :(" + error);
-                }
+               //ispl.onSyncTimedOut();
                 return;
             }
 
-            Log.v(TAG, "Processing " + response.getRecords().size() + " records");
+            if (response.containsKey("error")) {
+                app.setOdoo(null, user);
+                OPreferenceManager pref = new OPreferenceManager(mContext);
+                OdooResult error = response.getMap("error");
+                if (pref.getBoolean(About.DEVELOPER_MODE, false)) {
+                    OLog.log("ERROR ERROR :(" + error);
+                }
+                //ispl.onSyncFailed(error.toString());
+
+                return;
+            }
+
+            int count = response.getRecords().size();
+            Log.v(TAG, "Processing " + count + " records");
+
+            //ispl.onServerListFetched(count);
+
             dataUtils.handleResult(model, user, result, response, createRelationRecords);
             // Updating records on server if local are latest updated.
             // if model allowed update record to server
@@ -224,11 +303,13 @@ public class OSyncAdapter extends AbstractThreadedSyncAdapter {
             }
 
             Log.v(TAG, "Sync for (" + model.getModelName() + ") finished at " + ODateUtils.getDate());
-            if (createRelationRecords) {
-                IrModel irModel = new IrModel(mContext, user);
-                irModel.setLastSyncDateTimeToNow(model);
-            }
+//            if (createRelationRecords) {
+//                IrModel irModel = new IrModel(mContext, user);
+//                //irModel.updateSyncModel();
+//            }
+            //ispl.onSyncFinished();
             model.onSyncFinished();
+
         } catch (Exception e) {
             e.printStackTrace();
             model.onSyncFailed();
@@ -250,20 +331,69 @@ public class OSyncAdapter extends AbstractThreadedSyncAdapter {
         model.close();
     }
 
+    private ODomain getODomain(OModel model, ODomain domain_filter, boolean checkForDataLimit, boolean createRelationRecords){
+        ODomain domain = new ODomain();
+        domain.append(model.defaultDomain());
+        if (domain_filter != null) {
+            domain.append(domain_filter);
+        }
+
+        if (checkForWriteCreateDate) {
+            List<Integer> serverIds = model.getServerIds();
+            // Model Create date domain filters
+            if (model.checkForCreateDate() && checkForDataLimit) {
+                if (serverIds.size() > 0) {
+                    if (model.checkForWriteDate()
+                            && !model.isEmptyTable()) {
+                        domain.add("|");
+                    }
+                    if (model.checkForWriteDate() && !model.isEmptyTable()
+                            && createRelationRecords && model.getLastSyncDateTime() != null)
+                        domain.add("&");
+                }
+                int data_limit = preferenceManager.getInt("sync_data_limit", 360);
+                domain.add("create_date", ">=", ODateUtils.getDateBefore(data_limit));
+                if (serverIds.size() > 0) {
+                    domain.add("id", "not in", serverIds);
+                }
+            }
+            // Model write date domain filters
+            if (model.checkForWriteDate() && !model.isEmptyTable() && createRelationRecords) {
+                String last_sync_date = model.getLastSyncDateTime();
+                if (last_sync_date != null) {
+                    domain.add("write_date", ">", last_sync_date);
+                }
+            }
+        }
+        return domain;
+    }
+
     private void handleRelationRecords(OUser user,
                                        HashMap<String, OSyncDataUtils.SyncRelationRecords> relationRecords,
                                        SyncResult result) {
+
         for (String key : relationRecords.keySet()) {
+
+            Log.d(TAG, "handleRelationRecords (" + key + ")" );
             OSyncDataUtils.SyncRelationRecords record = relationRecords.get(key);
             OModel model = record.getBaseModel();
+            //SyncModel baseSyncModel = model.getSyncModel();
             OModel rel_model = model.createInstance(record.getRelationModel());
+            //SyncModel relatedSyncModel = model.getSyncModel();
             model.close();
 
             // Skipping blank sync request if there is no any ids to sync.
             if (!record.getUniqueIds().isEmpty()) {
                 ODomain domain = new ODomain();
                 domain.add("id", "in", record.getUniqueIds());
+                boolean syncRelations = Defaults.alwaysSyncRelations(rel_model.getModelName());
+//                if(syncRelations){
+//                    syncData(rel_model, user, domain, result, false, true);
+//                }else{
+//
+//                }
                 syncData(rel_model, user, domain, result, false, false);
+
             }
             // Updating manyToOne record with their relation record row_id
             switch (record.getRelationType()) {
@@ -339,8 +469,8 @@ public class OSyncAdapter extends AbstractThreadedSyncAdapter {
         for (ODataRow record : records) {
             if (validateRelationRecords(model, record)) {
                 /*
-                 Need to check server id for record.
-                 It is possible that record created on server by validating main record.
+                 * Need to check server id for record,
+                 * it is possible that record created on server by validating main record.
                  */
                 if (model.selectServerId(record.getInt(OColumn.ROW_ID)) == 0) {
                     int id = createOnServer(model, OdooRecordUtils.createRecordValues(model, record));

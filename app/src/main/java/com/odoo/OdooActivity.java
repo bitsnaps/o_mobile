@@ -46,6 +46,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.odoo.config.StartupConfig;
 import com.odoo.core.account.AppIntro;
 import com.odoo.core.account.ManageAccounts;
 import com.odoo.core.account.OdooLogin;
@@ -127,7 +128,9 @@ public class OdooActivity extends OdooCompatActivity {
 
     private void validateUserObject() {
         if (OdooAccountManager.anyActiveUser(this)) {
-            OUser user = OUser.current(this);
+            final OUser user = OUser.current(this);//TODO: Centralized place to put this
+            StartupConfig.onStartup(App.getContext(), user);
+
             if (!OdooAccountManager.isValidUserObj(this, user)
                     && app.inNetwork()) {
                 OdooUserObjectUpdater.showUpdater(this, new OdooUserObjectUpdater.OnUpdateFinish() {

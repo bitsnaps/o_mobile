@@ -44,6 +44,8 @@ public class OdooLogin extends AppCompatActivity implements View.OnClickListener
         View.OnFocusChangeListener, OdooUserLoginSelectorDialog.IUserLoginSelectListener,
         IOdooConnectionListener, IOdooLoginCallback {
 
+    public static final String TAG = OdooActivity.class.getSimpleName();
+
     private EditText edtUsername, edtPassword, edtSelfHosted;
     private Boolean mCreateAccountRequest = false;
     private Boolean mSelfHostedURL = false;
@@ -368,19 +370,23 @@ public class OdooLogin extends AppCompatActivity implements View.OnClickListener
         @Override
         protected Boolean doInBackground(OUser... params) {
             mUser = params[0];
+
+//            Toast.makeText(this, OResource.string(this, R.string.label_select_database), Toast.LENGOmTH_LONG).show();
+//            Toast.makeText(this, OResource.string(App.getContext(), R.string.error_sync_unsuccessful), Toast.LENGTH_LONG).show();
             if (OdooAccountManager.createAccount(OdooLogin.this, mUser)) {
                 mUser = OdooAccountManager.getDetails(OdooLogin.this, mUser.getAndroidName());
                 OdooAccountManager.login(OdooLogin.this, mUser.getAndroidName());
-                FirstLaunchConfig.onFirstLaunch(OdooLogin.this, mUser);
                 try {
-                    // Syncing company details
-                    ODataRow company_details = new ODataRow();
-                    company_details.put("id", mUser.getCompanyId());
-                    ResCompany company = new ResCompany(OdooLogin.this, mUser);
-                    company.quickCreateRecord(company_details);
+                    FirstLaunchConfig.onFirstLaunch(App.getContext(), mUser);
+                    OdooAccountManager.updateUserData(App.getContext(), mUser);
                     Thread.sleep(5000);
+                } catch (ConfigurationException ce) {
+                    OdooAccountManager.updateUserData(App.getContext(), mUser);
+                    Log.e(TAG, "Unable to update user configuration from Server", ce);
+                    return false;
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "Unable to update user configuration from Server", e);
+                    return false;
                 }
                 return true;
             }

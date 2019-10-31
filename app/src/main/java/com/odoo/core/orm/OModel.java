@@ -30,6 +30,8 @@ import android.util.Log;
 
 import com.odoo.App;
 import com.odoo.BuildConfig;
+import com.odoo.base.addons.abirex.dto.DTO;
+import com.odoo.base.addons.abirex.dto.SyncModel;
 import com.odoo.base.addons.ir.IrModel;
 import com.odoo.core.auth.OdooAccountManager;
 import com.odoo.core.orm.annotation.Odoo;
@@ -51,6 +53,7 @@ import com.odoo.core.utils.ODateUtils;
 import com.odoo.core.utils.OListUtils;
 import com.odoo.core.utils.OStorageUtils;
 import com.odoo.core.utils.StringUtils;
+import com.odoo.data.abirex.Columns;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -70,7 +73,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 
-
 public class OModel implements ISyncServiceListener {
 
     public static final String TAG = OModel.class.getSimpleName();
@@ -87,6 +89,9 @@ public class OModel implements ISyncServiceListener {
     private OdooVersion mOdooVersion = null;
     private String default_name_column = "name";
     private boolean hasMailChatter = false;
+
+    //New vars
+    IrModel syncModelDao;
 
     // Base Columns
     OColumn id = new OColumn("ID", OInteger.class).setDefaultValue(0);
@@ -121,6 +126,7 @@ public class OModel implements ISyncServiceListener {
                 App.setSQLite(mUser.getAndroidName(), sqLite);
             }
         }
+       // syncModelDao = App.getDao(IrModel.class);
     }
 
     public SQLiteDatabase getReadableDatabase() {
@@ -593,6 +599,21 @@ public class OModel implements ISyncServiceListener {
         return null;
     }
 
+    public ODataRow browseServerId(int server_id) {
+        return browseServerId(null, server_id);
+    }
+
+    public ODataRow browseServerId(String[] projection, int server_id) {
+        List<ODataRow> rows = select(projection, Columns.server_id + " = ?", new String[]{server_id + ""});
+        if (rows.size() > 0) {
+            return rows.get(0);
+        }
+        return null;
+    }
+
+
+
+
     public List<Integer> getServerIds() {
         List<Integer> ids = new ArrayList<>();
         for (ODataRow row : select(new String[]{"id"})) {
@@ -786,11 +807,11 @@ public class OModel implements ISyncServiceListener {
         return row_id;
     }
 
-    public int selectServerId(int row_id) {
+    public int selectServerId (int row_id) {
         return browse(row_id).getInt("id");
     }
 
-    public int selectRowId(int server_id) {
+    public int selectRowId (int server_id) {
         List<ODataRow> rows = select(new String[]{OColumn.ROW_ID}, "id = ?", new String[]{server_id + ""});
         if (rows.size() > 0) {
             return rows.get(0).getInt(OColumn.ROW_ID);
@@ -798,7 +819,7 @@ public class OModel implements ISyncServiceListener {
         return INVALID_ROW_ID;
     }
 
-    public int insert(OValues values) {
+    public int insert (OValues values) {
         Uri uri = mContext.getContentResolver().insert(uri(), values.toContentValues());
         if (uri != null) {
             return Integer.parseInt(uri.getLastPathSegment());
@@ -1119,7 +1140,7 @@ public class OModel implements ISyncServiceListener {
         syncAdapter.setDomain(domain);
         syncAdapter.checkForWriteCreateDate(false);
         syncAdapter.onPerformSync(getUser().getAccount(), null, authority(), null, new SyncResult());
-        return browse(null, "id = ?", new String[]{record.getString("id")});
+        return browse(null, "_id = ?", new String[]{record.getString("_id")});
     }
 
     public ODataRow countGroupBy(String column, String group_by, String having, String[] args) {
@@ -1180,6 +1201,11 @@ public class OModel implements ISyncServiceListener {
         }
     }
 
+    //New methods
+    public SyncModel getSyncModel(){
+        return syncModelDao.getSyncModel();
+    }
+
     @Override
     public void onSyncStarted() {
         // Will be over ride by extending model
@@ -1202,5 +1228,18 @@ public class OModel implements ISyncServiceListener {
 
     public SyncUtils sync() {
         return SyncUtils.get(mContext);
+    }
+
+    public void initDaos() {
+
+    }
+
+    public DTO fromRow(ODataRow row) {
+        return null;
+    }
+
+    public DTO get(int id){
+        ODataRow row = browse(id);
+        return fromRow(row);
     }
 }

@@ -128,6 +128,42 @@
                     app:fieldName="timezone"
                     app:fieldTextSize="@dimen/text_size_xmedium"
                     app:showIcon="false"></odoo.controls.OField>
+
+                <odoo.controls.OField
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:controlLabel="COMPANY"
+                    app:fieldLabelColor="@color/theme_primary"
+                    app:fieldName="company"
+                    app:fieldTextSize="@dimen/text_size_xmedium"
+                    app:showIcon="false"></odoo.controls.OField>
+
+                <odoo.controls.OField
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:controlLabel="POS SESSION"
+                    app:fieldLabelColor="@color/theme_primary"
+                    app:fieldName="pos_session"
+                    app:fieldTextSize="@dimen/text_size_xmedium"
+                    app:showIcon="false"></odoo.controls.OField>
+
+                <odoo.controls.OField
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:controlLabel="PRICELIST"
+                    app:fieldLabelColor="@color/theme_primary"
+                    app:fieldName="price_list"
+                    app:fieldTextSize="@dimen/text_size_xmedium"
+                    app:showIcon="false"></odoo.controls.OField>
+
+                <odoo.controls.OField
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:controlLabel="CURRENCY"
+                    app:fieldLabelColor="@color/theme_primary"
+                    app:fieldName="currency"
+                    app:fieldTextSize="@dimen/text_size_xmedium"
+                    app:showIcon="false"></odoo.controls.OField>
             </odoo.controls.OForm>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

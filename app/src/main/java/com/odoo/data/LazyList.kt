@@ -22,7 +22,7 @@ class LazyList<T>(private val mCursor: Cursor, private val mCreator: ItemFactory
         } else {
             // we have to grow the collection
             for (i in size until index) {
-                add(null!!)
+                //add(null!!)
             }
             // create last object, add and return
             val item = mCreator.create(mCursor, index)

@@ -16,6 +16,7 @@
     <string name="error_invalid_password">Invalid password</string>
     <string name="error_provide_username">Provide username</string>
     <string name="error_provide_password">Provide password</string>
+    <string name="error_sync_unsuccessful">Sync unsuccessful</string>
     <string name="error_provide_server_url">Provide server URL</string>
     <string name="status_connecting_to_server">Connecting&#8230;</string>
     <string name="status_connected_to_server">Connected</string>

@@ -66,4 +66,9 @@ public class ODomain extends ODomainArgsHelper<ODomain> {
         }
         return result;
     }
+
+    @Override
+    public String toString(){
+        return getArray().toString();
+    }
 }

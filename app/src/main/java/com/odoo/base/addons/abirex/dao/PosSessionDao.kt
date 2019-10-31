@@ -3,17 +3,10 @@ package com.odoo.base.addons.abirex.dao
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import android.net.Uri
-import android.support.v4.content.Loader
-import android.util.Log
-import com.odoo.App
+import android.os.Build
 
-import com.odoo.BuildConfig
-import com.odoo.base.addons.abirex.model.PosOrder
-import com.odoo.base.addons.abirex.model.PosSession
-import com.odoo.base.addons.abirex.model.PurchaseOrder
-import com.odoo.base.addons.res.ResCompany
-import com.odoo.base.addons.res.ResCurrency
+import com.odoo.base.addons.abirex.dto.PosSession
+import com.odoo.base.addons.abirex.dto.User
 import com.odoo.base.addons.res.ResUsers
 import com.odoo.core.orm.ODataRow
 import com.odoo.core.orm.OModel
@@ -24,8 +17,15 @@ import com.odoo.data.LazyList
 import com.odoo.core.orm.fields.OColumn.RelationType
 import com.odoo.core.orm.fields.types.*
 import com.odoo.core.utils.OCursorUtils
+import android.os.Build.MANUFACTURER
+import android.text.TextUtils
+import com.odoo.App
+import com.odoo.base.addons.abirex.util.DateUtils
+import com.odoo.data.abirex.Columns
+import com.odoo.data.abirex.ModelNames
 
-class PosSessionDao(context: Context, user: OUser?) : OModel(context, "pos.session", user) {
+
+class PosSessionDao(context: Context, user: OUser?) : OModel(context, ModelNames.POS_SESSION, user) {
 
     internal var config_id = OColumn("Pos Config", PosConfigDao::class.java, RelationType.ManyToOne).setRequired()
     internal var name = OColumn("Session ID", OInteger::class.java)
@@ -43,7 +43,15 @@ class PosSessionDao(context: Context, user: OUser?) : OModel(context, "pos.sessi
 //    internal var cash_register_id = OColumn("Company", ResCompany::class.java, RelationType.ManyToOne)
     internal var rescue = OColumn("Rescue", OBoolean::class.java)
 
-    internal var userDao = ResUsers(context, user)
+    lateinit  var userDao : ResUsers
+    lateinit var posConfigDao: PosConfigDao
+    var userr = user
+
+
+    override fun initDaos() {
+        posConfigDao = App.getDao(PosConfigDao::class.java)
+        userDao = App.getDao(ResUsers::class.java)
+    }
 
     fun  posSessionCreator(): LazyList.ItemFactory<PosSession> {
         return object : LazyList.ItemFactory<PosSession> {
@@ -59,26 +67,30 @@ class PosSessionDao(context: Context, user: OUser?) : OModel(context, "pos.sessi
         setHasMailChatter(true)
     }
 
-    operator fun get(id: Int): PosSession? {
+    override fun get(id: Int): PosSession {
         val oDataRow = browse(id)
-        populateRelatedColumns(relationColumns.map{it.name}.toTypedArray(), oDataRow)
         return fromRow(oDataRow)
     }
 
-    fun fromRow(row: ODataRow): PosSession{
-        val id = row.getInt(OColumn.ROW_ID)
-        val configId = row.getInt(config_id.name)
+     override fun fromRow(row: ODataRow): PosSession {
+         super.fromRow(row)
+         val id = row.getInt(Columns.id)
+         val serverId = row.getInt(Columns.server_id)
+        val posConfig = posConfigDao.fromDataRow(row.getM2ORecord(config_id.name).browse())
         val name = row.getString(name.name)
         val user = userDao.fromRow(row.getM2ORecord(user_id.name).browse())
-        val startTime = row.getString(start_at.name)
-        val stopTime = row.getString(stop_at.name)
+         //TODO: use state to make start and stop date null if session hasn't being started
+        val startTime = if(row.getString(start_at.name) != "false")  DateUtils.parseToYYDDMM(row.getString(start_at.name)) else  DateUtils.now()
+        val stopTime =  if(row.getString(stop_at.name) != "false")  DateUtils.parseToYYDDMM(row.getString(stop_at.name)) else  DateUtils.now()
         val state = row.getString(state.name)
-        val sequenceNo = row.getInt(sequence_number.name)
+         val sequenceNo = row.getInt(sequence_number.name)
         val loginNo = row.getInt(login_number.name)
-//        val cashJournalId = row.getInt(cash_journal_id.name)
-//        val cashRegisterId = row.getBoolean(cash_register_id.name)
+//      val cashJournalId = row.getInt(cash_journal_id.name)
+//      val cashRegisterId = row.getBoolean(cash_register_id.name)
         val rescue = row.getBoolean(rescue.name)
-        return PosSession(id, name, user)
+        return PosSession(id, serverId, name, user, posConfig, startTime , stopTime,
+                    state, sequenceNo, loginNo, rescue)
+
     }
 //
 //    override fun uri(): Uri {
@@ -88,6 +100,45 @@ class PosSessionDao(context: Context, user: OUser?) : OModel(context, "pos.sessi
 
     override fun onModelUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
 
+    }
+
+    fun new (user: User) : PosSession {
+        val now = DateUtils.now()
+        val posSession = PosSession(0, 0, getDeviceName() + " - " + now , user, posConfigDao[1]
+                , now,  now, "opened", 1, 1, false)
+        posSession.id = insert(posSession.toOValues())
+        return posSession
+    }
+
+
+    fun getDeviceName(): String {
+        val manufacturer = MANUFACTURER
+        val model = Build.MODEL
+        return if (model.startsWith(manufacturer)) {
+            capitalize(model)
+        } else capitalize(manufacturer) + " " + model
+    }
+
+    private fun capitalize(str: String): String {
+        if (TextUtils.isEmpty(str)) {
+            return str
+        }
+        val arr = str.toCharArray()
+        var capitalizeNext = true
+
+        val phrase = StringBuilder()
+        for (c in arr) {
+            if (capitalizeNext && Character.isLetter(c)) {
+                phrase.append(Character.toUpperCase(c))
+                capitalizeNext = false
+                continue
+            } else if (Character.isWhitespace(c)) {
+                capitalizeNext = true
+            }
+            phrase.append(c)
+        }
+
+        return phrase.toString()
     }
 //
 //    override fun onSyncStarted() {

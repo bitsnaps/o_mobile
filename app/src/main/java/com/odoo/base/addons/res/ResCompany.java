@@ -21,12 +21,15 @@ package com.odoo.base.addons.res;
 
 import android.content.Context;
 
-import com.odoo.base.addons.abirex.model.Company;
+import com.odoo.App;
+import com.odoo.base.addons.abirex.dto.Company;
+import com.odoo.base.addons.abirex.dto.Partner;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.orm.OModel;
 import com.odoo.core.orm.fields.OColumn;
 import com.odoo.core.orm.fields.types.OVarchar;
 import com.odoo.core.support.OUser;
+import com.odoo.data.abirex.Columns;
 
 public class ResCompany extends OModel {
     public static final String TAG = ResCompany.class.getSimpleName();
@@ -34,10 +37,20 @@ public class ResCompany extends OModel {
     OColumn name = new OColumn("Name", OVarchar.class);
     OColumn currency_id = new OColumn("Currency", ResCurrency.class,
             OColumn.RelationType.ManyToOne);
+    OColumn partner_id = new OColumn(null, ResPartner.class, OColumn.RelationType.ManyToOne);
+
+    ResPartner partnerDao = null;
 
     public ResCompany(Context context, OUser user) {
         super(context, "res.company", user);
     }
+
+    @Override
+     public void initDaos() {
+         partnerDao = App.getDao(ResPartner.class);
+     }
+
+
 
     public static ODataRow getCurrency(Context context) {
         ResCompany company = new ResCompany(context, null);
@@ -46,14 +59,16 @@ public class ResCompany extends OModel {
     }
 
     public Company get(int id){
-        ODataRow oDataRow = browse(id);
+        ODataRow oDataRow =   browse(id);
         return fromRow(oDataRow);
     }
 
     public Company fromRow(ODataRow row){
-        Integer id = row.getInt(OColumn.ROW_ID);
+        Integer id = row.getInt(Columns.id);
+        Integer serverId = row.getInt(Columns.server_id);
+        Partner partner = partnerDao.get(row.getInt(Columns.Partner.partner_id));
         String name = row.getString(this.name.getName());
-        return new Company(id, name);
+        return new Company(id, serverId, name, partner);
     }
 
     @Override

@@ -27,6 +27,7 @@ import java.util.Map;
 import java.util.Queue;
 
 public class OdooResponseQueue {
+
     public static final String TAG = OdooResponseQueue.class.getSimpleName();
     private Map<String, Queue<IOdooResponse>> mOdooResponseQueue = new HashMap<>();
 

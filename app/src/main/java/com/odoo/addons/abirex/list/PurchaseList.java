@@ -23,10 +23,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.odoo.R;
-import com.odoo.addons.abirex.form.PurchaseDetails;
+import com.odoo.addons.abirex.detail.PurchaseDetails;
 import com.odoo.base.addons.abirex.dao.PurchaseOrderDao;
 import com.odoo.base.addons.abirex.dao.PurchaseOrderDateDao;
-import com.odoo.base.addons.abirex.model.PurchaseOrderDate;
+import com.odoo.base.addons.abirex.dto.PurchaseOrderDate;
 import com.odoo.core.orm.ODataRow;
 import com.odoo.core.support.addons.fragment.BaseFragment;
 import com.odoo.core.support.addons.fragment.IOnSearchViewChangeListener;
@@ -89,7 +89,7 @@ AdapterView.OnItemClickListener {
         setHasSyncStatusObserver(KEY, this, db());
         View view =  inflater.inflate(R.layout.common_listview, container, false);
         dateFilter =
-                (Button) getActivity().findViewById(R.id.filter_template);
+                (Button) getActivity().findViewById(R.id.btn_filter_template);
         dateFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

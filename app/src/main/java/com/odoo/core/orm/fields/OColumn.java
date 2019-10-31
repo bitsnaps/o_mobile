@@ -31,6 +31,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 public class OColumn {
+
     public static final String TAG = OColumn.class.getSimpleName();
     public static final String ROW_ID = "_id";
     private LinkedHashMap<String, String> mSelectionMap = new LinkedHashMap<>();
@@ -174,8 +175,7 @@ public class OColumn {
     }
 
     public OColumn addDomain(String column_name, String operator, Object value) {
-        columnDomains.put(column_name, new ColumnDomain(column_name, operator,
-                value));
+        columnDomains.put(column_name, new ColumnDomain(column_name, operator, value));
         return this;
     }
 
@@ -447,4 +447,5 @@ public class OColumn {
             return domain.toString();
         }
     }
+
 }

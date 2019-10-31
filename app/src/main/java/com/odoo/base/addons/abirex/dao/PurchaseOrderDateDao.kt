@@ -4,8 +4,8 @@ import android.database.Cursor
 import android.support.v4.content.Loader
 import android.util.Log
 
-import com.odoo.base.addons.abirex.Utils
-import com.odoo.base.addons.abirex.model.PurchaseOrderDate
+import com.odoo.base.addons.abirex.dto.PurchaseOrderDate
+import com.odoo.base.addons.abirex.util.DateUtils
 import com.odoo.core.orm.fields.OAggregate
 import com.odoo.data.DataLoader
 import com.odoo.data.LazyList
@@ -26,24 +26,23 @@ class PurchaseOrderDateDao(internal var purchaseOrderDao: PurchaseOrderDao) {
     private val purchaseOrderDateCreator: LazyList.ItemFactory<*>
         get() = object : LazyList.ItemFactory<PurchaseOrderDate> {
             override fun create(cursor: Cursor, index: Int): PurchaseOrderDate {
-                val purchaseOrderDate = PurchaseOrderDate()
                 val fields = ArrayList<Field>()
-                fields.addAll(Arrays.asList(*javaClass.declaredFields))
+                fields.addAll(listOf(*javaClass.declaredFields))
                 cursor.moveToPosition(index)
                 val groupDateIndex = cursor.getColumnIndex(group_date.alias)
                 val amountTotalIndex = cursor.getColumnIndex(amount_total.alias)
                 val noOfPurchaseIndex = cursor.getColumnIndex(no_of_purchases.alias)
                 val vendorIdsIndex = cursor.getColumnIndex(vendor_id_count.alias)
                 try {
-                    purchaseOrderDate.setPurchaseDate(cursor.getString(groupDateIndex))
-                    purchaseOrderDate.totalAmount = cursor.getFloat(amountTotalIndex)
-                    purchaseOrderDate.noOfVendors = cursor.getInt(noOfPurchaseIndex)
-                    purchaseOrderDate.noOfPurchases = cursor.getInt(vendorIdsIndex)
+
+                    val purchaseOrderDate = PurchaseOrderDate(DateUtils.parseToYYDDMM(cursor.getString(groupDateIndex)),
+                            cursor.getInt(vendorIdsIndex), cursor.getFloat(amountTotalIndex),
+                            cursor.getInt(noOfPurchaseIndex)
+                            )
+                    return purchaseOrderDate
                 } catch (e: ParseException) {
                     throw IllegalArgumentException(e)
                 }
-
-                return purchaseOrderDate
             }
         }
 
@@ -73,8 +72,8 @@ class PurchaseOrderDateDao(internal var purchaseOrderDao: PurchaseOrderDao) {
         val args = ArrayList<String>()
         if (dateFrom != null && dateTo != null) {
             where += " date_order BETWEEN  " + group_date.getoColumn() + "(?) and " + group_date.getoColumn() + "(?)"
-            args.add(Utils.getLowerBound(dateFrom))
-            args.add(Utils.getUpperBound(dateTo))
+            args.add(DateUtils.getLowerBound(dateFrom))
+            args.add(DateUtils.getUpperBound(dateTo))
         }
 
         val groupBy = (if (dateTo == null) " 0==0) " else ")") + " GROUP BY ( " + group_date.alias + " "

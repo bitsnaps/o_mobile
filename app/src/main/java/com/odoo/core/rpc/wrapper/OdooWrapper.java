@@ -34,6 +34,7 @@ import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
+import com.odoo.App;
 import com.odoo.core.rpc.Odoo;
 import com.odoo.core.rpc.handler.OdooVersionException;
 import com.odoo.core.rpc.helper.OArguments;
@@ -196,8 +197,10 @@ public class OdooWrapper<T> implements Response.Listener<JSONObject> {
             JsonObjectRequest request = new JsonObjectRequest(url, postData, OdooWrapper.this, errorListener);
             request.setRetryPolicy(new DefaultRetryPolicy(new_request_timeout, new_request_max_retry,
                     DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            request.setShouldCache(true);
             requestQueue.add(request);
         } else {
+
             JsonObjectRequest request = new JsonObjectRequest(url, postData, requestFuture, requestFuture);
             request.setRetryPolicy(new DefaultRetryPolicy(new_request_timeout, new_request_max_retry,
                     DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
@@ -207,6 +210,7 @@ public class OdooWrapper<T> implements Response.Listener<JSONObject> {
             } catch (Exception e) {
                 OdooLog.e(e);
             }
+
         }
         new_request_timeout = Odoo.REQUEST_TIMEOUT_MS;
         new_request_max_retry = Odoo.DEFAULT_MAX_RETRIES;
@@ -267,6 +271,7 @@ public class OdooWrapper<T> implements Response.Listener<JSONObject> {
     }
 
     private void getVersionInfo(final IOdooResponse res, OdooSyncResponse backResponse) {
+        final App app = (App) App.getContext();
         String url = serverURL + "/web/webclient/version_info";
         newJSONPOSTRequest(url, null, new IOdooResponse() {
             @Override
@@ -274,6 +279,7 @@ public class OdooWrapper<T> implements Response.Listener<JSONObject> {
                 try {
                     mVersion = OdooVersion.parseVersion(response);
                     res.onResponse(response);
+
                 } catch (OdooVersionException e) {
                     OdooError error = new OdooError(e.getMessage(), null);
                     error.setResponseCode(Odoo.ErrorCode.OdooVersionError.get());
@@ -915,9 +921,6 @@ public class OdooWrapper<T> implements Response.Listener<JSONObject> {
         users[0].setHost(serverURL);
         OdooFields fields = new OdooFields();
         fields.addAll(new String[]{"name", "partner_id", "tz", "image_medium", "company_id"});
-        ODomain domain = new ODomain();
-        domain.add("id", "=", users[0].getUserId());
-
         if (backResponse != null) {
             OdooResult result = read("res.users", users[0].getUserId(), fields);
             users[0] = parseUserObject(users[0], result);
@@ -928,6 +931,7 @@ public class OdooWrapper<T> implements Response.Listener<JSONObject> {
                 public void onResponse(OdooResult response) {
                     users[0] = parseUserObject(users[0], response);
                     callback.onLoginSuccess(mOdoo, users[0]);
+
                 }
 
                 @Override
@@ -956,6 +960,7 @@ public class OdooWrapper<T> implements Response.Listener<JSONObject> {
             //FIX: Odoo 7 Not returning company id with user login details
             odooSession.setCompanyId(company_id.intValue());
         }
+
         return user;
     }
 
