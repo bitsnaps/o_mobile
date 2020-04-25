@@ -17,7 +17,7 @@
             android:id="@+id/setting_activity_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            class="com.odoo.core.account.BaseSettings">
+            class="com.ehealthinformatics.app.fragment.BaseSettings">
 
         </fragment>
     </LinearLayout>

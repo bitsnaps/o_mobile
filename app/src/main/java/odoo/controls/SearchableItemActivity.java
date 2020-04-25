@@ -24,8 +24,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.ActionBarActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -35,21 +35,21 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.odoo.R;
-import com.odoo.core.orm.ODataRow;
-import com.odoo.core.orm.OModel;
-import com.odoo.core.orm.ServerDataHelper;
-import com.odoo.core.orm.fields.OColumn;
-import com.odoo.core.rpc.helper.ODomain;
-import com.odoo.core.rpc.helper.OdooFields;
-import com.odoo.core.support.list.OListAdapter;
-import com.odoo.core.utils.OControls;
-import com.odoo.core.utils.OResource;
+import com.ehealthinformatics.R;
+import com.ehealthinformatics.core.orm.ODataRow;
+import com.ehealthinformatics.core.orm.OModel;
+import com.ehealthinformatics.core.orm.ServerDataHelper;
+import com.ehealthinformatics.core.orm.fields.OColumn;
+import com.ehealthinformatics.core.rpc.helper.ODomain;
+import com.ehealthinformatics.core.rpc.helper.OdooFields;
+import com.ehealthinformatics.core.support.list.OListAdapter;
+import com.ehealthinformatics.core.utils.OControls;
+import com.ehealthinformatics.core.utils.OResource;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchableItemActivity extends ActionBarActivity implements
+public class SearchableItemActivity extends AppCompatActivity implements
         AdapterView.OnItemClickListener, TextWatcher, View.OnClickListener,
         OListAdapter.OnSearchChange, IOnQuickRecordCreateListener {
     public static final String TAG = SearchableItemActivity.class.getSimpleName();

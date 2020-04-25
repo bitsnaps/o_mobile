@@ -152,14 +152,14 @@
                     app:fieldTextAppearance="?android:textAppearanceMedium"
                     app:showLabel="false"></odoo.controls.OField>
 
-                <odoo.controls.OField
-                    android:id="@+id/parent_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:fieldName="parent_id"
-                    app:fieldTextAppearance="?android:textAppearanceMedium"
-                    app:showLabel="false"
-                    app:widgetType="SearchableLive"></odoo.controls.OField>
+<!--                <odoo.controls.OField-->
+<!--                    android:id="@+id/parent_id"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:fieldName="parent_id"-->
+<!--                    app:fieldTextAppearance="?android:textAppearanceMedium"-->
+<!--                    app:showLabel="false"-->
+<!--                    app:widgetType="SearchableLive"></odoo.controls.OField>-->
 
                 <View
                     style="@style/ViewSeparator"

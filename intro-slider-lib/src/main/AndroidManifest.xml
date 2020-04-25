@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.odoo.widgets.slider"
+    package="com.ehealthinformatics.widgets.slider"
     android:versionCode="1"
     android:versionName="1.0" >
 

@@ -410,7 +410,7 @@ public final class Gson {
    *  System.out.println("Num JSON writes" + stats.numWrites);
    *  }</pre>
    *  Note that since you can not override type adapter factories for String and Java primitive
-   *  types, our stats factory will not count the number of String or primitives that will be
+   *  types, our stats factory will not local_count the number of String or primitives that will be
    *  read or written.
    * @param skipPast The type adapter factory that needs to be skipped while searching for
    *   a matching type adapter. In most cases, you should just pass <i>this</i> (the type adapter

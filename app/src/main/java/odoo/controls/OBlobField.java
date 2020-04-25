@@ -26,8 +26,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.odoo.core.orm.fields.OColumn;
-import com.odoo.core.utils.BitmapUtils;
+import com.ehealthinformatics.core.orm.fields.OColumn;
+import com.ehealthinformatics.core.utils.BitmapUtils;
 
 public class OBlobField extends LinearLayout implements IOControlData {
     public static final String TAG = OBlobField.class.getSimpleName();

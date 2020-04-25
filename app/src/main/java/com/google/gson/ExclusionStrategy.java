@@ -72,7 +72,7 @@ package com.google.gson;
  *     .create();
  * </pre>
  *
- * <p>For certain model classes, you may only want to serialize a field, but exclude it for
+ * <p>For certain modelName classes, you may only want to serialize a field, but exclude it for
  * deserialization. To do that, you can write an {@code ExclusionStrategy} as per normal;
  * however, you would register it with the
  * {@link GsonBuilder#addDeserializationExclusionStrategy(ExclusionStrategy)} method.

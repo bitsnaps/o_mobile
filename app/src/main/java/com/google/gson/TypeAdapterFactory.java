@@ -26,7 +26,7 @@ import com.google.gson.reflect.TypeToken;
  * In this example, we implement a factory that creates type adapters for all
  * enums. The type adapters will write enums in lowercase, despite the fact
  * that they're defined in {@code CONSTANT_CASE} in the corresponding Java
- * model: <pre>   {@code
+ * modelName: <pre>   {@code
  *
  *   public class LowercaseEnumTypeAdapterFactory implements TypeAdapterFactory {
  *     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
@@ -126,7 +126,7 @@ import com.google.gson.reflect.TypeToken;
  *
  *           out.beginArray();
  *           for (Multiset.Entry<E> entry : value.entrySet()) {
- *             out.value(entry.getCount());
+ *             out.value(entry.getcount());
  *             elementAdapter.write(out, entry.getElement());
  *           }
  *           out.endArray();

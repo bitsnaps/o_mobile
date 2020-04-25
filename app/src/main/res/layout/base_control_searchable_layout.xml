@@ -45,7 +45,7 @@
 
     <include
         android:id="@+id/loading_progress"
-        layout="@layout/listview_data_loading_progress"
+        layout="@layout/layout_items"
         android:visibility="gone" />
 
     <ListView

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.odoo">
+    package="com.ehealthinformatics">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -32,14 +32,14 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <application
-        android:name="com.odoo.App"
+        android:name="com.ehealthinformatics.App"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@drawable/rx"
         android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.odoo.core.account.OdooLogin"
+            android:name="com.ehealthinformatics.app.activity.OdooLogin"
             android:label="${applicationName}"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -48,33 +48,44 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.odoo.core.account.ManageAccounts" />
+        <activity android:name="com.ehealthinformatics.app.activity.ManageAccounts" />
         <activity
-            android:name="com.odoo.OdooActivity"
+            android:name="com.ehealthinformatics.app.activity.OdooActivity"
             android:label="${applicationName}" />
         <activity android:name="odoo.controls.SearchableItemActivity" />
-        <activity android:name="com.odoo.addons.abirex.detail.PosOrderDetails" />
-        <activity android:name="com.odoo.addons.abirex.form.PosOrderEdit" />
-        <activity android:name="com.odoo.SettingsActivity" />
+        <activity android:name="com.ehealthinformatics.app.activity.product.ProductEdit" />
+        <activity android:name="com.ehealthinformatics.app.fragment.PosOrderDetails" />
+        <activity android:name="com.ehealthinformatics.app.activity.pos.PosOrderEdit" />
+        <activity android:name="com.ehealthinformatics.app.activity.shopping.PosOrderCart" />
+        <activity android:name="com.ehealthinformatics.app.activity.shopping.ShoppingCheckoutStep" />
+        <activity android:name="com.ehealthinformatics.app.activity.shopping.SimpleCheckout" />
+        <activity android:name="com.ehealthinformatics.app.activity.shopping.SearchToolbarLight" />
+        <activity android:name="com.ehealthinformatics.app.activity.shopping.SearchCustomer" />
+
+        <activity android:name="com.ehealthinformatics.app.activity.SettingsActivity" />
         <activity
-            android:name="com.odoo.core.account.AppIntro"
+            android:name="com.ehealthinformatics.app.activity.AppIntro"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".base.addons.mail.widget.MailDetailDialog"
+            android:name="com.ehealthinformatics.mail.widget.MailDetailDialog"
             android:theme="@style/Theme.AppCompat.Light.Dialog" />
         <activity
-            android:name=".base.addons.mail.widget.MailChatterCompose"
+            android:name="com.ehealthinformatics.mail.widget.MailChatterCompose"
             android:theme="@style/Theme.AppCompat.Light.Dialog" />
         <activity
-            android:name="com.odoo.core.account.OdooAccountQuickManage"
+            android:name="com.ehealthinformatics.app.activity.OdooAccountQuickManage"
             android:theme="@style/Theme.AppCompat.Light.Dialog"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name="com.odoo.core.account.About" />
-        <activity android:name="com.odoo.core.account.Profile" />
+        <activity android:name="com.ehealthinformatics.app.activity.About" />
+        <activity android:name="com.ehealthinformatics.app.activity.Profile" />
+        <activity android:name="com.ehealthinformatics.app.activity.shopping.PaymentType" />
+        <activity android:name="com.ehealthinformatics.app.activity.shopping.PaymentLine" />
+        <activity android:name="com.ehealthinformatics.app.activity.shopping.PaymentLines" />
+        <activity android:name="com.ehealthinformatics.app.activity.shopping.PaymentSuccess" />
 
          <!--Reminder Receivers//-->
-        <receiver android:name="com.odoo.core.utils.reminder.ReminderReceiver" />
-        <receiver android:name="com.odoo.core.utils.reminder.ReminderActionReceiver" />
+        <receiver android:name="com.ehealthinformatics.core.utils.reminder.ReminderReceiver" />
+        <receiver android:name="com.ehealthinformatics.core.utils.reminder.ReminderActionReceiver" />
 
         <!--&lt;!&ndash; SMS Receiver &ndash;&gt;-->
         <!--<receiver-->
@@ -86,7 +97,7 @@
             <!--android:taskAffinity="[insert package name here].SMS_DELIVERED"/>-->
 
         <receiver
-            android:name=".sms.SmsReceiver"
+            android:name="com.ehealthinformatics.sms.SmsReceiver"
             android:permission="android.permission.BROADCAST_SMS">
         <intent-filter android:priority="999" >
             <action android:name="android.provider.Telephony.SMS_RECEIVED" />
@@ -96,7 +107,7 @@
         <service android:name="com.android.mms.transaction.TransactionService"/>
 
 
-        <service android:name="com.odoo.core.auth.OdooAuthService">
+        <service android:name="com.ehealthinformatics.core.auth.OdooAuthService">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />
             </intent-filter>
@@ -107,19 +118,19 @@
         </service>
 
         <provider
-            android:name="com.odoo.core.orm.provider.BaseModelProvider"
+            android:name="com.ehealthinformatics.core.orm.provider.BaseModelProvider"
             android:authorities="${applicationId}.core.provider.content"
             android:multiprocess="true" />
 
         <!-- Sync Provider & Service  // -->
         <provider
-            android:name="com.odoo.base.addons.abirex.providers.CustomersSyncProvider"
+            android:name="com.ehealthinformatics.device.providers.CustomersSyncProvider"
             android:authorities="${applicationId}.core.provider.content.sync.res_partner"
             android:label="@string/sync_label_customers"
             android:multiprocess="true" />
 
         <service
-            android:name="com.odoo.base.addons.abirex.services.CustomerSyncService"
+            android:name="com.ehealthinformatics.device.services.CustomerSyncService"
             android:exported="true"
             android:process=":sync_customer">
             <intent-filter>
@@ -132,19 +143,19 @@
         </service>
 
         <activity
-            android:name="com.odoo.addons.abirex.detail.CustomerDetails"
+            android:name="com.ehealthinformatics.app.fragment.CustomerDetails"
             android:windowSoftInputMode="adjustPan" />
 
 
         <!-- Product Sync Provider & Service  // -->
         <provider
-            android:name=".base.addons.abirex.providers.ProductsSyncProvider"
+            android:name="com.ehealthinformatics.device.providers.ProductsSyncProvider"
             android:authorities="${applicationId}.core.provider.content.sync.product_product"
             android:label="@string/sync_label_products"
             android:multiprocess="true" />
 
         <service
-            android:name="com.odoo.base.addons.abirex.services.ProductSyncService"
+            android:name="com.ehealthinformatics.device.services.ProductSyncService"
             android:exported="true"
             android:process=":sync_product">
             <intent-filter>
@@ -157,19 +168,19 @@
         </service>
 
         <activity
-            android:name="com.odoo.addons.abirex.detail.ProductDetails"
+            android:name="com.ehealthinformatics.app.fragment.ProductDetails"
             android:windowSoftInputMode="adjustPan" />
 
 
         <!-- PurchaseList Sync Provider & Service  // -->
         <provider
-            android:name=".base.addons.abirex.providers.PurchaseSyncProvider"
+            android:name="com.ehealthinformatics.device.providers.PurchaseSyncProvider"
             android:authorities="${applicationId}.core.provider.content.sync.purchase_order"
             android:label="@string/sync_label_purchases"
             android:multiprocess="true" />
 
         <service
-            android:name="com.odoo.base.addons.abirex.services.PurchaseSyncService"
+            android:name="com.ehealthinformatics.device.services.PurchaseSyncService"
             android:exported="true"
             android:process=":sync_purchase">
             <intent-filter>
@@ -183,13 +194,13 @@
 
         <!-- PosOrderList Sync Provider & Service  // -->
         <provider
-            android:name=".base.addons.abirex.providers.PosOrderSyncProvider"
+            android:name="com.ehealthinformatics.device.providers.PosOrderSyncProvider"
             android:authorities="${applicationId}.core.provider.content.sync.pos_order"
             android:label="@string/sync_label_pos_order"
             android:multiprocess="true" />
 
         <service
-            android:name="com.odoo.base.addons.abirex.services.PosOrderSyncService"
+            android:name="com.ehealthinformatics.device.services.PosOrderSyncService"
             android:exported="true"
             android:process=":sync_point_of_sale">
             <intent-filter>
@@ -203,13 +214,13 @@
 
         <!-- PosOrderLine Sync Provider & Service  // -->
         <provider
-            android:name=".base.addons.abirex.providers.PosOrderLineSyncProvider"
+            android:name="com.ehealthinformatics.device.providers.PosOrderLineSyncProvider"
             android:authorities="${applicationId}.core.provider.content.sync.pos_order_line"
             android:label="@string/sync_label_pos_order_line"
             android:multiprocess="true" />
 
         <service
-            android:name="com.odoo.base.addons.abirex.services.PosOrderLineSyncService"
+            android:name="com.ehealthinformatics.device.services.PosOrderLineSyncService"
             android:exported="true"
             android:process=":sync_pos_order_line">
             <intent-filter>
@@ -223,13 +234,13 @@
 
         <!-- PosConfigLine Sync Provider & Service  // -->
         <provider
-            android:name=".base.addons.abirex.providers.PosConfigSyncProvider"
+            android:name="com.ehealthinformatics.device.providers.PosConfigSyncProvider"
             android:authorities="${applicationId}.core.provider.content.sync.pos_config"
             android:label="@string/sync_label_pos_config"
             android:multiprocess="true" />
 
         <service
-            android:name="com.odoo.base.addons.abirex.services.PosConfigSyncService"
+            android:name="com.ehealthinformatics.device.services.PosConfigSyncService"
             android:exported="true"
             android:process=":sync_pos_config">
             <intent-filter>

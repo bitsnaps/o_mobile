@@ -21,14 +21,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/iv_product_image"
-        android:src="@drawable/ic_medical_drug_pill"
-        android:layout_width="@dimen/default_50_dp"
-        android:layout_height="@dimen/default_50_dp"
-        android:layout_margin="@dimen/default_8dp"
-        android:layout_marginLeft="@dimen/default_8dp"
-        android:layout_marginStart="@dimen/default_8dp" />
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -45,13 +37,13 @@
             android:textAppearance="@style/ListTitleText"
             android:visibility="gone"/>
         <TextView
-            android:id="@+id/tv_product_name"
+            android:id="@+id/tv_pos_order_name"
             style="@style/ListTitleLayout"
             android:layout_width="match_parent"
             android:text="@string/stub_product_name"
             android:textAppearance="@style/ListTitleText" />
         <TextView
-            android:id="@+id/tv_product_type"
+            android:id="@+id/tv_pos_order_customer"
             android:text="@string/stub_medication_type"
             android:textAppearance="@style/ListSubtitleText"
             style="@style/ListSubtitleLayout"/>
@@ -59,18 +51,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <RatingBar
-                android:id="@+id/rb_product_rating"
+            <TextView
+                android:id="@+id/tv_pos_order_date"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_marginRight="@dimen/default_16dp"
-                android:layout_marginEnd="@dimen/default_16dp"
-                android:numStars="5"
-                android:stepSize="1"
-                android:rating="2"
-                style="?android:attr/ratingBarStyleSmall"/>
+                android:layout_marginEnd="@dimen/default_16dp"/>
             <TextView
-                android:id="@+id/tv_product_rating_no"
+                android:id="@+id/tv_pos_order_state"
                 android:fontFamily="@string/font_normal"
                 android:text="@string/stub_qty"
                 android:layout_weight="1"
@@ -86,7 +74,7 @@
         android:layout_marginStart="@dimen/default_8dp"
         android:orientation="vertical">
         <ImageButton
-            android:id="@+id/ib_product_menu"
+            android:id="@+id/ib_pos_order_menu"
             android:contentDescription="@string/menu"
             android:background="@color/colorPrimaryWhite"
             android:src="@drawable/ic_more_vert_black_24dp"
@@ -95,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"/>
         <TextView
-            android:id="@+id/tv_price"
+            android:id="@+id/tv_pos_order_total"
             android:text="@string/stub_price"
             android:layout_weight="1"
             android:layout_width="@dimen/default_88dp"

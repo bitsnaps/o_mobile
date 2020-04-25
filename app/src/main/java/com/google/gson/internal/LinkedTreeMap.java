@@ -17,7 +17,7 @@
 
 package com.google.gson.internal;
 
-import com.odoo.core.rpc.helper.utils.gson.OdooRecord;
+import com.ehealthinformatics.core.rpc.helper.utils.gson.OdooRecord;
 
 import java.io.ObjectStreamException;
 import java.io.Serializable;

@@ -21,6 +21,9 @@
         app:showAsAction="always">
         <menu>
             <item
+                android:id="@+id/menu_product_sync"
+                android:title="Sync" />
+            <item
                 android:id="@+id/menu_product_share"
                 android:title="@string/label_share" />
             <item

@@ -21,7 +21,7 @@ package odoo.controls;
 
 import android.view.View;
 
-import com.odoo.core.orm.fields.OColumn;
+import com.ehealthinformatics.core.orm.fields.OColumn;
 
 interface IOControlData {
     String TAG = IOControlData.class.getSimpleName();

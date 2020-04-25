@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">PharmaRx</string>
+    <string name="app_name">RxOne</string>
     <string name="sync_label_customers">Customers</string>
     <string name="toast_information_saved">Information Saved</string>
     <string name="toast_image_size_too_large">Image size too large !</string>
@@ -40,4 +40,18 @@
     <string name="stub_qty">5/10</string>
     <string name="menu">Menu</string>
     <string name="stub_price">$25.00</string>
+
+    <!--Material-X-->
+
+    <string name="version_unknown">Unknown</string>
+    <string name="app_version">Version</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur ipsum in placerat molestie.  Fusce quis mauris a enim sollicitudin
+        \n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur ipsum in placerat molestie.  Fusce quis mauris a enim sollicitudin
+    </string>
+
+
+    <string name="NEXT">NEXT</string>
+
 </resources>

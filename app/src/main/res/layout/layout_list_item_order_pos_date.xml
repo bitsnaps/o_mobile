@@ -24,7 +24,7 @@
                     android:textAppearance="@style/ListTitleText"
                     style="@style/ListTitleLayout"/>
                 <TextView
-                    android:id="@+id/tv_price"
+                    android:id="@+id/tv_pos_order_total"
                     android:text="@string/stub_thursday_7th_april_2019"
                     android:textAppearance="@style/ListSubtitleText"
                     style="@style/ListSubtitleLayout"/>

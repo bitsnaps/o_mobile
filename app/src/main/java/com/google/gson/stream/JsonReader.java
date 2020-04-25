@@ -61,7 +61,7 @@ import java.io.Reader;
  * #skipValue()}.
  *
  * <h3>Example</h3>
- * Suppose we'd like to parse a stream of messages such as the following: <pre> {@code
+ * Suppose we'id like to parse a stream of messages such as the following: <pre> {@code
  * [
  *   {
  *     "id": 912345678901,

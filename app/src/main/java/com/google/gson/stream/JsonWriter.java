@@ -53,7 +53,7 @@ import static com.google.gson.stream.JsonScope.NONEMPTY_OBJECT;
  * </ul>
  *
  * <h3>Example</h3>
- * Suppose we'd like to encode a stream of messages such as the following: <pre> {@code
+ * Suppose we'id like to encode a stream of messages such as the following: <pre> {@code
  * [
  *   {
  *     "id": 912345678901,

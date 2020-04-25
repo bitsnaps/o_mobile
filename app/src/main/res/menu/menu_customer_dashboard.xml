@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_notification"
+        android:icon="@drawable/ic_notifications_none_black_24dp"
+        android:title="@string/label_search"
+        android:actionLayout="@layout/layout_cart_icon"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="always|collapseActionView"></item>
+    <item
+        android:id="@+id/menu_cart"
+        android:icon="@drawable/ic_shopping_cart_black_24dp"
+        android:title="@string/label_search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="always|collapseActionView"></item>
+
+
+</menu>

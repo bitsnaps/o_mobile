@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.odoo.widgets.slider.SliderHelper
+    <com.ehealthinformatics.widgets.slider.SliderHelper
         android:id="@+id/default_view_helper"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

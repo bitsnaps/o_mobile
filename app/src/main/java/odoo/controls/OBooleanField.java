@@ -33,7 +33,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.odoo.core.orm.fields.OColumn;
+import com.ehealthinformatics.core.orm.fields.OColumn;
 
 public class OBooleanField extends LinearLayout implements IOControlData,
         CompoundButton.OnCheckedChangeListener {

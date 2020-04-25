@@ -34,21 +34,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.odoo.R;
-import com.odoo.core.orm.ODataRow;
-import com.odoo.core.orm.OModel;
-import com.odoo.core.orm.fields.OColumn;
-import com.odoo.core.orm.fields.types.OBlob;
-import com.odoo.core.orm.fields.types.OBoolean;
-import com.odoo.core.orm.fields.types.ODate;
-import com.odoo.core.orm.fields.types.ODateTime;
-import com.odoo.core.orm.fields.types.OFloat;
-import com.odoo.core.orm.fields.types.OHtml;
-import com.odoo.core.orm.fields.types.OInteger;
-import com.odoo.core.orm.fields.types.OSelection;
-import com.odoo.core.orm.fields.types.OText;
-import com.odoo.core.orm.fields.types.OTimestamp;
-import com.odoo.core.orm.fields.types.OVarchar;
+import com.ehealthinformatics.R;
+import com.ehealthinformatics.core.orm.ODataRow;
+import com.ehealthinformatics.core.orm.OModel;
+import com.ehealthinformatics.core.orm.fields.OColumn;
+import com.ehealthinformatics.core.orm.fields.types.OBlob;
+import com.ehealthinformatics.core.orm.fields.types.OBoolean;
+import com.ehealthinformatics.core.orm.fields.types.ODate;
+import com.ehealthinformatics.core.orm.fields.types.ODateTime;
+import com.ehealthinformatics.core.orm.fields.types.OFloat;
+import com.ehealthinformatics.core.orm.fields.types.OHtml;
+import com.ehealthinformatics.core.orm.fields.types.OInteger;
+import com.ehealthinformatics.core.orm.fields.types.OSelection;
+import com.ehealthinformatics.core.orm.fields.types.OText;
+import com.ehealthinformatics.core.orm.fields.types.OTimestamp;
+import com.ehealthinformatics.core.orm.fields.types.OVarchar;
 
 public class OField extends LinearLayout implements IOControlData.ValueUpdateListener {
     public static final String TAG = OField.class.getSimpleName();
