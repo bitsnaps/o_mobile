@@ -19,6 +19,7 @@ import com.ehealthinformatics.data.viewmodel.ProductViewModel
 import kotlinx.android.synthetic.main.activity_product_edit.*
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
+import com.ehealthinformatics.app.utils.DialogUtils
 import com.ehealthinformatics.core.utils.IntentUtils
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.layout_product_basic.*
@@ -54,7 +55,14 @@ class ProductEdit : OdooCompatActivity() {
         setSupportActionBar(tb_product)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
-        supportActionBar!!.title = if(productId > 0) product.name else "New product"
+        supportActionBar!!.title = if(productId > 0) trimString(product.name, 20) else "New product"
+    }
+
+    private fun trimString(text: String, length: Int): String {
+        if (text.length > length) {
+            return text.substring(0, length-3).plus("...")
+        }
+        return text
     }
 
     private fun initDataLoad() {
@@ -79,6 +87,7 @@ class ProductEdit : OdooCompatActivity() {
         val adapter = PlaceholderFragment.SectionsPagerAdapter(supportFragmentManager)
         val productFragment = PlaceholderFragment.newInstance(1)
         adapter.addFragment(productFragment, "PRODUCT")
+
         adapter.addFragment(PlaceholderFragment.newInstance(2), "STOCK")
         viewPager.adapter = adapter
         viewPager.addOnPageChangeListener(object: OnPageChangeListener {
@@ -89,6 +98,8 @@ class ProductEdit : OdooCompatActivity() {
     }
 
     private fun toUI() {
+        tv_product_name.text = trimString(product.productTemplate.name!!,20)
+        tv_product_price.text = "%.2f".format(product.cost)
         actv_product_name.setText(product.productTemplate.name)
         actv_product_price.setText("%.2f".format(product.price))
         actv_product_category.setText(product.productTemplate.category!!.name)
@@ -170,6 +181,10 @@ class ProductEdit : OdooCompatActivity() {
             btn_product_submit.setOnClickListener {
 
             }
+            iv_product_color.setOnClickListener {
+                DialogUtils.showColorsDialog(this, product)
+            }
+
         } else if (position == 1) {
             actv_product_description.setOnFocusChangeListener { v, hasFocus ->
                 if(!hasFocus)
@@ -196,8 +211,6 @@ class ProductEdit : OdooCompatActivity() {
         }
     }
 
-
-
     fun toggleArrow(view: View ): Boolean {
         if (view.rotation == 0F) {
             view.animate().setDuration(200).rotation(180F);
@@ -220,7 +233,7 @@ class ProductEdit : OdooCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         mMenu = menu
-        menuInflater.inflate(R.menu.menu_product_detail, menu)
+        menuInflater.inflate(R.menu.menu_product_detail_2, menu)
         return true
     }
 

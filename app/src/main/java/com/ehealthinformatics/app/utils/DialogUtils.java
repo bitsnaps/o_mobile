@@ -26,6 +26,7 @@ import com.ehealthinformatics.core.utils.IntentUtils;
 import com.ehealthinformatics.data.db.Columns;
 import com.ehealthinformatics.data.dto.AccountBankStatement;
 import com.ehealthinformatics.data.dto.PosOrder;
+import com.ehealthinformatics.data.dto.Product;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.ArrayList;
@@ -142,6 +143,33 @@ public class DialogUtils {
         dialog.getWindow().setAttributes(lp);
         loadPaymentTypes(context, llConfirmation, posOrder);
     }
+
+
+    public static void showColorsDialog(final Context context, Product product){
+
+        int  color;
+
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+        dialog.setContentView(R.layout.layout_product_colors);
+        LinearLayout llConfirmation = dialog.findViewById(R.id.ll_product_colors);
+
+        color = ContextCompat.getColor(context, R.color.light_green_400);
+
+        llConfirmation.setBackgroundColor(color);
+        dialog.setCancelable(true);
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.gravity = Gravity.CENTER;
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+        dialog.show();
+        dialog.getWindow().setAttributes(lp);
+        //loadPaymentTypes(context, llConfirmation, posOrder);
+    }
+
 
 
     private static void loadPaymentTypes (final Context context, View parent, final PosOrder posOrder) {

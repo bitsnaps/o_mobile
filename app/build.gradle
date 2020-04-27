@@ -67,6 +67,7 @@ dependencies {
     implementation 'com.hootsuite.android:nachos:1.1.1'                // material chips
     implementation 'com.google.android:flexbox:0.3.2'                  // google flexible box
     implementation 'com.crystal:crystalrangeseekbar:1.1.3'             // range seek bar
+    implementation 'com.github.avito-tech:krop:0.5'                    // image crop
 
 }
 repositories {

@@ -20,7 +20,7 @@
 package com.ehealthinformatics.config;
 
 public class OConstants {
-    public static final String URL_ODOO = "http://192.168.8.101:8069,http://192.168.8.100:8069,http://192.168.8.102:8069";
+    public static final String URL_ODOO = "http://192.168.8.101:8069,http://192.168.8.100:8069,http://192.168.8.102:8069,http://192.168.8.103:8069";
     public static final String URL_ODOO_RESET_PASSWORD = URL_ODOO + "/web/reset_password";
     public static final String URL_ODOO_SIGN_UP = URL_ODOO + "/web/signup";
     public static final String URL_ODOO_MOBILE_GIT_HUB = "https://github.com/JohnTheBeloved/o_mobile";
@@ -32,7 +32,8 @@ public class OConstants {
     public static String CURRENCY_SYMBOL = " ";
 
     /**
-     * Database version. Required to change in increment order
+     * Database version. Required to
+     * change in increment order
      * when you change your database model in case of released apk.
      *
      * When dealing with DATABASE_VERSION, you need to override onModelUpgrade() method
