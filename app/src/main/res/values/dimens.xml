@@ -11,7 +11,7 @@
     <dimen name="default_50_dp">50dp</dimen>
 
     <dimen name="default_6dp">6dp</dimen>
-    <dimen name="default_30_dp">30dp</dimen>
+    <dimen name="default_32_dp">32dp</dimen>
 
     <!--MaaterialX-->
     <dimen name="actionBarSize">56dp</dimen>

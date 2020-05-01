@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/spacing_large">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,7 +49,6 @@
         <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="67dp"
-        android:layout_margin="@dimen/spacing_large"
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
         android:gravity="center_vertical"
@@ -82,7 +82,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="49dp"
-        android:layout_margin="@dimen/spacing_large"
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
         android:gravity="center_vertical"
@@ -117,24 +116,43 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/spacing_mlarge" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/spacing_large"
-        android:textColorHint="#000">
+        android:text="Add Photo"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="First picture - is the title picture. Drag the phtotos to change the order"/>
 
-        <EditText
-            android:id="@+id/et_product_description"
+
+    <HorizontalScrollView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop="0dp"
+        android:paddingTop="0dp"
+        android:scrollbars="none"
+        android:scrollingCache="true">
+        <LinearLayout
+            android:id="@+id/ll_more_images"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="top"
-            android:hint="Description"
-            android:inputType="textMultiLine"
-            android:maxLines="12"
-            android:minLines="7"
-            android:textColor="#000"
-            android:theme="@style/EditText.Yellow" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+            android:orientation="horizontal"
+            android:padding="@dimen/default_8dp">
+            <ImageView
+                android:id="@+id/ib_add_more_images"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/default_8dp"
+                android:src="@drawable/ic_add_circle_primary_24dp"/>
+        </LinearLayout>
+    </HorizontalScrollView>
+    <TextView
+        android:id="@+id/tv_product_image_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:text="Add 2 Photos"
+        android:layout_marginLeft="@dimen/default_16dp"/>
 
 </LinearLayout>

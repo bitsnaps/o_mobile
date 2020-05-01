@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.ehealthinformatics.App;
 import com.ehealthinformatics.R;
+import com.ehealthinformatics.app.utils.LoadingUtils;
 import com.ehealthinformatics.config.FirstLaunchConfig;
 import com.ehealthinformatics.core.auth.ServerDefaultsService;
 import com.ehealthinformatics.core.orm.OdooServerException;
@@ -87,7 +88,7 @@ public class OdooLogin extends AppCompatActivity implements View.OnClickListener
         if (!mCreateAccountRequest) {
             if (OdooAccountManager.anyActiveUser(this)) {
                 //TODO:Put i preferecnces
-               startOdooActivity();
+                startSplashActivity();
                 return;
             } else if (OdooAccountManager.hasAnyAccount(this)) {
                 onRequestAccountSelect();
@@ -111,8 +112,8 @@ public class OdooLogin extends AppCompatActivity implements View.OnClickListener
         initServers();
     }
 
-    private void startOdooActivity() {
-        startActivity(new Intent(this, OdooActivity.class));
+    private void startSplashActivity() {
+        startActivity(new Intent(this, SplashScreenActivity.class));
         finish();
     }
 
@@ -307,7 +308,7 @@ public class OdooLogin extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onUserSelected(OUser user) {
         OdooAccountManager.login(this, user.getAndroidName());
-        startOdooActivity();
+        startSplashActivity();
     }
 
     @Override
@@ -420,45 +421,18 @@ public class OdooLogin extends AppCompatActivity implements View.OnClickListener
         @Override
         protected SyncConfig doInBackground(OUser... params) {
             mUser = params[0];
-            User user = null;
-            PosSession posSession = null;
-            List<AccountBankStatement> accountBankStatements = null;
+            LoadingUtils.ArtifactsLoader daos = new LoadingUtils.ArtifactsLoader(OdooLogin.this, mUser);
             try {
                 if (OdooAccountManager.createAccount(OdooLogin.this, mUser)) {
                     mUser = OdooAccountManager.getDetails(OdooLogin.this, mUser.getAndroidName());
                     OdooAccountManager.login(OdooLogin.this, mUser.getAndroidName());
-                    publishProgress("Initializing Daos...");
-                    App.initDaos(mUser.getUsername());
-                    publishProgress("Syncing user ...");
-                    ServerDefaultsService serverDefaultsService = new ServerDefaultsService(App.getContext(), mUser);
-                    user = serverDefaultsService.syncUser(mUser.getUserId());
-                    if (user != null) {
-                        publishProgress("Syncing Pos Session ...");
-                        posSession = serverDefaultsService.syncCurrentOpenSession(user);
-                        if (posSession != null) {
-                            mUser.setPosSessionId(posSession.getId());
-                            publishProgress("Syncing Bank Statement ...");
-                            accountBankStatements = serverDefaultsService.syncSessionStatement(posSession);
-                            if (accountBankStatements != null) {
-                                startOdooActivity();
-                            } else {
-                                publishProgress("Cannot sync statement account details with server");
-                            }
-                        } else {
-                            publishProgress("Cannot sync pos session details with server");
-                        }
-                    } else {
-                        publishProgress("Cannot sync user details with server");
-                    }
+                    return daos.init();
                 }
-                if(user  == null)throw new OdooServerException("Unable to get user information");
-                if(posSession  == null)throw new OdooServerException("Unable to get an open POS session");
-                return new SyncConfig(user, posSession);
             } catch (Exception e) {
                 Log.e(TAG, e.getMessage(), e);
                 removeUser(mUser);
-                return null;
             }
+            return null;
         }
 
         @Override
@@ -478,7 +452,6 @@ public class OdooLogin extends AppCompatActivity implements View.OnClickListener
                 mLoginProcessStatus.setText(OResource.string(OdooLogin.this, R.string.status_redirecting));
                 OConstants.CURRENCY_SYMBOL = syncConfig.getPosSession().getConfig().getPriceList().getCurrency().getSymbol();
                 mUser.setPosSessionId(syncConfig.getPosSession().getServerId());
-
                 mUser.setCurrencySymbol(OConstants.CURRENCY_SYMBOL);
                 OUser user = OdooAccountManager.updateUserData(App.getContext(), mUser);
                 mLoginProcessStatus.setText(OResource.string(OdooLogin.this, R.string.status_redirecting));
@@ -498,6 +471,11 @@ public class OdooLogin extends AppCompatActivity implements View.OnClickListener
             }
 
         }
+    }
+
+    private void startOdooActivity() {
+        startActivity(new Intent(this, OdooActivity.class));
+        finish();
     }
 
     private void removeUser(OUser oUser){

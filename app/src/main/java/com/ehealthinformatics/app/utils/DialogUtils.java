@@ -5,28 +5,39 @@ import android.app.Dialog;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.ehealthinformatics.R;
 import com.ehealthinformatics.app.activity.OdooActivity;
 import com.ehealthinformatics.app.activity.shopping.PaymentLine;
+import com.ehealthinformatics.app.listeners.OnItemClickListener;
 import com.ehealthinformatics.core.utils.IntentUtils;
+import com.ehealthinformatics.data.adapter.SimpleListAdapter;
 import com.ehealthinformatics.data.db.Columns;
 import com.ehealthinformatics.data.dto.AccountBankStatement;
 import com.ehealthinformatics.data.dto.PosOrder;
-import com.ehealthinformatics.data.dto.Product;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.ArrayList;
@@ -118,7 +129,6 @@ public class DialogUtils {
         dialog.getWindow().setAttributes(lp);
     }
 
-
     public static void showPaymentTypeDialog(final Context context, PosOrder posOrder){
 
         int  color;
@@ -144,19 +154,156 @@ public class DialogUtils {
         loadPaymentTypes(context, llConfirmation, posOrder);
     }
 
+    public static void showEnterTextDialog(final Context context, final View.OnClickListener onConfirm){
 
-    public static void showColorsDialog(final Context context, Product product){
+        final Dialog dialog = new Dialog(context, R.style.DialogTheme);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+        dialog.setContentView(R.layout.layout_enter_text);
+        ImageButton ibNavigateBack = dialog.findViewById(R.id.ib_text_dialog_navigate_back);
+        final EditText etText = dialog.findViewById(R.id.et_text_dialog_text);
+        final Button btnSave = dialog.findViewById(R.id.btn_text_dialog_save);
+        View.OnClickListener wrappedOnClick = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(v.getId() == btnSave.getId()){
+                    onConfirm.onClick(etText);
+                }
+                if(v.getId() == R.id.ib_text_dialog_navigate_back){
+                    dialog.dismiss();
+                }
+            }
+        };
+        btnSave.setOnClickListener(wrappedOnClick);
+        ibNavigateBack.setOnClickListener(wrappedOnClick);
+        dialog.setCancelable(true);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.gravity = Gravity.BOTTOM;
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.horizontalMargin = 0;
 
-        int  color;
+        dialog.show();
+        dialog.getWindow().setAttributes(lp);
+    }
+
+    public static void showChooseImageDialog(final Context context, final View.OnClickListener viewClicked){
+
+        final Dialog dialog = new Dialog(context, R.style.DialogTheme);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+        dialog.setContentView(R.layout.layout_choose_image);
+        LinearLayout llTakePicture = dialog.findViewById(R.id.ll_take_picture);
+        LinearLayout llBrowseImage = dialog.findViewById(R.id.ll_browse_image);
+        View.OnClickListener wrappedOnClick = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                if(viewClicked != null)
+                    viewClicked.onClick(v);
+            }
+        };
+        llTakePicture.setOnClickListener(wrappedOnClick);
+        llBrowseImage.setOnClickListener(wrappedOnClick);
+        dialog.setCancelable(true);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.gravity = Gravity.BOTTOM;
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.horizontalMargin = 0;
+
+        dialog.show();
+        dialog.getWindow().setAttributes(lp);
+    }
+
+    public static void showChooseItemDialog(final Context context, final SimpleListAdapter simpleListAdapter){
+
+        final Dialog dialog = new Dialog(context, R.style.DialogTheme);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+        dialog.setContentView(R.layout.dialog_layout_search_item);
+        final RecyclerView recyclerView = dialog.findViewById(R.id.rv_simple_select);
+        ImageView ivSearchDialogBack = dialog.findViewById(R.id.ib_search_dialog_navigate_back);
+        EditText etSearchFilter = dialog.findViewById(R.id.et_search_item);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(simpleListAdapter);
+        simpleListAdapter.addListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, Object item, int pos) {
+                dialog.dismiss();
+            }
+        });
+
+        ivSearchDialogBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        etSearchFilter.addTextChangedListener(
+                new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        simpleListAdapter.getFilter().filter(s);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+
+                    }
+                }
+        );
+
+        dialog.setCancelable(true);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.gravity = Gravity.FILL;
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.horizontalMargin = 0;
+
+        dialog.show();
+        dialog.getWindow().setAttributes(lp);
+    }
+
+    public static void showColorsDialog(final Context context, final View... views){
 
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
         dialog.setContentView(R.layout.layout_product_colors);
         LinearLayout llConfirmation = dialog.findViewById(R.id.ll_product_colors);
+        dialog.findViewById(R.id.ib_color_close).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
 
-        color = ContextCompat.getColor(context, R.color.light_green_400);
+        GridLayout gl = dialog.findViewById(R.id.gc_colors);
+        int cnt = gl.getChildCount();
+        while (cnt-- > 0) {
+            gl.getChildAt(cnt).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ColorDrawable background = (ColorDrawable)v.getBackground();
+                    int viewsCount = views.length;
+                    while(viewsCount-- > 0){
+                        views[viewsCount].setBackgroundColor(background.getColor());
+                        if(views[viewsCount].getId() == R.id.ll_summary_in_image){
+                            views[viewsCount].setBackgroundColor(manipulateColor(background.getColor(), 0.8F));
+                        }
+                    }
+                    dialog.dismiss();
+                }
+            });
+        }
 
-        llConfirmation.setBackgroundColor(color);
         dialog.setCancelable(true);
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
@@ -170,7 +317,16 @@ public class DialogUtils {
         //loadPaymentTypes(context, llConfirmation, posOrder);
     }
 
-
+    public static int manipulateColor(int color, float factor) {
+        int a = Color.alpha(color);
+        int r = Math.round(Color.red(color) * factor);
+        int g = Math.round(Color.green(color) * factor);
+        int b = Math.round(Color.blue(color) * factor);
+        return Color.argb(a,
+                Math.min(r,255),
+                Math.min(g,255),
+                Math.min(b,255));
+    }
 
     private static void loadPaymentTypes (final Context context, View parent, final PosOrder posOrder) {
 
@@ -218,8 +374,6 @@ public class DialogUtils {
         }
     }
 
-
-
     private void showStateDialog(final View v) {
         final  String[] array = new String[]{"Arizona", "California", "Florida", "Massachusetts", "New York", "Washington"};
         AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
@@ -231,9 +385,9 @@ public class DialogUtils {
                 dialog.dismiss();
             }
         });
-
         builder.show();
     }
+
     private void showCountryDialog(final View v) {
         final  String[] array = new String[]{"United State", "Germany", "United Kingdom", "Australia", "Nigeria"};
         AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());

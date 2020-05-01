@@ -11,6 +11,9 @@ import com.ehealthinformatics.data.db.Columns;
 import com.ehealthinformatics.data.db.ModelNames;
 import com.ehealthinformatics.data.dto.Category;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CategoryDao extends OModel {
 
     OColumn name = new OColumn("Name", OVarchar.class);
@@ -27,5 +30,15 @@ public class CategoryDao extends OModel {
         if(qf.contains(Columns.name)) name = row.getString(Columns.name);
         Category category = new Category(id, name);
         return  category;
+    }
+
+    public List getCategoryList() {
+        List<ODataRow> rows = select();
+        ArrayList<Category> categories = new ArrayList();
+        int index = rows.size();
+        while(index-- > 0) {
+            categories.add(fromRow(rows.get(index), QueryFields.all()));
+        }
+        return categories;
     }
 }

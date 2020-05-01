@@ -72,6 +72,8 @@ public class ProductDao extends OModel {
     private ProductTemplateDao productTemplateDao;
     private MedicineDao medicineDao;
 
+    private List<Product> productsCache = null;
+
     @Override
     public ODomain defaultDomain()  {
         ODomain oDomain = super.defaultDomain();
@@ -94,7 +96,7 @@ public class ProductDao extends OModel {
 
     @Override
     public Product get(int id, QueryFields queryFields){
-        //TODO: Reomve Daos dependency, it can auto return Dto instead of ODataRow
+        //TODO: Remove Daos dependency, it can auto return Dto instead of ODataRow
         return fromRow(browse(id), queryFields);
     }
 
@@ -103,12 +105,15 @@ public class ProductDao extends OModel {
     }
 
     public List<Product> selectAll(QueryFields queryFields) {
-        List<Product> products
-                 = new ArrayList<>();
-        for(ODataRow oDataRow: select()){
-            products.add(fromRow(oDataRow, queryFields));
+        if (productsCache == null){
+            List<Product> products
+                    = new ArrayList<>();
+            for(ODataRow oDataRow: select()){
+                products.add(fromRow(oDataRow, queryFields));
+            }
+            productsCache = products;
         }
-        return products;
+        return productsCache;
     }
 
     public LazyList<Product> lazySearchFilter(String name, QueryFields queryFields){

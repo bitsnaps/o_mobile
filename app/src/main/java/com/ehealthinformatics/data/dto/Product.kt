@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import com.ehealthinformatics.core.orm.OValues
 import com.ehealthinformatics.core.utils.BitmapUtils
+import com.ehealthinformatics.data.db.Columns
 import java.io.Serializable
 
 data class Product(var id: Int, var serverId: Int, var name: String, var description: String, var active: Boolean,
@@ -17,6 +18,15 @@ data class Product(var id: Int, var serverId: Int, var name: String, var descrip
 
     override fun toOValues(): OValues {
         var oValues = OValues()
+        oValues.put(Columns.ProductCol.name, name)
+        oValues.put(Columns.ProductCol.description, description)
+        oValues.put(Columns.ProductCol.active, active)
+        oValues.put(Columns.ProductCol.id, id)
+        oValues.put(Columns.ProductCol.id, id)
+        oValues.put(Columns.ProductCol.id, id)
+        oValues.put(Columns.ProductCol.id, id)
+        oValues.put(Columns.ProductCol.id, id)
+        oValues.put(Columns.ProductCol.id, id)
         return oValues
     }
 

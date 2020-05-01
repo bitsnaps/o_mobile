@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/ll_simple_item"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="@drawable/shape_top_bottom_border_grey"
+    android:padding="25dp">
+    <TextView
+        android:id="@+id/tv_label"
+        android:fontFamily="@string/font_normal"
+        android:text="No Category"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textAppearance="@style/ListInfo.Purple" />
+</LinearLayout>
+
