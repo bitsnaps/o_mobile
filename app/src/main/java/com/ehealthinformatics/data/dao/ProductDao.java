@@ -73,6 +73,7 @@ public class ProductDao extends OModel {
     private MedicineDao medicineDao;
 
     private List<Product> productsCache = null;
+    private LazyList<Product> productsCache2 = null;
 
     @Override
     public ODomain defaultDomain()  {
@@ -101,7 +102,10 @@ public class ProductDao extends OModel {
     }
 
     public LazyList<Product> lazySelectAll(QueryFields queryFields) {
-        return new LazyList<Product>(getProductCreator(queryFields), select(new String[]{Columns.id}));
+        if(productsCache2 == null) {
+            productsCache2 = new LazyList<Product>(getProductCreator(queryFields), select(new String[]{Columns.id}));
+        }
+        return productsCache2;
     }
 
     public List<Product> selectAll(QueryFields queryFields) {

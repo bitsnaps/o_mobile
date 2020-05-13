@@ -9,11 +9,13 @@ import androidx.lifecycle.ViewModel;
 
 import com.ehealthinformatics.App;
 import com.ehealthinformatics.core.orm.OValues;
+import com.ehealthinformatics.core.rpc.helper.ODomain;
 import com.ehealthinformatics.data.dao.CategoryDao;
 import com.ehealthinformatics.data.dao.ProductDao;
 import com.ehealthinformatics.data.dao.ProductTemplateDao;
 import com.ehealthinformatics.data.dao.QueryFields;
 import com.ehealthinformatics.data.dao.UoMDao;
+import com.ehealthinformatics.data.db.Columns;
 import com.ehealthinformatics.data.dto.Category;
 import com.ehealthinformatics.data.dto.Product;
 import com.ehealthinformatics.data.dto.ProductTemplate;
@@ -27,7 +29,6 @@ public class ProductViewModel extends ViewModel {
         public Product product;
         public List<Category> categories;
         public List<Uom> uoms;
-        public boolean saved;
     }
     private ProductDao productDao;
     private ProductTemplateDao productTemplateDao;
@@ -35,13 +36,13 @@ public class ProductViewModel extends ViewModel {
     private UoMDao uoMDao;
     private final MutableLiveData<ProductViewClass> selected = new MutableLiveData<>();
     private final MutableLiveData<Boolean> saved = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> synced = new MutableLiveData<>();
 
     public ProductViewModel(){
         this.productDao = App.getDao(ProductDao.class);
         this.categoryDao = App.getDao(CategoryDao.class);
         this.productTemplateDao = App.getDao(ProductTemplateDao.class);
         this.uoMDao = App.getDao(UoMDao.class);
-        saved.setValue(false);
     }
 
     public void loadData(Integer id) {
@@ -74,8 +75,12 @@ public class ProductViewModel extends ViewModel {
                     OValues product = oValues[0];
                     OValues productTemplate = oValues[1];
                     Product currentProduct = selected.getValue().product;
-                    boolean productSaved = productDao.update(currentProduct.getId(), product);
-                    boolean productTemplateSaved = productTemplateDao.update(currentProduct.getProductTemplate().getId(), productTemplate);
+                    boolean productSaved = false;
+                    boolean productTemplateSaved = false;
+                    if(productTemplate.keys().size() > 0)
+                        productSaved = productDao.update(currentProduct.getId(), product);
+                    if(productTemplate.keys().size() > 0)
+                        productTemplateSaved = productTemplateDao.update(currentProduct.getProductTemplate().getId(), productTemplate);
                     return productSaved && productTemplateSaved;
                 }
             @Override
@@ -85,11 +90,31 @@ public class ProductViewModel extends ViewModel {
         }.execute(product, productTemplate);
     }
 
+    public void sync() {
+        new AsyncTask<Void, Void, Boolean>() {
+            @Override
+            protected Boolean doInBackground(Void... oValues) {
+                ODomain oDomain = new ODomain();
+                oDomain.add(Columns.server_id, "=", selected.getValue().product.getServerId());
+                productDao.quickSyncRecords(oDomain);
+                return true;
+            }
+
+            @Override
+            protected void onPostExecute(Boolean data) {
+                synced.setValue(data);
+            }
+        }.execute();
+    }
+
     public LiveData<ProductViewClass> getSelected() {
         return selected;
     }
     public LiveData<Boolean> getSaveStatus() {
         return saved;
+    }
+    public LiveData<Boolean> getSyncStatus() {
+        return synced;
     }
 
 }

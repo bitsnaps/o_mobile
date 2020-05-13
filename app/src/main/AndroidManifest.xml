@@ -54,7 +54,9 @@
             android:name="com.ehealthinformatics.app.activity.OdooActivity"
             android:label="${applicationName}" />
         <activity android:name="odoo.controls.SearchableItemActivity" />
-        <activity android:name="com.ehealthinformatics.app.activity.product.ProductEdit" />
+        <activity android:name="com.ehealthinformatics.app.activity.product.ProductEdit"
+            android:windowSoftInputMode="adjustResize"
+            />
         <activity android:name="com.ehealthinformatics.app.fragment.PosOrderDetails" />
         <activity android:name="com.ehealthinformatics.app.activity.pos.PosOrderEdit" />
         <activity android:name="com.ehealthinformatics.app.activity.shopping.PosOrderCart" />

@@ -154,7 +154,7 @@ public class DialogUtils {
         loadPaymentTypes(context, llConfirmation, posOrder);
     }
 
-    public static void showEnterTextDialog(final Context context, final View.OnClickListener onConfirm){
+    public static void showEnterTextDialog(final Context context, String defaultText, final View.OnClickListener onConfirm){
 
         final Dialog dialog = new Dialog(context, R.style.DialogTheme);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
@@ -162,29 +162,38 @@ public class DialogUtils {
         ImageButton ibNavigateBack = dialog.findViewById(R.id.ib_text_dialog_navigate_back);
         final EditText etText = dialog.findViewById(R.id.et_text_dialog_text);
         final Button btnSave = dialog.findViewById(R.id.btn_text_dialog_save);
+        final Button btnClear = dialog.findViewById(R.id.btn_dialog_text_clear);
         View.OnClickListener wrappedOnClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(v.getId() == btnSave.getId()){
                     onConfirm.onClick(etText);
+                    dialog.dismiss();
                 }
                 if(v.getId() == R.id.ib_text_dialog_navigate_back){
                     dialog.dismiss();
                 }
+                if(v.getId() == R.id.btn_dialog_text_clear){
+                    etText.setText("");
+                }
             }
         };
+        etText.setText(defaultText);
+        etText.requestFocus();
         btnSave.setOnClickListener(wrappedOnClick);
+        btnClear.setOnClickListener(wrappedOnClick);
         ibNavigateBack.setOnClickListener(wrappedOnClick);
         dialog.setCancelable(true);
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(dialog.getWindow().getAttributes());
         lp.gravity = Gravity.BOTTOM;
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
         lp.horizontalMargin = 0;
 
         dialog.show();
         dialog.getWindow().setAttributes(lp);
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
     }
 
     public static void showChooseImageDialog(final Context context, final View.OnClickListener viewClicked){

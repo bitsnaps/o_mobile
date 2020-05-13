@@ -12,8 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="60dip"
         android:paddingTop="0dp"
         android:scrollbars="none"
         android:scrollingCache="true">
@@ -248,7 +246,8 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="Description"
-                                    android:maxLines="1"
+                                    android:focusable="false"
+                                    android:editable="false"
                                     android:singleLine="true"
                                     android:text="" />
 
@@ -304,11 +303,6 @@
 
                             </com.google.android.material.textfield.TextInputLayout>
 
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/grey_10" />
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="49dp"
@@ -326,9 +320,6 @@
                                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                                     android:textColor="@color/grey_80" />
 
-                                <View
-                                    android:layout_width="@dimen/spacing_middle"
-                                    android:layout_height="wrap_content" />
 
                                 <androidx.appcompat.widget.SwitchCompat
                                     android:id="@+id/sc_product_active"

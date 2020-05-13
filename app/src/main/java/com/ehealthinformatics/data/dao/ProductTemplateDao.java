@@ -52,6 +52,7 @@ public class ProductTemplateDao extends OModel {
         String productType = null;
         Uom uom = null;
         Category category = null;
+
         if(queryFields.contains(Columns.id)) id = row.getInt(Columns.id);
         if(queryFields.contains(Columns.server_id)) serverId = row.getInt(Columns.server_id);
         if(queryFields.contains(Columns.name)) name = row.getString(Columns.name);

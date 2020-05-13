@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/shape_top_bottom_border_grey">
+    android:background="@color/colorPrimaryWhite"
+    android:fitsSystemWindows="true">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_weight="0"
@@ -23,9 +24,10 @@
             android:layout_weight="10"
             android:layout_height="match_parent"
             android:text="Description"/>
-        <TextView
+        <Button
+            android:id="@+id/btn_dialog_text_clear"
             android:layout_width="0dp"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:text="Clear"
             android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -33,8 +35,16 @@
         android:id="@+id/et_text_dialog_text"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:gravity="top|left"
         android:layout_width="match_parent"
-        android:gravity="center"/>
+        android:scrollbars="vertical"
+        android:inputType="textMultiLine"
+        android:minLines="10"
+        android:maxLines="50"
+        android:text=""
+
+        android:background="@color/transparent"/>
+    <requestFocus/>
 
     <Button
         android:id="@+id/btn_text_dialog_save"

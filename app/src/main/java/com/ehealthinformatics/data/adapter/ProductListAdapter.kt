@@ -13,7 +13,12 @@ import com.ehealthinformatics.config.OConstants
 import com.ehealthinformatics.core.utils.BitmapUtils
 import com.ehealthinformatics.data.dto.Product
 
-class ProductListAdapter public constructor(val onItemClickListener: OnItemClickListener<Product>) : RecyclerView.Adapter<ProductViewHolder>() {
+class
+
+
+
+
+ProductListAdapter public constructor(val onItemClickListener: OnItemClickListener<Product>) : RecyclerView.Adapter<ProductViewHolder>() {
 
     private lateinit var productLazyList: List<Product>
     private lateinit var itemView: View

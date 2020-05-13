@@ -31,9 +31,11 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.Gravity
+import android.view.MenuItem
 import android.widget.*
 import com.ehealthinformatics.app.listeners.OnItemClickListener
 import com.ehealthinformatics.core.orm.OValues
+import com.ehealthinformatics.core.utils.BitmapUtils
 import com.ehealthinformatics.data.adapter.SimpleListAdapter
 import com.ehealthinformatics.data.db.Columns
 import java.io.File
@@ -55,6 +57,7 @@ class ProductEdit : OdooCompatActivity() {
     private val currencySign = "₦"
     private val UPLOAD_TAG = "upload"
     private val CANCEL_TAG = "cancel"
+    private val imageBitmaps = HashMap<String, String>()
 
     private var simpleItem = SimpleItem("None", "None")
     private var ovProduct = OValues()
@@ -63,7 +66,7 @@ class ProductEdit : OdooCompatActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_edit)
-        productId =  intent.extras.getInt(Columns.id)
+        productId =  intent.extras.getInt(IntentUtils.IntentParams.ID)
         editMode = intent.extras.getBoolean(IntentUtils.IntentParams.EDIT_MODE)
         initDataLoad()
     }
@@ -90,6 +93,8 @@ class ProductEdit : OdooCompatActivity() {
             initToolbar()
             initComponent()
             toUI()
+            initFragmentListeners(0)
+            initFragmentListeners(1)
         })
 
         model.saveStatus.observe(this, Observer<Boolean> { saved ->
@@ -99,6 +104,15 @@ class ProductEdit : OdooCompatActivity() {
                 Toast.makeText(this, "Failed Saving Product", Toast.LENGTH_SHORT).show()
             }
         })
+
+        model.syncStatus.observe(this, Observer<Boolean> { synced ->
+            if (synced){
+                Toast.makeText(this, "Product Synced successfully...", Toast.LENGTH_SHORT).show()
+            } else{
+                Toast.makeText(this, "Failed Syncing Product...", Toast.LENGTH_SHORT).show()
+            }
+        })
+
     }
 
     private fun initComponent() {
@@ -117,7 +131,7 @@ class ProductEdit : OdooCompatActivity() {
         viewPager.addOnPageChangeListener(object: OnPageChangeListener {
             override fun  onPageScrollStateChanged(state: Int) {}
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
-            override fun  onPageSelected(position: Int) { initFragmentListeners(position) }
+            override fun  onPageSelected(position: Int) { }
         })
     }
 
@@ -127,9 +141,9 @@ class ProductEdit : OdooCompatActivity() {
         actv_product_name.setText(product.productTemplate.name)
         actv_product_price.setText("%.2f".format(product.price))
         actv_product_category.setText(product.productTemplate.category!!.name)
-        actv_product_code.setText(product.code)
+        actv_product_code.setText(strip(product.code))
         actv_product_cost_price.setText("%.2f".format(product.cost))
-        actv_product_uom.setText(strip(product.productTemplate.uom!!.name))
+        actv_product_uom.setText(product.productTemplate.uom!!.name)
         sc_product_active.isChecked = product.productTemplate.active!!
         actv_product_description.setText(strip(product.productTemplate.description))
         et_product_qty.setText("%.2f".format(product.qtyAvailable))
@@ -176,8 +190,9 @@ class ProductEdit : OdooCompatActivity() {
     private fun onProductColorClick(){
         DialogUtils.showColorsDialog(this, v_product_color, ll_summary_in_image, et_product_image_text)
     }
+
     private fun onNameChange() {
-        ovProduct.put(Columns.name, actv_product_name )
+        ovProduct.put(Columns.name, actv_product_name.text.toString() )
         ovProductTemplate.put(Columns.name, actv_product_name.text.toString())
     }
     private fun onPriceChange() : TextWatcher {
@@ -223,8 +238,10 @@ class ProductEdit : OdooCompatActivity() {
         })
         DialogUtils.showChooseItemDialog(this, simpleListAdapter)
     }
-    private fun onActiveChange(isActive: Boolean) =
-            ovProduct.put(Columns.ProductCol.active, isActive)
+    private fun onActiveChange(isActive: Boolean) {
+        ovProduct.put(Columns.ProductCol.active, isActive)
+        ovProductTemplate.put(Columns.ProductTemplateCol.active, isActive)
+    }
     private fun onUploadOrCancelClick(){
         if (iv_upload_or_cancel.tag == UPLOAD_TAG) {
             DialogUtils.showChooseImageDialog(this, View.OnClickListener {
@@ -258,8 +275,10 @@ class ProductEdit : OdooCompatActivity() {
 
     //Second Tab
     private fun onDescriptionClick() {
-        DialogUtils.showEnterTextDialog(this) {
-            ovProduct.put(Columns.description,  (it as EditText).text)
+        DialogUtils.showEnterTextDialog(this, actv_product_description.text.toString()) {
+            val text = (it as EditText).text.toString()
+            actv_product_description.setText(text)
+            ovProductTemplate.put(Columns.description,  text)
         }
     }
     private fun onQtyChange() {
@@ -288,6 +307,7 @@ class ProductEdit : OdooCompatActivity() {
         }
     }
     private fun onSubmit() {
+        if (ovProduct.keys().size > 0 || ovProductTemplate.keys().size > 0)
         model.save(ovProduct, ovProductTemplate)
     }
 
@@ -298,7 +318,7 @@ class ProductEdit : OdooCompatActivity() {
             actv_product_name.setOnFocusChangeListener { v, focus -> if (!focus) onNameChange() }
             actv_product_price.addTextChangedListener(onPriceChange())
             actv_product_category.setOnClickListener { onCategoryClick() }
-            actv_product_description.setOnClickListener {  }
+            actv_product_description.setOnClickListener { onDescriptionClick() }
             actv_product_code.setOnFocusChangeListener { v, focus -> if (!focus) onCodeChange() }
             actv_product_cost_price.setOnFocusChangeListener { v, focus -> if (!focus) onCostChange() }
             actv_product_uom.setOnClickListener { onUOMClick() }
@@ -308,7 +328,6 @@ class ProductEdit : OdooCompatActivity() {
             btn_product_submit.setOnClickListener { onSubmit() }
         }
         else if (position == 1) {
-            actv_product_description.setOnClickListener { onDescriptionClick() }
             et_product_qty.setOnFocusChangeListener { _, focused -> if(focused) onQtyChange()}
             sc_product_is_medicine.setOnCheckedChangeListener { buttonView, isChecked ->
                 onMedicineChange(isChecked)
@@ -342,6 +361,15 @@ class ProductEdit : OdooCompatActivity() {
         return true
     }
 
+    override fun onOptionsItemSelected(item: MenuItem):  Boolean
+    {
+        when(item.itemId) {
+            android.R.id.home -> finish()
+            R.id.menu_product_sync -> model.sync()
+        }
+        return true
+    }
+
     override fun onActivityResult(requestCode: Int,  resultCode: Int, data: Intent?)
     {
 
@@ -359,6 +387,9 @@ class ProductEdit : OdooCompatActivity() {
                     et_product_image_text.visibility = View.GONE
                     iv_upload_or_cancel.tag = CANCEL_TAG
                     iv_upload_or_cancel.setImageResource(R.drawable.ic_close_grey)
+                    ovProduct.put(image, BitmapUtils.toBase64(imageBitmap))
+                    ovProduct.put(image_small, BitmapUtils.toBase64(imageBitmap))
+                    ovProduct.put(image_medium, BitmapUtils.toBase64(imageBitmap))
                 }
             }
 
@@ -370,6 +401,9 @@ class ProductEdit : OdooCompatActivity() {
                 et_product_image_text.visibility = View.GONE
                 iv_upload_or_cancel.tag = CANCEL_TAG
                 iv_upload_or_cancel.setImageResource(R.drawable.ic_close_grey)
+                ovProduct.put(image, BitmapUtils.toBase64(imageBitmap))
+                ovProduct.put(image_small, BitmapUtils.toBase64(imageBitmap))
+                ovProduct.put(image_medium, BitmapUtils.toBase64(imageBitmap))
             }
 
 
@@ -431,7 +465,8 @@ class ProductEdit : OdooCompatActivity() {
 
     private fun getImage(bitmap: Bitmap, removeImage: View.OnClickListener) : FrameLayout{
         val tinySize = 30
-        val rightMargin = 10
+        val margin = 20
+
 
         val parentLayoutParams = FrameLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
         val imageFrame = FrameLayout(this)
@@ -439,7 +474,8 @@ class ProductEdit : OdooCompatActivity() {
 
         val closeBtnLayoutParams = FrameLayout.LayoutParams(tinySize, tinySize)
         closeBtnLayoutParams.gravity = Gravity.TOP or Gravity.RIGHT
-        closeBtnLayoutParams.rightMargin = rightMargin
+        closeBtnLayoutParams.rightMargin = margin
+        closeBtnLayoutParams.topMargin = margin
         val closeButton = ImageButton(this)
         closeButton.layoutParams = closeBtnLayoutParams
         closeButton.setImageResource(R.drawable.ic_close)
@@ -447,14 +483,15 @@ class ProductEdit : OdooCompatActivity() {
 
         val correctBtnLayoutParams = FrameLayout.LayoutParams(tinySize, tinySize)
         correctBtnLayoutParams.gravity = Gravity.BOTTOM or Gravity.RIGHT
-        correctBtnLayoutParams.rightMargin = rightMargin
+        correctBtnLayoutParams.rightMargin = margin
+        correctBtnLayoutParams.bottomMargin = margin
         val correctButton = ImageButton(this)
         correctButton.layoutParams = correctBtnLayoutParams
         correctButton.setImageResource(R.drawable.ic_check_circle_black_24dp)
 
         val imageViewLayoutParams = FrameLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
         val imageView = ImageView(this)
-        imageViewLayoutParams.rightMargin = rightMargin
+        imageViewLayoutParams.rightMargin = 10
         imageView.layoutParams = imageViewLayoutParams
         imageView.layoutParams.height = ib_add_more_images.height
         imageView.layoutParams.width =  ib_add_more_images.width

@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ProductLazyListViewModel extends ViewModel {
-    private final MutableLiveData<LazyList<Product>> productLiveData =
+    private final MutableLiveData<List<Product>> productLiveData =
             new MutableLiveData<>();
     private ProductDao productDao;
     IrModel syncModelDao;
@@ -35,19 +35,19 @@ public class ProductLazyListViewModel extends ViewModel {
         loadAllProducts();
     }
 
-    public LiveData<LazyList<Product>> getData() {
+    public LiveData<List<Product>> getData() {
         return productLiveData;
     }
 
     public void loadAllProducts(){
 
-        new AsyncTask<Void, Void, LazyList<Product>>(){
+        new AsyncTask<Void, Void, List<Product>>(){
             @Override
-            protected LazyList<Product> doInBackground(Void... voids) {
+            protected List<Product> doInBackground(Void... voids) {
                 //TODO: Make this light
               final SyncModel syncModel =  syncModelDao.getOrCreateTrigger(ModelNames.PRODUCT, Columns.SyncModel.Mode.REFRESH_TRIGGERED,5, QueryFields.all());
               if(syncModel != null && syncModel.isCompleted()){
-                  return productDao.lazySelectAll(QueryFields.all());
+                  return productDao.selectAll(QueryFields.all());
               }
 
               //TODO: Other way to return empty lazy list
@@ -60,7 +60,7 @@ public class ProductLazyListViewModel extends ViewModel {
             }
 
             @Override
-            protected void onPostExecute(LazyList<Product> productList) {
+            protected void onPostExecute(List<Product> productList) {
                 super.onPostExecute(productList);
                 productLiveData.setValue(productList);
             }

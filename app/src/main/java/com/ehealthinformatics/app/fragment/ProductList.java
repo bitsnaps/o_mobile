@@ -47,6 +47,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ehealthinformatics.App;
+import com.ehealthinformatics.app.activity.product.ProductEdit;
 import com.ehealthinformatics.app.listeners.OnItemClickListener;
 import com.ehealthinformatics.config.OConstants;
 import com.ehealthinformatics.core.service.SyncStatus;
@@ -381,7 +382,7 @@ public class ProductList extends BaseFragment implements ISyncStatusObserverList
     private void loadActivity(Product product) {
         Bundle data = new Bundle();
         data.putInt(IntentUtils.IntentParams.ID, product.getId());
-        IntentUtils.startActivity(getActivity(), ProductDetails.class, data);
+        IntentUtils.startActivity(getActivity(), ProductEdit.class, data);
     }
 
 
