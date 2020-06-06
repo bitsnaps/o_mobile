@@ -111,9 +111,15 @@ public class Columns {
         public static String uom_id = "uom_id";
         public static String category_id = "categ_id";
         public static String is_medicine = "is_medicine";
+        public static String product_image_ids = "product_image_ids";
     }
 
-    public static class ProductCol extends Columns{
+    public static class ProductImageCol extends Columns {
+        public static String product_tmpl_id = "product_tmpl_id";
+        public static String image = "image";
+    }
+
+        public static class ProductCol extends Columns{
         public static String medicine_id = "medicine_id";
         public static String product_tmpl_id = "product_tmpl_id";
         public static String uom_id = "uom_id";

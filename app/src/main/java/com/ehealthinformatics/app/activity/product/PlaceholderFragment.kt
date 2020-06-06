@@ -19,8 +19,10 @@ class PlaceholderFragment : Fragment() {
         val rootView: View
         if (arguments!!.getInt(ARG_SECTION_NUMBER) == 1) {
             rootView = inflater.inflate(R.layout.layout_product_basic, container, false)
-        } else {
+        } else if (arguments!!.getInt(ARG_SECTION_NUMBER) == 2) {
             rootView = inflater.inflate(R.layout.layout_product_stock, container, false)
+        } else   {
+            rootView = inflater.inflate(R.layout.layout_product_website, container, false)
         }
         return rootView
     }

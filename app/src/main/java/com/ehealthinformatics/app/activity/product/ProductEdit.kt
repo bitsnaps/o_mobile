@@ -38,6 +38,7 @@ import com.ehealthinformatics.core.orm.OValues
 import com.ehealthinformatics.core.utils.BitmapUtils
 import com.ehealthinformatics.data.adapter.SimpleListAdapter
 import com.ehealthinformatics.data.db.Columns
+import kotlinx.android.synthetic.main.layout_product_website.*
 import java.io.File
 import java.util.ArrayList
 
@@ -127,6 +128,7 @@ class ProductEdit : OdooCompatActivity() {
         val productFragment = PlaceholderFragment.newInstance(1)
         adapter.addFragment(productFragment, "PRODUCT")
         adapter.addFragment(PlaceholderFragment.newInstance(2), "STOCK")
+        adapter.addFragment(PlaceholderFragment.newInstance(3), "WEBSITE")
         viewPager.adapter = adapter
         viewPager.addOnPageChangeListener(object: OnPageChangeListener {
             override fun  onPageScrollStateChanged(state: Int) {}
@@ -328,6 +330,13 @@ class ProductEdit : OdooCompatActivity() {
             btn_product_submit.setOnClickListener { onSubmit() }
         }
         else if (position == 1) {
+            et_product_qty.setOnFocusChangeListener { _, focused -> if(focused) onQtyChange()}
+            sc_product_is_medicine.setOnCheckedChangeListener { buttonView, isChecked ->
+                onMedicineChange(isChecked)
+            }
+        }
+
+        else if (position == 2) {
             et_product_qty.setOnFocusChangeListener { _, focused -> if(focused) onQtyChange()}
             sc_product_is_medicine.setOnCheckedChangeListener { buttonView, isChecked ->
                 onMedicineChange(isChecked)
