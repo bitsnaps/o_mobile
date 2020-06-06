@@ -127,7 +127,6 @@ public class ProductList extends BaseFragment implements ISyncStatusObserverList
         initDataLoad();
     }
 
-
     private void initControls(View view){
 //        activeFilterButton = getActivity().findViewById(R.id.btn_filter_template);
 //        activeFilterButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_active, 0, 0,0);
@@ -147,6 +146,7 @@ public class ProductList extends BaseFragment implements ISyncStatusObserverList
 
     private void initList(){
         viewModel = ViewModelProviders.of(this).get(ProductLazyListViewModel.class);
+        viewModel.loadAllProducts();
         recyclerView = getActivity().findViewById(R.id.rv_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -164,7 +164,6 @@ public class ProductList extends BaseFragment implements ISyncStatusObserverList
                         listLoaded(productList.isEmpty());
                     }
                 }, 3000);
-
             }
         });
     }
@@ -179,11 +178,12 @@ public class ProductList extends BaseFragment implements ISyncStatusObserverList
         llSyncProgress.setVisibility(View.VISIBLE);
     }
 
-    private void resetLayout(){
+    private void resetLayout() {
         llLoading.setVisibility(View.GONE);
         noItemRefreshLayout.setVisibility(View.GONE);
         itemsRefreshLayout.setVisibility(View.GONE);
-        llSyncProgress.setVisibility(View.GONE);}
+        llSyncProgress.setVisibility(View.GONE);
+    }
 
     private void listLoaded(Boolean isEmpty) {
         hideRefreshingProgress();
@@ -196,7 +196,6 @@ public class ProductList extends BaseFragment implements ISyncStatusObserverList
             itemsRefreshLayout.setVisibility(View.VISIBLE);
         }
     }
-
 
     @Override
     public Class<ProductDao> database() {

@@ -10,6 +10,7 @@ public class ModelNames {
     public static String PARTNER = "res.partner";
     public static String PRODUCT_TEMPLATE = "product.template";
     public static String PRODUCT = "product.product";
+    public static String PRODUCT_IMAGE = "product.image";
     public static String CATEGORY = "product.category";
     public static String ACCOUNT = "account.account";
     public static String ACCOUNT_BANK_STATEMENT = "account.bank.statement";

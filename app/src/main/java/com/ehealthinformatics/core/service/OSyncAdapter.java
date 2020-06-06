@@ -82,7 +82,6 @@ public class OSyncAdapter extends AbstractThreadedSyncAdapter {
     private HashMap<String, ODomain> mDomain = new HashMap<>();
     private HashMap<String, ISyncFinishListener> mSyncFinishListeners = new HashMap<>();
 
-
     public OSyncAdapter(Context context, Class<? extends OModel> model, OSyncService service,
                         boolean autoInitialize) {
         super(context, autoInitialize);
@@ -154,7 +153,6 @@ public class OSyncAdapter extends AbstractThreadedSyncAdapter {
             }
         }
     }
-
 
 //if mode set heck for datalimit
     private void syncData(OModel oModel, ODomain domain_filter,

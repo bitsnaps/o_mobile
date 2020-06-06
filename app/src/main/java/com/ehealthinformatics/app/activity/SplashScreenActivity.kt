@@ -56,6 +56,7 @@ class SplashScreenActivity : AppCompatActivity() {
             val daos = LoadingUtils.ArtifactsLoader(App.getContext(), mUser)
             daos.init()
             val productDao = App.getDao<ProductDao>(ProductDao::class.java)
+
             productDao.selectAll(QueryFields.all())
             return null
         }

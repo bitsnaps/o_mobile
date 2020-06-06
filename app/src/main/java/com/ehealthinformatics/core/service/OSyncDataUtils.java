@@ -293,7 +293,6 @@ public class OSyncDataUtils {
                                         if (mCreateRelationRecords) {
                                             OModel o2mModel = mModel.createInstance(column.getType());
                                             List<Integer> o2mIds = OListUtils.doubleToIntList(record.getO2M(name));
-
                                             syncProcess.getChildModel(o2mModel.getModelName())
                                                     .getPullToDeviceIds().addAll(o2mIds);
 //                                            addUpdateRelationRecord(mModel, o2mModel.getTableName(),
