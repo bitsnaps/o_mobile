@@ -26,7 +26,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -34,7 +33,6 @@ import com.ehealthinformatics.App;
 import com.ehealthinformatics.BuildConfig;
 import com.ehealthinformatics.data.dao.QueryFields;
 import com.ehealthinformatics.data.dto.DTO;
-import com.ehealthinformatics.data.dto.SyncMode;
 import com.ehealthinformatics.data.dao.IrModel;
 import com.ehealthinformatics.core.auth.OdooAccountManager;
 import com.ehealthinformatics.core.orm.annotation.Odoo;

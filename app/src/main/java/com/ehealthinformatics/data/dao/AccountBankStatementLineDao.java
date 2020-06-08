@@ -6,7 +6,6 @@ import com.ehealthinformatics.App;
 import com.ehealthinformatics.core.orm.ODataRow;
 import com.ehealthinformatics.core.orm.OModel;
 import com.ehealthinformatics.core.orm.fields.OColumn;
-import com.ehealthinformatics.core.orm.fields.types.OBoolean;
 import com.ehealthinformatics.core.orm.fields.types.ODate;
 import com.ehealthinformatics.core.orm.fields.types.OFloat;
 import com.ehealthinformatics.core.orm.fields.types.OVarchar;
@@ -15,22 +14,18 @@ import com.ehealthinformatics.core.utils.DateUtils;
 import com.ehealthinformatics.data.db.Columns;
 import com.ehealthinformatics.data.dto.Account;
 import com.ehealthinformatics.data.dto.AccountBankStatement;
-import com.ehealthinformatics.data.dto.AccountBankStatementCashBox;
 import com.ehealthinformatics.data.dto.AccountBankStatementLine;
 import com.ehealthinformatics.data.dto.AccountJournal;
 import com.ehealthinformatics.data.dto.Company;
 import com.ehealthinformatics.data.dto.Currency;
 import com.ehealthinformatics.data.dto.Partner;
 import com.ehealthinformatics.data.dto.PosOrder;
-import com.ehealthinformatics.data.dto.PosSession;
-import com.ehealthinformatics.data.dto.User;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import static com.ehealthinformatics.core.orm.fields.OColumn.RelationType.ManyToOne;
-import static com.ehealthinformatics.core.orm.fields.OColumn.RelationType.OneToMany;
 
 public class AccountBankStatementLineDao extends OModel {
 

@@ -102,4 +102,22 @@ public class StringUtils {
         return string != null && !string.isEmpty() && string.equalsIgnoreCase("false");
     }
 
+
+    public static String trimString(String text, int length) {
+        if (text.length() > length) {
+            return text.substring(0, length-3) + "...";
+        }
+        return text;
+    }
+
+
+    public static String strip(String string) {
+        return string == "false" ? "" : string;
+    }
+
+    public static boolean isNotEmpty(String string) {
+        return string != null && string.length() > 0;
+    }
+
+
 }

@@ -19,7 +19,6 @@ import com.ehealthinformatics.R;
 import com.ehealthinformatics.data.adapter.SyncModelsListAdapter;
 import com.ehealthinformatics.data.dao.QueryFields;
 import com.ehealthinformatics.data.db.Columns;
-import com.ehealthinformatics.data.dto.SyncMode;
 import com.ehealthinformatics.data.dao.IrModel;
 import com.ehealthinformatics.core.support.addons.fragment.BaseFragment;
 import com.ehealthinformatics.core.support.addons.fragment.ISyncStatusObserverListener;

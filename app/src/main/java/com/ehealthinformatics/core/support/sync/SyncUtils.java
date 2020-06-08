@@ -26,7 +26,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.ehealthinformatics.data.db.Columns;
-import com.ehealthinformatics.data.dto.SyncMode;
 import com.ehealthinformatics.core.service.OSyncAdapter;
 import com.ehealthinformatics.core.support.OUser;
 

@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.view.MenuItemCompat;
@@ -22,14 +21,11 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.ehealthinformatics.R;
 import com.ehealthinformatics.app.activity.shopping.PosOrderCart;
 import com.ehealthinformatics.app.listeners.OnItemClickListener;
 import com.ehealthinformatics.core.support.addons.fragment.BaseFragment;
-import com.ehealthinformatics.core.support.addons.fragment.IOnSearchViewChangeListener;
-import com.ehealthinformatics.core.support.addons.fragment.ISyncStatusObserverListener;
 import com.ehealthinformatics.core.support.drawer.ODrawerItem;
 import com.ehealthinformatics.core.utils.IntentUtils;
 import com.ehealthinformatics.data.adapter.AdvertismentListAdapter;

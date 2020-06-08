@@ -15,34 +15,28 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http:www.gnu.org/licenses/>
  *
- * Created on 31/12/14 6:43 PM
+ * Created on 2/1/15 11:07 AM
  */
-package com.ehealthinformatics.data.dao;
+package com.ehealthinformatics.device.services;
 
 import android.content.Context;
+import android.os.Bundle;
 
-import com.ehealthinformatics.core.orm.ODataRow;
-import com.ehealthinformatics.core.orm.OModel;
-import com.ehealthinformatics.core.orm.fields.OColumn;
-import com.ehealthinformatics.core.orm.fields.types.OVarchar;
+import com.ehealthinformatics.core.service.OSyncAdapter;
+import com.ehealthinformatics.core.service.OSyncService;
 import com.ehealthinformatics.core.support.OUser;
-import com.ehealthinformatics.data.db.Columns;
-import com.ehealthinformatics.data.dto.Country;
+import com.ehealthinformatics.data.dao.ProductDao;
 
-public class ResCountry extends OModel {
+public class ProductImageSyncService extends OSyncService {
+    public static final String TAG = ProductImageSyncService.class.getSimpleName();
 
-    OColumn name = new OColumn("Name", OVarchar.class).setSize(100);
-
-    public ResCountry(Context context, OUser user) {
-        super(context, "res.country", user);
+    @Override
+    public OSyncAdapter getSyncAdapter(OSyncService service, Context context) {
+        return new OSyncAdapter(context, ProductDao.class, this, true);
     }
 
-    public Country fromRow(final ODataRow row) {
-        Country country = new Country(
-                row.getInt(Columns.id),
-                row.getInt(Columns.server_id),
-                row.getString(Columns.Partner.name));
-        return country;
-
+    @Override
+    public void performDataSync(OSyncAdapter adapter, Bundle extras, OUser user) {
+        //adapter.syncDataLimit(Defaults.DATA_SYNC_LIMIT);
     }
 }

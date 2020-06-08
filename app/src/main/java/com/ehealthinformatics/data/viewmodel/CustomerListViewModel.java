@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.ehealthinformatics.App;
-import com.ehealthinformatics.app.fragment.CustomerList;
 import com.ehealthinformatics.data.dao.QueryFields;
 import com.ehealthinformatics.data.dao.ResPartner;
 import com.ehealthinformatics.data.dto.Customer;

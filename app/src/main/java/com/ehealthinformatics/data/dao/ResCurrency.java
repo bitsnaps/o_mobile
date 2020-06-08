@@ -29,7 +29,6 @@ import com.ehealthinformatics.core.orm.fields.types.OFloat;
 import com.ehealthinformatics.core.orm.fields.types.OVarchar;
 import com.ehealthinformatics.core.support.OUser;
 import com.ehealthinformatics.data.db.Columns;
-import com.ehealthinformatics.data.dto.User;
 
 import java.util.ArrayList;
 

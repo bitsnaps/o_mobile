@@ -32,8 +32,6 @@ import com.ehealthinformatics.core.orm.fields.types.OVarchar;
 import com.ehealthinformatics.core.support.OUser;
 import com.ehealthinformatics.data.db.Columns;
 
-import java.util.ArrayList;
-
 public class ResUsers extends OModel {
     public static final String TAG = ResUsers.class.getSimpleName();
 

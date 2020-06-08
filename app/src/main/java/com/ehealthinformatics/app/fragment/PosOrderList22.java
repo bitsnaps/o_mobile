@@ -7,7 +7,6 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 import com.ehealthinformatics.app.listeners.OnMoreButtonClickListener;
-import com.ehealthinformatics.core.utils.BitmapUtils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;

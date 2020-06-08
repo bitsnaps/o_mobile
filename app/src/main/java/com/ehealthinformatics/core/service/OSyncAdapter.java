@@ -33,11 +33,9 @@ import android.widget.Toast;
 import com.ehealthinformatics.App;
 import com.ehealthinformatics.R;
 import com.ehealthinformatics.core.orm.OdooServerException;
-import com.ehealthinformatics.core.utils.DateUtils;
 import com.ehealthinformatics.data.dao.IrModel;
 import com.ehealthinformatics.data.dao.QueryFields;
 import com.ehealthinformatics.data.db.Columns;
-import com.ehealthinformatics.data.dto.SyncMode;
 import com.ehealthinformatics.data.dto.SyncModel;
 import com.ehealthinformatics.data.dto.SyncProcess;
 import com.ehealthinformatics.data.dao.ResCompany;
@@ -194,11 +192,11 @@ public class OSyncAdapter extends AbstractThreadedSyncAdapter {
             //Step 1a: Null response.
             //TODO: Retry logic may be useful here cos of funny failures
 
-            syncProcess.setSyncResponse(response);
             if (response == null) {
               handleNullResponse(syncProcess);
               return;
             }
+            syncProcess.setSyncResponse(response);
 
             //Step 1b: Error response,
             if (response.containsKey("error")) {

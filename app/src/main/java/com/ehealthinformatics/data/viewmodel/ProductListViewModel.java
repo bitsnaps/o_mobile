@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModel;
 import com.ehealthinformatics.App;
 import com.ehealthinformatics.data.dao.ProductDao;
 import com.ehealthinformatics.data.dao.QueryFields;
-import com.ehealthinformatics.data.db.Columns;
 import com.ehealthinformatics.data.dto.Product;
 
 import java.util.HashMap;

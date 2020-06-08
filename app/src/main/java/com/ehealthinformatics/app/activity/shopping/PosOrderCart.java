@@ -24,14 +24,10 @@ import android.widget.Toast;
 import com.balysv.materialripple.MaterialRippleLayout;
 import com.ehealthinformatics.App;
 import com.ehealthinformatics.app.listeners.OnItemClickListener;
-import com.ehealthinformatics.config.OConstants;
 import com.ehealthinformatics.core.rpc.helper.ODomain;
 import com.ehealthinformatics.core.utils.OAppBarUtils;
-import com.ehealthinformatics.data.dao.AccountBankStatementDao;
 import com.ehealthinformatics.data.dao.PosOrderLineDao;
 import com.ehealthinformatics.data.dao.QueryFields;
-import com.ehealthinformatics.data.dto.AccountBankStatement;
-import com.ehealthinformatics.data.dto.AccountBankStatementLine;
 import com.ehealthinformatics.data.viewmodel.PosOrderViewModel;
 import com.ehealthinformatics.R;
 import com.ehealthinformatics.data.adapter.CartListAdapter;
@@ -42,8 +38,6 @@ import com.ehealthinformatics.data.dto.Product;
 import com.ehealthinformatics.core.support.OdooCompatActivity;
 import com.ehealthinformatics.core.utils.IntentUtils;
 import com.ehealthinformatics.data.db.Columns;
-
-import java.util.List;
 
 
 public class PosOrderCart extends OdooCompatActivity implements OnItemClickListener<PosOrderLine> {

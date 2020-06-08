@@ -59,7 +59,6 @@ import com.ehealthinformatics.data.dao.QueryFields;
 import com.ehealthinformatics.data.db.Columns;
 import com.ehealthinformatics.data.db.ModelNames;
 import com.ehealthinformatics.data.dto.Product;
-import com.ehealthinformatics.data.dto.SyncMode;
 import com.ehealthinformatics.data.dto.SyncModel;
 import com.ehealthinformatics.data.viewmodel.ProductLazyListViewModel;
 import com.ehealthinformatics.R;

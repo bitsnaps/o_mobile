@@ -3,7 +3,6 @@ package com.ehealthinformatics.data.dao;
 import android.content.Context;
 
 import com.ehealthinformatics.data.db.ModelNames;
-import com.ehealthinformatics.data.dto.Category;
 import com.ehealthinformatics.data.dto.Uom;
 import com.ehealthinformatics.core.orm.ODataRow;
 import com.ehealthinformatics.core.orm.OModel;

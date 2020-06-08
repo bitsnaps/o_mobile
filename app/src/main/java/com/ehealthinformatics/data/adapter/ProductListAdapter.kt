@@ -4,7 +4,6 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ehealthinformatics.App
 
 import com.ehealthinformatics.R
 import com.ehealthinformatics.app.listeners.OnItemClickListener

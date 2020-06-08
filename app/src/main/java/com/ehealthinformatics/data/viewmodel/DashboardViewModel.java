@@ -16,8 +16,6 @@ import com.ehealthinformatics.data.dto.Dashboard;
 import com.ehealthinformatics.data.dto.PosSession;
 import com.ehealthinformatics.data.dao.ResPartner;
 
-import java.util.Date;
-
 public class DashboardViewModel extends ViewModel {
     private ProductDao productDao;
     private PosOrderDao posOrderDao;

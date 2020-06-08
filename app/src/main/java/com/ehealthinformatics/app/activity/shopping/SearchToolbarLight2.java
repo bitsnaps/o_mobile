@@ -28,12 +28,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ehealthinformatics.R;
-import com.ehealthinformatics.app.listeners.OnItemClickListener;
 import com.ehealthinformatics.app.utils.ViewAnimation;
 import com.ehealthinformatics.core.support.OdooCompatActivity;
 import com.ehealthinformatics.core.utils.OAppBarUtils;
 import com.ehealthinformatics.data.adapter.CartSuggestionsAdapter;
-import com.ehealthinformatics.data.adapter.SimpleListAdapter;
 import com.ehealthinformatics.data.dao.QueryFields;
 import com.ehealthinformatics.data.db.Columns;
 import com.ehealthinformatics.data.dto.Product;

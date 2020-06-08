@@ -23,7 +23,6 @@ import com.ehealthinformatics.core.support.addons.fragment.BaseFragment;
 import com.ehealthinformatics.core.support.addons.fragment.ISyncStatusObserverListener;
 import com.ehealthinformatics.core.support.drawer.ODrawerItem;
 import com.ehealthinformatics.data.viewmodel.DashboardViewModel;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;

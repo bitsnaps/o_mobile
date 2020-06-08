@@ -1,6 +1,5 @@
 package com.ehealthinformatics.app.activity.shopping
 
-import android.app.ProgressDialog
 import android.os.AsyncTask
 import android.os.Bundle
 import android.view.MenuItem
@@ -26,7 +25,6 @@ import android.content.Context
 import com.ehealthinformatics.app.listeners.OnItemClickListener
 import com.ehealthinformatics.app.utils.DialogUtils
 import com.ehealthinformatics.core.utils.IntentUtils
-import java.util.ArrayList
 
 class PaymentLines : OdooCompatActivity() {
 

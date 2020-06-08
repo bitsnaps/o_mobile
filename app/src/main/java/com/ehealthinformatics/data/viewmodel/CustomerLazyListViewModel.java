@@ -7,17 +7,14 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.ehealthinformatics.App;
-import com.ehealthinformatics.app.fragment.CustomerList;
 import com.ehealthinformatics.core.orm.ODataRow;
 import com.ehealthinformatics.data.LazyList;
 import com.ehealthinformatics.data.dao.IrModel;
 import com.ehealthinformatics.data.dao.QueryFields;
 import com.ehealthinformatics.data.dao.ResPartner;
-import com.ehealthinformatics.data.dao.ResPartner;
 import com.ehealthinformatics.data.db.Columns;
 import com.ehealthinformatics.data.db.ModelNames;
 import com.ehealthinformatics.data.dto.Customer;
-import com.ehealthinformatics.data.dto.SyncMode;
 import com.ehealthinformatics.data.dto.SyncModel;
 
 import java.util.ArrayList;

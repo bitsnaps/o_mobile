@@ -27,7 +27,6 @@ import android.util.Log;
 
 import com.ehealthinformatics.config.OConstants;
 import com.ehealthinformatics.data.dao.QueryFields;
-import com.ehealthinformatics.data.db.Columns;
 import com.ehealthinformatics.data.dto.User;
 import com.ehealthinformatics.data.dao.ResUsers;
 import com.ehealthinformatics.core.auth.OdooAccountManager;

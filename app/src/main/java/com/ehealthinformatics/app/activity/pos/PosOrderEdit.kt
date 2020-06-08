@@ -3,9 +3,6 @@ package com.ehealthinformatics.app.activity.pos
 
 import android.os.Bundle
 import android.widget.*
-import com.klinker.android.send_message.Message
-import com.klinker.android.send_message.Settings
-import com.klinker.android.send_message.Transaction
 import com.ehealthinformatics.App
 
 import com.ehealthinformatics.R
@@ -116,12 +113,12 @@ class PosOrderEdit : OdooCompatActivity() {
     }
 
     private fun PosOrder.sendOffline() {
-        val sendSettings = Settings()
-        sendSettings.useSystemSending = true
-        val transaction =  Transaction(applicationContext, sendSettings)
-        val message =  Message(toSMS(), "+2348065701493")
-        //TODO: Change to thread
-        transaction.sendNewMessage(message, 9)
+//        val sendSettings = Settings()
+//        sendSettings.useSystemSending = true
+//        val transaction =  Transaction(applicationContext, sendSettings)
+//        val message =  Message(toSMS(), "+2348065701493")
+//        //TODO: Change to thread
+//        transaction.sendNewMessage(message, 9)
     }
 
     private fun PosOrder.addProductt(product: Product){

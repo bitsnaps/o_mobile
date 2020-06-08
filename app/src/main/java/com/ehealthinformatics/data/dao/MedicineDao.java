@@ -8,7 +8,6 @@ import com.ehealthinformatics.core.orm.fields.OColumn;
 import com.ehealthinformatics.core.orm.fields.types.OVarchar;
 import com.ehealthinformatics.core.support.OUser;
 import com.ehealthinformatics.data.db.Columns;
-import com.ehealthinformatics.data.dto.Account;
 import com.ehealthinformatics.data.dto.Medicine;
 
 public class MedicineDao extends OModel {

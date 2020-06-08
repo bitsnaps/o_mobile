@@ -21,16 +21,7 @@ import android.widget.Toast;
 import com.ehealthinformatics.App;
 import com.ehealthinformatics.R;
 import com.ehealthinformatics.app.utils.LoadingUtils;
-import com.ehealthinformatics.config.FirstLaunchConfig;
-import com.ehealthinformatics.core.auth.ServerDefaultsService;
-import com.ehealthinformatics.core.orm.OdooServerException;
-import com.ehealthinformatics.data.dao.ResCompany;
-import com.ehealthinformatics.data.dto.AccountBankStatement;
-import com.ehealthinformatics.data.dto.Company;
-import com.ehealthinformatics.data.dto.PosSession;
 import com.ehealthinformatics.data.dto.SyncConfig;
-import com.ehealthinformatics.data.dto.User;
-import com.ehealthinformatics.exception.ConfigurationException;
 import com.ehealthinformatics.core.auth.OdooAccountManager;
 import com.ehealthinformatics.core.auth.OdooAuthenticator;
 import com.ehealthinformatics.core.rpc.Odoo;
@@ -47,8 +38,6 @@ import com.ehealthinformatics.config.OConstants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class OdooLogin extends AppCompatActivity implements View.OnClickListener,

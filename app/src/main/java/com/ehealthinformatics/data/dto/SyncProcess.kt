@@ -16,7 +16,6 @@ import com.ehealthinformatics.data.db.Columns
 import java.util.*
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet
-import kotlin.math.absoluteValue
 
 class SyncProcess(var parent: SyncProcess?, var oModel: OModel, var syncModelDao: IrModel, var oUser: OUser, var syncModel: SyncModel,
                   var dataUtils: OSyncDataUtils?, var filterDomain: ODomain, var syncResult: SyncResult) {

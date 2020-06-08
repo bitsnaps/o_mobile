@@ -12,7 +12,6 @@ import com.ehealthinformatics.core.utils.DateUtils
 import com.ehealthinformatics.core.orm.ODataRow
 import com.ehealthinformatics.core.orm.OModel
 import com.ehealthinformatics.core.orm.fields.OColumn
-import com.ehealthinformatics.core.orm.fields.OColumn.ROW_ID
 import com.ehealthinformatics.core.support.OUser
 
 import com.ehealthinformatics.core.orm.fields.OColumn.RelationType
@@ -21,7 +20,6 @@ import com.ehealthinformatics.core.rpc.helper.ODomain
 import com.ehealthinformatics.data.LazyList
 import com.ehealthinformatics.data.db.Columns
 import com.ehealthinformatics.data.db.ModelNames
-import java.util.*
 import kotlin.collections.ArrayList
 
 class PosOrderDao(context: Context?, user: OUser?) : OModel(context, ModelNames.POS_ORDER, user) {

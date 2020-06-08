@@ -1,9 +1,6 @@
 package com.ehealthinformatics.app.utils;
 
 import android.content.Context;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ehealthinformatics.App;
 import com.ehealthinformatics.core.auth.ServerDefaultsService;

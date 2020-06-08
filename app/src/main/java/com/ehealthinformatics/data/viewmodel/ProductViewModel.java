@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.ehealthinformatics.App;
 import com.ehealthinformatics.core.orm.OValues;
+import com.ehealthinformatics.core.orm.RelValues;
 import com.ehealthinformatics.core.rpc.helper.ODomain;
 import com.ehealthinformatics.data.dao.CategoryDao;
 import com.ehealthinformatics.data.dao.ProductDao;
@@ -18,7 +19,6 @@ import com.ehealthinformatics.data.dao.UoMDao;
 import com.ehealthinformatics.data.db.Columns;
 import com.ehealthinformatics.data.dto.Category;
 import com.ehealthinformatics.data.dto.Product;
-import com.ehealthinformatics.data.dto.ProductTemplate;
 import com.ehealthinformatics.data.dto.Uom;
 
 import java.util.List;
@@ -72,6 +72,7 @@ public class ProductViewModel extends ViewModel {
         new AsyncTask<OValues, Void, Boolean>() {
                 @Override
                 protected Boolean doInBackground(OValues... oValues) {
+                    RelValues relValues = new RelValues();
                     OValues product = oValues[0];
                     OValues productTemplate = oValues[1];
                     Product currentProduct = selected.getValue().product;

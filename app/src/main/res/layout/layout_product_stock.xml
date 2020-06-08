@@ -11,11 +11,48 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:id="@+id/ll_activate_stock"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_marginTop="50dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="5dp"
+                android:text="Track Product Stock"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/grey_80" />
+
+            <View
+                android:layout_width="@dimen/spacing_middle"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="@dimen/spacing_middle"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sc_product_activate_stock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:clickable="true"
+                app:thumbTint="@color/switch_color_primary" />
+
+        </LinearLayout>
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="100dp"
             android:textSize="30sp"
             android:text="On hand"
             android:textColor="#504C4C" />
@@ -46,71 +83,6 @@
         </LinearLayout>
     </LinearLayout>
 
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="67dp"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Active"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:textColor="@color/grey_80" />
-
-        <View
-            android:layout_width="@dimen/spacing_middle"
-            android:layout_height="wrap_content" />
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/sc_product_is_medicine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            app:thumbTint="@color/switch_color_primary" />
-
-        <View
-            android:layout_width="@dimen/spacing_middle"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="49dp"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Is Medicine"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:textColor="@color/grey_80" />
-
-        <View
-            android:layout_width="@dimen/spacing_middle"
-            android:layout_height="wrap_content" />
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/sc_product_active"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            app:thumbTint="@color/switch_color_primary" />
-
-        <View
-            android:layout_width="@dimen/spacing_middle"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
 
     <View
         android:layout_width="0dp"

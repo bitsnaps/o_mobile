@@ -1,1 +1,2 @@
 include ':app', ':intro-slider-lib'
+include ':app', 'odoorxdata'

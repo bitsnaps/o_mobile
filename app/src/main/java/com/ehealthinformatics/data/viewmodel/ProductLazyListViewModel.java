@@ -15,11 +15,9 @@ import com.ehealthinformatics.data.db.Columns;
 import com.ehealthinformatics.data.db.ModelNames;
 import com.ehealthinformatics.data.dto.Product;
 import com.ehealthinformatics.data.LazyList;
-import com.ehealthinformatics.data.dto.SyncMode;
 import com.ehealthinformatics.data.dto.SyncModel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class ProductLazyListViewModel extends ViewModel {

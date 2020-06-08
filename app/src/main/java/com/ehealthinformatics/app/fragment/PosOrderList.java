@@ -42,7 +42,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,7 +58,6 @@ import com.ehealthinformatics.data.dao.QueryFields;
 import com.ehealthinformatics.data.db.Columns;
 import com.ehealthinformatics.data.db.ModelNames;
 import com.ehealthinformatics.data.dto.PosOrder;
-import com.ehealthinformatics.data.dto.SyncMode;
 import com.ehealthinformatics.data.dto.SyncModel;
 import com.ehealthinformatics.R;
 import com.ehealthinformatics.data.adapter.PosOrderListAdapter;

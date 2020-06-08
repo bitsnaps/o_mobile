@@ -32,14 +32,11 @@ import com.ehealthinformatics.app.listeners.OnItemClickListener;
 import com.ehealthinformatics.app.utils.ViewAnimation;
 import com.ehealthinformatics.core.support.OdooCompatActivity;
 import com.ehealthinformatics.core.utils.OAppBarUtils;
-import com.ehealthinformatics.data.adapter.CartSuggestionsAdapter;
 import com.ehealthinformatics.data.adapter.SuggestionsAdapter;
 import com.ehealthinformatics.data.db.Columns;
 import com.ehealthinformatics.data.dto.Customer;
-import com.ehealthinformatics.data.dto.Product;
 import com.ehealthinformatics.data.dto.Suggestion;
 import com.ehealthinformatics.data.viewmodel.CustomerListViewModel;
-import com.ehealthinformatics.data.viewmodel.ProductListViewModel;
 
 import java.util.ArrayList;
 import java.util.List;

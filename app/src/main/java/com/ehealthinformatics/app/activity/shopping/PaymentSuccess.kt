@@ -13,8 +13,6 @@ import com.ehealthinformatics.data.db.Columns
 import com.ehealthinformatics.data.dto.*
 
 import kotlinx.android.synthetic.main.fragment_payment_success.*
-import androidx.fragment.app.Fragment
-import com.ehealthinformatics.app.fragment.PosOrderList
 
 
 class PaymentSuccess : OdooCompatActivity() {

@@ -28,7 +28,6 @@ import android.util.Log;
 import com.ehealthinformatics.App;
 import com.ehealthinformatics.BuildConfig;
 import com.ehealthinformatics.data.db.ModelNames;
-import com.ehealthinformatics.data.dto.Medicine;
 import com.ehealthinformatics.data.dto.Product;
 import com.ehealthinformatics.data.dto.ProductTemplate;
 import com.ehealthinformatics.core.utils.ImageUtils;
@@ -79,7 +78,8 @@ public class ProductDao extends OModel {
     public ODomain defaultDomain()  {
         ODomain oDomain = super.defaultDomain();
         oDomain.add("product_tmpl_id.active", "=", "true");
-        oDomain.add("product_tmpl_id.is_medicine", "=", "true");
+        oDomain.add("product_tmpl_id.is_medicine", "!=", "true");
+        oDomain.add("name", "=", "Faded SkyBlu Denim Jeans");
         return oDomain;
     }
 

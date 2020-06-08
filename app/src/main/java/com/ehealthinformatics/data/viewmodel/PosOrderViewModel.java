@@ -14,10 +14,7 @@ import com.ehealthinformatics.data.dao.PosOrderDao;
 import com.ehealthinformatics.data.dao.PosOrderLineDao;
 import com.ehealthinformatics.data.dao.QueryFields;
 import com.ehealthinformatics.data.dto.AccountBankStatement;
-import com.ehealthinformatics.data.dto.AccountBankStatementLine;
 import com.ehealthinformatics.data.dto.PosOrder;
-
-import java.util.List;
 
 public class PosOrderViewModel extends ViewModel {
 

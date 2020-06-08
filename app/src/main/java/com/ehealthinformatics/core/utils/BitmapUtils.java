@@ -36,6 +36,8 @@ import android.graphics.drawable.VectorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import androidx.core.content.ContextCompat;
+
+import android.provider.MediaStore;
 import android.text.TextPaint;
 import android.util.Base64;
 
@@ -92,11 +94,9 @@ public class BitmapUtils {
         // and then we can return your byte array.
         return byteBuffer.toByteArray();
     }
-
     public static String uriToBase64(Uri uri, ContentResolver resolver) {
         return uriToBase64(uri, resolver, false);
     }
-
     public static String uriToBase64(Uri uri, ContentResolver resolver, boolean thumbnail) {
         String encodedBase64 = "";
         try {
@@ -107,7 +107,6 @@ public class BitmapUtils {
         }
         return encodedBase64;
     }
-
     public static  String toBase64(Bitmap bitmap){
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
@@ -115,7 +114,6 @@ public class BitmapUtils {
         String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
         return encoded;
     }
-
     /**
      * Gets the bitmap imageMedium.
      *
@@ -129,7 +127,6 @@ public class BitmapUtils {
                 imageAsBytes.length);
 
     }
-
     public static Bitmap getBitmapImageOrFalse(Context context, String base64) {
         if(base64 == "false"){
             byte[] imageAsBytes = Base64.decode(base64.getBytes(), 5);
@@ -139,7 +136,6 @@ public class BitmapUtils {
             return getAlphabetImage(context, "O");
         }
     }
-
     public static Bitmap resizeImage(int width, int height, Bitmap originalImage){
         Bitmap background = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
@@ -164,8 +160,6 @@ public class BitmapUtils {
 
         return background;
     }
-
-
     public static Bitmap getAlphabetImage(Context context, String content) {
         Resources res = context.getResources();
         Bitmap mDefaultBitmap =  BitmapFactory.decodeResource(res, R.drawable.avatar);
@@ -193,7 +187,6 @@ public class BitmapUtils {
                 height / 2 + (mBounds.bottom - mBounds.top) / 2, mPaint);
         return bitmap;
     }
-
     private static Bitmap getBitmap(VectorDrawable vectorDrawable) {
         Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),
                 vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
@@ -202,7 +195,6 @@ public class BitmapUtils {
         vectorDrawable.draw(canvas);
         return bitmap;
     }
-
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static Bitmap getBitmap(Context context, int drawableId) {
         Drawable drawable = ContextCompat.getDrawable(context, drawableId);
@@ -214,4 +206,9 @@ public class BitmapUtils {
             throw new IllegalArgumentException("unsupported drawable type");
         }
     }
+
+    public static Bitmap uriToBitmap(ContentResolver contentResolver, Uri uri) throws IOException {
+        return MediaStore.Images.Media.getBitmap(contentResolver, uri);
+    }
+
 }

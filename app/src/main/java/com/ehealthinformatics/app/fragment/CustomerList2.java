@@ -63,7 +63,6 @@ import com.ehealthinformatics.data.dao.ResPartner;
 import com.ehealthinformatics.data.db.Columns;
 import com.ehealthinformatics.data.db.ModelNames;
 import com.ehealthinformatics.data.dto.Customer;
-import com.ehealthinformatics.data.dto.SyncMode;
 import com.ehealthinformatics.data.dto.SyncModel;
 import com.ehealthinformatics.data.viewmodel.CustomerLazyListViewModel;
 

@@ -31,6 +31,7 @@ import com.ehealthinformatics.core.orm.OModel;
 import com.ehealthinformatics.core.orm.OSQLite;
 import com.ehealthinformatics.core.rpc.Odoo;
 import com.ehealthinformatics.core.support.OUser;
+import com.facebook.stetho.Stetho;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
@@ -53,6 +54,7 @@ public class App extends Application {
         App.APPLICATION_NAME = getPackageManager().getApplicationLabel(getApplicationInfo()).toString();
         App.modelRegistryUtils.makeReady(getApplicationContext());
         mContext = this;
+        Stetho.initializeWithDefaults(this);
     }
 
     public static OSQLite getSQLite(String userName) {

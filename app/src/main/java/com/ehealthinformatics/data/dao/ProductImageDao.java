@@ -26,7 +26,7 @@ import android.util.Log;
 
 import com.ehealthinformatics.BuildConfig;
 import com.ehealthinformatics.core.orm.ODataRow;
-import com.ehealthinformatics.core.orm.fields.types.OInteger;
+import com.ehealthinformatics.core.utils.BitmapUtils;
 import com.ehealthinformatics.data.db.Columns;
 import com.ehealthinformatics.data.db.ModelNames;
 import com.ehealthinformatics.core.orm.OModel;
@@ -45,7 +45,7 @@ public class ProductImageDao extends OModel {
             ".core.provider.content.sync.product_image";
 
     OColumn image = new OColumn("Image", OVarchar.class).setSize(100).setRequired();
-    OColumn product_tmpl_id = new OColumn("Product", OInteger.class).setRequired();
+    OColumn product_tmpl_id = new OColumn("Product", ProductTemplateDao.class, OColumn.RelationType.ManyToOne).setRequired();
 
     @Override
     public void initDaos() {
@@ -63,7 +63,7 @@ public class ProductImageDao extends OModel {
         if(queryFields.contains(Columns.id)) id = row.getInt(Columns.id);
         if(queryFields.contains(Columns.server_id)) serverId = row.getInt(Columns.server_id);
         if(queryFields.contains(Columns.ProductImageCol.image)) image = row.getString(Columns.ProductImageCol.image);
-        ProductImage productImage = new ProductImage(id, serverId, image);
+        ProductImage productImage = new ProductImage(id, serverId, BitmapUtils.getBitmapImage(getContext(), image));
         return  productImage;
     }
 
@@ -71,7 +71,7 @@ public class ProductImageDao extends OModel {
         String[] projection = null;
         String selection = Columns.ProductImageCol.product_tmpl_id +  " = ?";
         String[] selectionArgs = new String[]{productTemplateId+""};
-        String sortOrder = Columns.name + " ASC  LIMIT 10";
+        String sortOrder = Columns.id + " ASC  LIMIT 10";
         List<ODataRow> oDataRows = select(projection, selection, selectionArgs, sortOrder);
         ArrayList<ProductImage> productImages = new ArrayList<>();
         for (int i = 0; i < oDataRows.size(); i++) {

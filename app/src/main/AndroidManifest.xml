@@ -185,6 +185,31 @@
             android:windowSoftInputMode="adjustPan" />
 
 
+        <!-- Product Image Sync Provider & Service  // -->
+        <provider
+            android:name="com.ehealthinformatics.device.providers.ProductImagesSyncProvider"
+            android:authorities="${applicationId}.core.provider.content.sync.product_image"
+            android:label="@string/sync_label_product_images"
+            android:multiprocess="true" />
+
+        <service
+            android:name="com.ehealthinformatics.device.services.ProductImageSyncService"
+            android:exported="true"
+            android:process=":sync_product_image">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/product_image_sync_adapter" />
+        </service>
+
+        <activity
+            android:name="com.ehealthinformatics.app.fragment.ProductDetails"
+            android:windowSoftInputMode="adjustPan" />
+
+
         <!-- PurchaseList Sync Provider & Service  // -->
         <provider
             android:name="com.ehealthinformatics.device.providers.PurchaseSyncProvider"

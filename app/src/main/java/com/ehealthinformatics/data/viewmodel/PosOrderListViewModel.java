@@ -12,7 +12,6 @@ import com.ehealthinformatics.data.dto.PosOrder;
 import com.ehealthinformatics.core.rpc.helper.ODomain;
 import com.ehealthinformatics.data.db.Columns;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
