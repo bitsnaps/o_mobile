@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.ehealthinformatics.mail.widget.MailChatterView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.ehealthinformatics.rxshop.mail.widget.MailChatterView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_marginTop="@dimen/default_16dp"
     android:layout_height="wrap_content">
@@ -88,4 +88,4 @@
             android:fontFamily="@string/font_condensed"
             android:layout_height="wrap_content" />
     </LinearLayout>
-</com.ehealthinformatics.mail.widget.MailChatterView>
+</com.ehealthinformatics.rxshop.mail.widget.MailChatterView>

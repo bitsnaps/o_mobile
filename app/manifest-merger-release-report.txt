@@ -201,7 +201,7 @@ MERGED from framework-master-update-dpr:odoo-rpc-v3:unspecified:17:5
 		ADDED from AndroidManifest.xml:35:9
 	android:name
 		ADDED from AndroidManifest.xml:30:9
-activity#com.odoo.app.activity.OdooLogin
+activity#com.odoo.rxShop.activity.OdooLogin
 ADDED from AndroidManifest.xml:37:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:39:13
@@ -217,7 +217,7 @@ category#android.intent.category.LAUNCHER
 ADDED from AndroidManifest.xml:43:17
 	android:name
 		ADDED from AndroidManifest.xml:43:27
-activity#com.odoo.app.activity.ManageAccounts
+activity#com.odoo.rxShop.activity.ManageAccounts
 ADDED from AndroidManifest.xml:46:9
 	android:name
 		ADDED from AndroidManifest.xml:46:19
@@ -233,7 +233,7 @@ activity#com.odoo.ui.activity.SettingsActivity
 ADDED from AndroidManifest.xml:49:9
 	android:name
 		ADDED from AndroidManifest.xml:49:19
-activity#com.odoo.app.activity.AppIntro
+activity#com.odoo.rxShop.activity.AppIntro
 ADDED from AndroidManifest.xml:50:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:52:13
@@ -251,7 +251,7 @@ ADDED from AndroidManifest.xml:56:9
 		ADDED from AndroidManifest.xml:58:13
 	android:name
 		ADDED from AndroidManifest.xml:57:13
-activity#com.odoo.app.activity.OdooAccountQuickManage
+activity#com.odoo.rxShop.activity.OdooAccountQuickManage
 ADDED from AndroidManifest.xml:59:9
 	android:windowSoftInputMode
 		ADDED from AndroidManifest.xml:60:13
@@ -259,11 +259,11 @@ ADDED from AndroidManifest.xml:59:9
 		ADDED from AndroidManifest.xml:62:13
 	android:name
 		ADDED from AndroidManifest.xml:61:13
-activity#com.odoo.app.activity.About
+activity#com.odoo.rxShop.activity.About
 ADDED from AndroidManifest.xml:63:9
 	android:name
 		ADDED from AndroidManifest.xml:63:19
-activity#com.odoo.app.activity.Profile
+activity#com.odoo.rxShop.activity.Profile
 ADDED from AndroidManifest.xml:64:9
 	android:name
 		ADDED from AndroidManifest.xml:64:19

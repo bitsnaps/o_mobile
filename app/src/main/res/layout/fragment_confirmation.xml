@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:rxShop="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -28,7 +28,7 @@
                     android:text="SHIPPING TO:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                     android:textColor="@color/grey_40"
-                    app:fontFamily="sans-serif-medium" />
+                    rxShop:fontFamily="sans-serif-medium" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -36,7 +36,7 @@
                     android:text="Edit"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/colorPrimary"
-                    app:fontFamily="sans-serif-medium" />
+                    rxShop:fontFamily="sans-serif-medium" />
 
             </LinearLayout>
 
@@ -47,7 +47,7 @@
                 android:text="Laura Michelle"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 android:textColor="@color/grey_90"
-                app:fontFamily="sans-serif-medium" />
+                rxShop:fontFamily="sans-serif-medium" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
                 android:text="1144 Central, Newport Kentucky, US 41071"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 android:textColor="@color/grey_90"
-                app:fontFamily="sans-serif-medium" />
+                rxShop:fontFamily="sans-serif-medium" />
 
         </LinearLayout>
 
@@ -82,7 +82,7 @@
                     android:text="PAYMENT DETAILS:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                     android:textColor="@color/grey_40"
-                    app:fontFamily="sans-serif-medium" />
+                    rxShop:fontFamily="sans-serif-medium" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -90,7 +90,7 @@
                     android:text="Edit"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/colorPrimary"
-                    app:fontFamily="sans-serif-medium" />
+                    rxShop:fontFamily="sans-serif-medium" />
 
             </LinearLayout>
 
@@ -101,7 +101,7 @@
                 android:text="XXXX - XXXX - XXXX - 1195"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 android:textColor="@color/grey_90"
-                app:fontFamily="sans-serif-medium" />
+                rxShop:fontFamily="sans-serif-medium" />
 
         </LinearLayout>
 
@@ -128,7 +128,7 @@
                     android:text="PRODUCT ORDER:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                     android:textColor="@color/grey_40"
-                    app:fontFamily="sans-serif-medium" />
+                    rxShop:fontFamily="sans-serif-medium" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -136,7 +136,7 @@
                     android:text="Edit"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/colorPrimary"
-                    app:fontFamily="sans-serif-medium" />
+                    rxShop:fontFamily="sans-serif-medium" />
 
             </LinearLayout>
 
@@ -156,7 +156,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/image_shop_2" />
+                        rxShop:srcCompat="@drawable/image_shop_2" />
 
                     <View
                         android:layout_width="@dimen/spacing_middle"
@@ -180,7 +180,7 @@
                                 android:text="Coup Hoodie Jacket"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                                 android:textColor="@color/grey_90"
-                                app:fontFamily="sans-serif-medium" />
+                                rxShop:fontFamily="sans-serif-medium" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -221,7 +221,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/image_shop_4" />
+                        rxShop:srcCompat="@drawable/image_shop_4" />
 
                     <View
                         android:layout_width="@dimen/spacing_middle"
@@ -244,7 +244,7 @@
                                 android:text="Qonnoq Checked Blouse"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                                 android:textColor="@color/grey_90"
-                                app:fontFamily="sans-serif-medium" />
+                                rxShop:fontFamily="sans-serif-medium" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -288,7 +288,7 @@
                 android:text="DELIVERY PRODUCT:"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:textColor="@color/grey_40"
-                app:fontFamily="sans-serif-medium" />
+                rxShop:fontFamily="sans-serif-medium" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -301,7 +301,7 @@
                     android:layout_width="@dimen/spacing_middle"
                     android:layout_height="@dimen/spacing_middle"
                     android:tint="@color/grey_20"
-                    app:srcCompat="@drawable/shape_round_primary" />
+                    rxShop:srcCompat="@drawable/shape_round_primary" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -312,7 +312,7 @@
                     android:text="Regular (12 Days)"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/grey_40"
-                    app:fontFamily="sans-serif-medium" />
+                    rxShop:fontFamily="sans-serif-medium" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -322,7 +322,7 @@
                     android:text="+$11"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/grey_40"
-                    app:fontFamily="sans-serif-black" />
+                    rxShop:fontFamily="sans-serif-black" />
 
             </LinearLayout>
 
@@ -336,7 +336,7 @@
                 <ImageView
                     android:layout_width="@dimen/spacing_middle"
                     android:layout_height="@dimen/spacing_middle"
-                    app:srcCompat="@drawable/shape_round_primary" />
+                    rxShop:srcCompat="@drawable/shape_round_primary" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -347,7 +347,7 @@
                     android:text="Express (7 Days)"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/grey_90"
-                    app:fontFamily="sans-serif-medium" />
+                    rxShop:fontFamily="sans-serif-medium" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -357,7 +357,7 @@
                     android:text="+$20"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/grey_90"
-                    app:fontFamily="sans-serif-black" />
+                    rxShop:fontFamily="sans-serif-black" />
 
             </LinearLayout>
 
@@ -372,7 +372,7 @@
                     android:layout_width="@dimen/spacing_middle"
                     android:layout_height="@dimen/spacing_middle"
                     android:tint="@color/grey_20"
-                    app:srcCompat="@drawable/shape_round_primary" />
+                    rxShop:srcCompat="@drawable/shape_round_primary" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -383,7 +383,7 @@
                     android:text="Priority (4 Days)"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/grey_40"
-                    app:fontFamily="sans-serif-medium" />
+                    rxShop:fontFamily="sans-serif-medium" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -393,7 +393,7 @@
                     android:text="+$32"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/grey_40"
-                    app:fontFamily="sans-serif-black" />
+                    rxShop:fontFamily="sans-serif-black" />
 
             </LinearLayout>
 
@@ -417,7 +417,7 @@
                 android:text="Product Cost"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:textColor="@color/grey_40"
-                app:fontFamily="sans-serif-medium" />
+                rxShop:fontFamily="sans-serif-medium" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -425,7 +425,7 @@
                 android:text="$123.50"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/grey_90"
-                app:fontFamily="sans-serif-medium" />
+                rxShop:fontFamily="sans-serif-medium" />
 
         </LinearLayout>
 
@@ -447,7 +447,7 @@
                 android:text="Order Total"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:textColor="@color/grey_40"
-                app:fontFamily="sans-serif-medium" />
+                rxShop:fontFamily="sans-serif-medium" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -455,7 +455,7 @@
                 android:text="$143.50"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/grey_90"
-                app:fontFamily="sans-serif-black" />
+                rxShop:fontFamily="sans-serif-black" />
 
         </LinearLayout>
 

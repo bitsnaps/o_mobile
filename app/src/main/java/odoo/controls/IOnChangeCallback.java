@@ -19,7 +19,7 @@
  */
 package odoo.controls;
 
-import com.ehealthinformatics.core.orm.ODataRow;
+import com.ehealthinformatics.odoorx.core.base.orm.ODataRow;
 
 public interface IOnChangeCallback {
     public static final String TAG = IOnChangeCallback.class.getSimpleName();

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:rxShop="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -17,7 +17,7 @@
             android:text="CONTACT DETAILS"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
             android:textColor="@color/grey_40"
-            app:fontFamily="sans-serif-medium" />
+            rxShop:fontFamily="sans-serif-medium" />
 
         <EditText
             android:id="@+id/et_name"
@@ -59,7 +59,7 @@
             android:text="SHIPPING ADDRESS"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
             android:textColor="@color/grey_40"
-            app:fontFamily="sans-serif-medium" />
+            rxShop:fontFamily="sans-serif-medium" />
 
         <EditText
             android:id="@+id/et_ship_street"

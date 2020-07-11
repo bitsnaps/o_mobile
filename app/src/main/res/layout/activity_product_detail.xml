@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:rxShop="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -21,7 +21,7 @@
         android:padding="@dimen/spacing_mlarge"
         android:scrollbars="none"
         android:scrollingCache="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        rxShop:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -129,10 +129,10 @@
                 android:id="@+id/of_edt_medicine_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:fieldName="medicine_id"
-                app:fieldTextAppearance="?android:textAppearanceMedium"
-                app:showLabel="false"
-                app:widgetType="SearchableLive"></odoo.controls.OField>
+                rxShop:fieldName="medicine_id"
+                rxShop:fieldTextAppearance="?android:textAppearanceMedium"
+                rxShop:showLabel="false"
+                rxShop:widgetType="SearchableLive"></odoo.controls.OField>
 
 
             <Button

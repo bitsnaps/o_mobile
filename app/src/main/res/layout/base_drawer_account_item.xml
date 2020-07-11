@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:rxShop="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:selectableItemBackground"
@@ -17,7 +17,7 @@
         android:scaleType="centerCrop"
         android:layout_marginRight="@dimen/default_8dp"
         android:src="@drawable/avatar"
-        app:maskDrawable="@drawable/circle_mask" />
+        rxShop:maskDrawable="@drawable/circle_mask" />
 
     <LinearLayout
         android:layout_width="match_parent"

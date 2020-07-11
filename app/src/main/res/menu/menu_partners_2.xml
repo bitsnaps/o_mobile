@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:rxShop="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_common_list_search"
         android:icon="@drawable/ic_action_search"
         android:title="@string/label_search"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="always|collapseActionView"></item>
+        rxShop:actionViewClass="androidx.appcompat.widget.SearchView"
+        rxShop:showAsAction="always|collapseActionView"></item>
     <item
         android:id="@+id/menu_common_list_delete_all"
         android:icon="@drawable/ic_delete_white_24dp"
         android:title="Delete All"
-        app:showAsAction="never"></item>
+        rxShop:showAsAction="never"></item>
 </menu>

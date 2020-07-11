@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:rxShop="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
             android:layout_width="@dimen/default_50_dp"
             android:layout_height="@dimen/default_50_dp"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/image_shop_2" />
+            rxShop:srcCompat="@drawable/image_shop_2" />
 
         <View
             android:layout_width="@dimen/spacing_middle"
@@ -42,7 +42,7 @@
                     android:text="Coup Hoodie Jacket"
                     android:textAppearance="@style/ListTitleText"
                     android:textColor="@color/grey_90"
-                    app:fontFamily="sans-serif-medium" />
+                    rxShop:fontFamily="sans-serif-medium" />
 
                 <TextView
                     android:id="@+id/tv_cart_product_desc"
@@ -89,7 +89,7 @@
                     android:text="1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                     android:textColor="@color/grey_90"
-                    app:fontFamily="sans-serif-medium" />
+                    rxShop:fontFamily="sans-serif-medium" />
 
                 <ImageButton
                     android:id="@+id/ib_cart_product_remove"

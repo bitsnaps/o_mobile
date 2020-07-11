@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:rxShop="http://schemas.android.com/apk/res-auto"
     android:id="@+id/parent_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,16 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        app:elevation="0dp">
+        rxShop:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/white"
-            app:contentInsetStartWithNavigation="0dp"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:theme="@style/Toolbar.Light">
+            rxShop:contentInsetStartWithNavigation="0dp"
+            rxShop:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            rxShop:theme="@style/Toolbar.Light">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                     android:text="Checkout"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/grey_80"
-                    app:fontFamily="sans-serif-medium" />
+                    rxShop:fontFamily="sans-serif-medium" />
 
             </LinearLayout>
 
@@ -117,7 +117,7 @@
                         android:layout_height="@dimen/spacing_smlarge"
                         android:layout_centerHorizontal="true"
                         android:background="@android:color/white"
-                        app:srcCompat="@drawable/shape_round_outline_primary" />
+                        rxShop:srcCompat="@drawable/shape_round_outline_primary" />
 
                     <TextView
                         android:id="@+id/tv_payment"
@@ -142,7 +142,7 @@
                         android:layout_height="@dimen/spacing_smlarge"
                         android:layout_centerHorizontal="true"
                         android:background="@android:color/white"
-                        app:srcCompat="@drawable/shape_round_outline_primary" />
+                        rxShop:srcCompat="@drawable/shape_round_outline_primary" />
 
                     <TextView
                         android:id="@+id/tv_confirm"
@@ -165,7 +165,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        rxShop:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <FrameLayout
             android:id="@+id/frame_content"
@@ -190,7 +190,7 @@
                     android:layout_height="@dimen/spacing_smlarge"
                     android:layout_gravity="center"
                     android:tint="@android:color/white"
-                    app:srcCompat="@drawable/ic_arrow_back" />
+                    rxShop:srcCompat="@drawable/ic_arrow_back" />
 
             </com.balysv.materialripple.MaterialRippleLayout>
 
@@ -223,7 +223,7 @@
                         android:layout_marginStart="@dimen/spacing_medium"
                         android:rotation="180"
                         android:tint="@android:color/white"
-                        app:srcCompat="@drawable/ic_arrow_back" />
+                        rxShop:srcCompat="@drawable/ic_arrow_back" />
 
                 </LinearLayout>
 

@@ -19,7 +19,15 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/default_16dp"
             android:text="RxOne. We Deliver your Medicines."/>
-            android:text="Anywhere, Right on time"/>
+        android:text="Anywhere, Right on time"/>
+        <TextView
+            android:id="@+id/tv_progress_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="RxOne. We Deliver your Medicines."/>
+        android:text="Welcome to RxShop"/>
     </LinearLayout>
 
 </RelativeLayout>

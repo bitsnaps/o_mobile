@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:rxShop="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,8 +18,8 @@
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="?attr/actionBarSize"-->
 <!--            android:theme="@style/ThemeOverlay.AppCompat.Light"-->
-<!--            app:contentInsetStartWithNavigation="0dp"-->
-<!--            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">-->
+<!--            rxShop:contentInsetStartWithNavigation="0dp"-->
+<!--            rxShop:popupTheme="@style/ThemeOverlay.AppCompat.Light">-->
 
 <!--            <LinearLayout-->
 <!--                android:layout_width="match_parent"-->
@@ -87,8 +87,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_marginTop="@dimen/spacing_middle"
-                    app:cardCornerRadius="6dp"
-                    app:cardElevation="0dp">
+                    rxShop:cardCornerRadius="6dp"
+                    rxShop:cardElevation="0dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:rxShop="http://schemas.android.com/apk/res-auto"
     android:paddingLeft="@dimen/default_8dp"
     android:paddingStart="@dimen/default_8dp"
     android:paddingRight="@dimen/default_16dp"
@@ -19,7 +19,7 @@
             android:layout_margin="@dimen/default_8dp"
             android:layout_marginLeft="@dimen/default_8dp"
             android:layout_marginStart="@dimen/default_8dp"
-            app:maskDrawable="@drawable/circle_mask" />
+            rxShop:maskDrawable="@drawable/circle_mask" />
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"

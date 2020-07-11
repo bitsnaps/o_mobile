@@ -44,13 +44,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ehealthinformatics.core.orm.ODataRow;
-import com.ehealthinformatics.core.orm.OM2ORecord;
-import com.ehealthinformatics.core.orm.OModel;
-import com.ehealthinformatics.core.orm.OValues;
-import com.ehealthinformatics.core.orm.fields.OColumn;
-import com.ehealthinformatics.core.orm.fields.types.OSelection;
-import com.ehealthinformatics.core.utils.OControls;
+import com.ehealthinformatics.odoorx.core.base.orm.ODataRow;
+import com.ehealthinformatics.odoorx.core.base.orm.OM2ORecord;
+import com.ehealthinformatics.odoorx.core.base.orm.OModel;
+import com.ehealthinformatics.odoorx.core.base.orm.OValues;
+import com.ehealthinformatics.odoorx.core.base.orm.fields.OColumn;
+import com.ehealthinformatics.odoorx.core.base.orm.fields.types.OSelection;
+import com.ehealthinformatics.odoorx.core.base.utils.OControls;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

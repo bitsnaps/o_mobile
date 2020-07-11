@@ -31,8 +31,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ehealthinformatics.core.orm.fields.OColumn;
-import com.ehealthinformatics.core.utils.ODateUtils;
+import com.ehealthinformatics.odoorx.core.base.orm.fields.OColumn;
+import com.ehealthinformatics.odoorx.core.base.utils.ODateUtils;
 
 import java.util.Date;
 

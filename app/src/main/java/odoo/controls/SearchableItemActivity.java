@@ -35,16 +35,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.ehealthinformatics.R;
-import com.ehealthinformatics.core.orm.ODataRow;
-import com.ehealthinformatics.core.orm.OModel;
-import com.ehealthinformatics.core.orm.ServerDataHelper;
-import com.ehealthinformatics.core.orm.fields.OColumn;
-import com.ehealthinformatics.core.rpc.helper.ODomain;
-import com.ehealthinformatics.core.rpc.helper.OdooFields;
-import com.ehealthinformatics.core.support.list.OListAdapter;
-import com.ehealthinformatics.core.utils.OControls;
-import com.ehealthinformatics.core.utils.OResource;
+import com.ehealthinformatics.odoorx.core.base.orm.ODataRow;
+import com.ehealthinformatics.odoorx.core.base.orm.OModel;
+import com.ehealthinformatics.odoorx.core.base.orm.ServerDataHelper;
+import com.ehealthinformatics.odoorx.core.base.orm.fields.OColumn;
+import com.ehealthinformatics.odoorx.core.base.rpc.helper.ODomain;
+import com.ehealthinformatics.odoorx.core.base.rpc.helper.OdooFields;
+import com.ehealthinformatics.odoorx.core.base.support.list.OListAdapter;
+import com.ehealthinformatics.odoorx.core.base.utils.OControls;
+import com.ehealthinformatics.odoorx.core.base.utils.OResource;
+import com.ehealthinformatics.odoorx.rxshop.R;
 
 import java.util.ArrayList;
 import java.util.List;

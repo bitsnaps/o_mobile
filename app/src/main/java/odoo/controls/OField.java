@@ -34,21 +34,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.ehealthinformatics.R;
-import com.ehealthinformatics.core.orm.ODataRow;
-import com.ehealthinformatics.core.orm.OModel;
-import com.ehealthinformatics.core.orm.fields.OColumn;
-import com.ehealthinformatics.core.orm.fields.types.OBlob;
-import com.ehealthinformatics.core.orm.fields.types.OBoolean;
-import com.ehealthinformatics.core.orm.fields.types.ODate;
-import com.ehealthinformatics.core.orm.fields.types.ODateTime;
-import com.ehealthinformatics.core.orm.fields.types.OFloat;
-import com.ehealthinformatics.core.orm.fields.types.OHtml;
-import com.ehealthinformatics.core.orm.fields.types.OInteger;
-import com.ehealthinformatics.core.orm.fields.types.OSelection;
-import com.ehealthinformatics.core.orm.fields.types.OText;
-import com.ehealthinformatics.core.orm.fields.types.OTimestamp;
-import com.ehealthinformatics.core.orm.fields.types.OVarchar;
+import com.ehealthinformatics.odoorx.core.base.orm.ODataRow;
+import com.ehealthinformatics.odoorx.core.base.orm.OModel;
+import com.ehealthinformatics.odoorx.core.base.orm.fields.OColumn;
+import com.ehealthinformatics.odoorx.core.base.orm.fields.types.OBlob;
+import com.ehealthinformatics.odoorx.core.base.orm.fields.types.OBoolean;
+import com.ehealthinformatics.odoorx.core.base.orm.fields.types.ODate;
+import com.ehealthinformatics.odoorx.core.base.orm.fields.types.ODateTime;
+import com.ehealthinformatics.odoorx.core.base.orm.fields.types.OFloat;
+import com.ehealthinformatics.odoorx.core.base.orm.fields.types.OHtml;
+import com.ehealthinformatics.odoorx.core.base.orm.fields.types.OInteger;
+import com.ehealthinformatics.odoorx.core.base.orm.fields.types.OSelection;
+import com.ehealthinformatics.odoorx.core.base.orm.fields.types.OText;
+import com.ehealthinformatics.odoorx.core.base.orm.fields.types.OTimestamp;
+import com.ehealthinformatics.odoorx.core.base.orm.fields.types.OVarchar;
+import com.ehealthinformatics.odoorx.rxshop.R;
 
 public class OField extends LinearLayout implements IOControlData.ValueUpdateListener {
     public static final String TAG = OField.class.getSimpleName();

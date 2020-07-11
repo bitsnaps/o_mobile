@@ -25,7 +25,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
-import com.ehealthinformatics.core.utils.ODateUtils;
+import com.ehealthinformatics.odoorx.core.base.utils.ODateUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

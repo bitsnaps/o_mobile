@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:rxShop="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -17,10 +17,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Headline"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:titleEnabled="false">
+            rxShop:contentScrim="?attr/colorPrimary"
+            rxShop:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Headline"
+            rxShop:layout_scrollFlags="scroll|exitUntilCollapsed"
+            rxShop:titleEnabled="false">
 
             <ImageView
                 android:id="@+id/dip_image"
@@ -29,7 +29,7 @@
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/avatar"
-                app:layout_collapseMode="parallax" />
+                rxShop:layout_collapseMode="parallax" />
 
             <View
                 android:layout_width="match_parent"
@@ -40,8 +40,8 @@
                 android:id="@+id/dip_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+                rxShop:layout_collapseMode="pin"
+                rxShop:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -54,7 +54,7 @@
         android:clipToPadding="false"
         android:scrollbars="none"
         android:scrollingCache="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        rxShop:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
         <LinearLayout
@@ -296,10 +296,10 @@
         android:layout_margin="@dimen/spacing_mlarge"
         android:clickable="true"
         android:tint="@android:color/white"
-        app:backgroundTint="@color/deep_orange_500"
-        app:fabSize="normal"
-        app:layout_anchor="@id/dip_app_bar_layout"
-        app:layout_anchorGravity="bottom|right|end"
+        rxShop:backgroundTint="@color/deep_orange_500"
+        rxShop:fabSize="normal"
+        rxShop:layout_anchor="@id/dip_app_bar_layout"
+        rxShop:layout_anchorGravity="bottom|right|end"
         android:src="@drawable/ic_action_edit" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

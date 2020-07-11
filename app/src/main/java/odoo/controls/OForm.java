@@ -35,14 +35,14 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.ehealthinformatics.R;
-import com.ehealthinformatics.mail.widget.MailChatterView;
-import com.ehealthinformatics.core.orm.ODataRow;
-import com.ehealthinformatics.core.orm.OModel;
-import com.ehealthinformatics.core.orm.OValues;
-import com.ehealthinformatics.core.orm.fields.OColumn;
-import com.ehealthinformatics.core.orm.fields.utils.DomainFilterParser;
-import com.ehealthinformatics.core.utils.OResource;
+import com.ehealthinformatics.odoorx.rxshop.R;
+import com.ehealthinformatics.rxshop.mail.widget.MailChatterView;
+import com.ehealthinformatics.odoorx.core.base.orm.ODataRow;
+import com.ehealthinformatics.odoorx.core.base.orm.OModel;
+import com.ehealthinformatics.odoorx.core.base.orm.OValues;
+import com.ehealthinformatics.odoorx.core.base.orm.fields.OColumn;
+import com.ehealthinformatics.odoorx.core.base.orm.fields.utils.DomainFilterParser;
+import com.ehealthinformatics.odoorx.core.base.utils.OResource;
 
 import java.util.HashMap;
 

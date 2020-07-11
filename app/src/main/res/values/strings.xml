@@ -24,7 +24,6 @@
 
     <string name="label_no_purchase_found">No purchase found !</string>
     <string name="sync_label_purchases">Purchase</string>
-    <string name="sync_label_pos_order">POS Order</string>
     <string name="sync_label_pos_order_line">POS Order Line</string>
     <string name="sync_label_pos_config">POS Config</string>
     <string name="inactive">Inactive</string>

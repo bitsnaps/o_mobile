@@ -30,8 +30,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.ehealthinformatics.core.orm.fields.OColumn;
-import com.ehealthinformatics.core.utils.ODateUtils;
+import com.ehealthinformatics.odoorx.core.base.orm.fields.OColumn;
+import com.ehealthinformatics.odoorx.core.base.utils.ODateUtils;
 
 public class OEditTextField extends LinearLayout implements IOControlData,
         View.OnFocusChangeListener {

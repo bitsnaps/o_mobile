@@ -1,2 +1,2 @@
 <menu xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.ehealthinformatics.app.activity.OdooLogin"></menu>
+    tools:context=".odoorx.rxshop.activity.OdooLogin"></menu>

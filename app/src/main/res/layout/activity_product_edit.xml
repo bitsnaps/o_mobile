@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:rxShop="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -16,9 +16,9 @@
             android:id="@+id/tb_product"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways"
+            rxShop:layout_scrollFlags="scroll|enterAlways"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            rxShop:popupTheme="@style/AppTheme.PopupOverlay" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_product"
@@ -27,15 +27,15 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_gravity="left"
             android:background="@color/colorPrimary"
-            app:tabGravity="fill"
-            app:tabMode="fixed" />
+            rxShop:tabGravity="fill"
+            rxShop:tabMode="fixed" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_products"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        rxShop:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -45,7 +45,7 @@
         android:padding="@dimen/spacing_mlarge"
         android:scrollbars="none"
         android:scrollingCache="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        rxShop:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     </androidx.core.widget.NestedScrollView>
 
@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/default_16dp"
         android:src="@drawable/ic_action_camera"
-        app:layout_anchor="@id/product_detail_appbar"
-        app:layout_anchorGravity="bottom|right|end" />
+        rxShop:layout_anchor="@id/product_detail_appbar"
+        rxShop:layout_anchorGravity="bottom|right|end" />
 
 </LinearLayout>

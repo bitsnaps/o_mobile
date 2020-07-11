@@ -32,7 +32,7 @@ import androidx.core.view.ViewCompat;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.ehealthinformatics.R;
+import com.ehealthinformatics.odoorx.rxshop.R;
 
 /**
  * An {@link android.widget.ImageView} that draws its contents inside a mask and
