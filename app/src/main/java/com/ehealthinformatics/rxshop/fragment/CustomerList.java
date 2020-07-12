@@ -129,7 +129,6 @@ public class CustomerList extends BaseFragment implements ISyncStatusObserverLis
         });
     }
 
-
     @Override
     public void onViewBind(View view, Cursor cursor, ODataRow row) {
         Bitmap img;

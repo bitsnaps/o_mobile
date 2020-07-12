@@ -244,7 +244,7 @@ public class ProductList extends BaseFragment implements ISyncStatusObserverList
             public void run(){
                 IrModel syncModelDao = RxShop.getDao(IrModel.class);
                 SyncModel syncModel = syncModelDao.getOrCreateTrigger(ModelNames.PRODUCT, Columns.SyncModel.Mode.REFRESH_TRIGGERED, OConstants.getSyncDepth(ModelNames.PRODUCT), QueryFields.all());
-                Date last5Minutes = ODateUtils.getDateMinuteBefore(DateUtils.now(), 5);
+                Date last5Minutes = ODateUtils.getDateMinuteBefore(DateUtils.now(), 1);
                 boolean updatedLessThan5MinsAgo = syncModel.getProcessUpdated().after(last5Minutes);
                 boolean createdLessThan5MinsAgo = syncModel.getLastSynced().after(last5Minutes);
                 if(createdLessThan5MinsAgo && syncModel.isQueued()){

@@ -15,10 +15,10 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.ehealthinformatics.odoorx.core.data.dto.Dashboard;
 import com.ehealthinformatics.odoorx.rxshop.R;
 import com.ehealthinformatics.rxshop.activity.shopping.PosOrderCart;
 import com.ehealthinformatics.odoorx.core.base.utils.IntentUtils;
-import com.ehealthinformatics.odoorx.core.data.dto.Dashboard;
 import com.ehealthinformatics.odoorx.rxshop.base.support.addons.fragment.BaseFragment;
 import com.ehealthinformatics.odoorx.rxshop.base.support.addons.fragment.ISyncStatusObserverListener;
 import com.ehealthinformatics.odoorx.core.base.support.drawer.ODrawerItem;

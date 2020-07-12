@@ -1,14 +1,10 @@
 package com.ehealthinformatics.rxshop.activity
 
 import android.content.Intent
-import android.os.AsyncTask
 import android.os.Bundle
-
 import androidx.appcompat.app.AppCompatActivity
 import com.ehealthinformatics.RxShop
 import com.ehealthinformatics.odoorx.core.base.auth.IConfigLoadListener
-import com.ehealthinformatics.odoorx.rxshop.R
-import com.ehealthinformatics.rxshop.utils.LoadingUtils
 import com.ehealthinformatics.odoorx.core.base.auth.ILoginProgressStatus
 import com.ehealthinformatics.odoorx.core.base.auth.LoginProgressStatus
 import com.ehealthinformatics.odoorx.core.base.auth.OUserAccount
@@ -17,6 +13,8 @@ import com.ehealthinformatics.odoorx.core.base.support.OUser
 import com.ehealthinformatics.odoorx.core.data.dao.ProductDao
 import com.ehealthinformatics.odoorx.core.data.dao.QueryFields
 import com.ehealthinformatics.odoorx.core.data.dto.SyncConfig
+import com.ehealthinformatics.odoorx.rxshop.R
+import com.ehealthinformatics.rxshop.utils.LoadingUtils
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 
 class SplashScreenActivity : AppCompatActivity() , ILoginProgressStatus, IConfigLoadListener {
@@ -36,6 +34,7 @@ class SplashScreenActivity : AppCompatActivity() , ILoginProgressStatus, IConfig
 
     override fun onConnect(databases: MutableList<String>?) {
         displayMessage("Connected to Odoo...")
+        userAccount.authenticate()
     }
 
     override fun onLoginSuccess(oUser: OUser?) {
@@ -57,11 +56,15 @@ class SplashScreenActivity : AppCompatActivity() , ILoginProgressStatus, IConfig
     }
 
     override fun onStartConfigLoad(): SyncConfig {
-        displayMessage("Loading configurations...")
+        displayMessage("Initializing Daos...")
+        RxShop.initDaos(userAccount)
+        displayMessage("Loading Daos...")
         val artifactsLoader = LoadingUtils.ArtifactsLoader(userAccount)
         val syncConfig = artifactsLoader.load()
+        displayMessage("Loading Products...")
         val productDao = RxShop.getDao<ProductDao>(ProductDao::class.java)
         productDao.selectAll(QueryFields.all())
+        displayMessage("Finished Loading Products...")
         return syncConfig
     }
 

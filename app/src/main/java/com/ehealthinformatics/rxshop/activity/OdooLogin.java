@@ -366,6 +366,7 @@ public class OdooLogin extends AppCompatActivity implements View.OnClickListener
 
     @Override
     public SyncConfig onStartConfigLoad() {
+        display("Loading Config");
         RxShop.initDaos(userAccount);
         LoadingUtils.ArtifactsLoader artifactsLoader = new LoadingUtils.ArtifactsLoader(userAccount);
         return artifactsLoader.load();
@@ -397,7 +398,12 @@ public class OdooLogin extends AppCompatActivity implements View.OnClickListener
         }, 1500);
     }
 
-    private  void display(String message) {
-        mLoginProcessStatus.setText(message);
+    private  void display(final String message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mLoginProcessStatus.setText(message);
+            }
+        });
     }
 }
