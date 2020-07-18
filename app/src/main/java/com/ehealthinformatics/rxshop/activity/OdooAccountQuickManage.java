@@ -36,10 +36,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ehealthinformatics.RxShop;
-import com.ehealthinformatics.odoorx.core.base.auth.IConfigLoadListener;
-import com.ehealthinformatics.odoorx.core.base.auth.ILoginProgressStatus;
-import com.ehealthinformatics.odoorx.core.base.rpc.listeners.OdooError;
-import com.ehealthinformatics.odoorx.core.data.dto.SyncConfig;
 import com.ehealthinformatics.odoorx.rxshop.R;
 import com.ehealthinformatics.odoorx.core.base.auth.OdooAccountManager;
 import com.ehealthinformatics.odoorx.core.base.rpc.Odoo;

@@ -4,16 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.ehealthinformatics.RxShop
-import com.ehealthinformatics.odoorx.core.base.auth.IConfigLoadListener
-import com.ehealthinformatics.odoorx.core.base.auth.ILoginProgressStatus
-import com.ehealthinformatics.odoorx.core.base.auth.LoginProgressStatus
-import com.ehealthinformatics.odoorx.core.base.auth.OUserAccount
+import com.ehealthinformatics.odoorx.core.base.auth.*
 import com.ehealthinformatics.odoorx.core.base.rpc.listeners.OdooError
 import com.ehealthinformatics.odoorx.core.base.support.OUser
 import com.ehealthinformatics.odoorx.core.data.dao.ProductDao
 import com.ehealthinformatics.odoorx.core.data.dao.QueryFields
-import com.ehealthinformatics.odoorx.core.data.dto.SyncConfig
 import com.ehealthinformatics.odoorx.rxshop.R
+import com.ehealthinformatics.odoorx.rxshop.dto.SyncConfig
 import com.ehealthinformatics.rxshop.utils.LoadingUtils
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 
@@ -55,7 +52,7 @@ class SplashScreenActivity : AppCompatActivity() , ILoginProgressStatus, IConfig
         finish()
     }
 
-    override fun onStartConfigLoad(): SyncConfig {
+    override fun onStartConfigLoad(): ISyncConfig {
         displayMessage("Initializing Daos...")
         RxShop.initDaos(userAccount)
         displayMessage("Loading Daos...")
@@ -68,7 +65,7 @@ class SplashScreenActivity : AppCompatActivity() , ILoginProgressStatus, IConfig
         return syncConfig
     }
 
-    override fun onConfigLoadSuccess(syncConfig: SyncConfig?) {
+    override fun onConfigLoadSuccess(syncConfig: ISyncConfig?) {
        displayMessage("Loaded configuration Succesfully")
         startOdooActivity()
     }

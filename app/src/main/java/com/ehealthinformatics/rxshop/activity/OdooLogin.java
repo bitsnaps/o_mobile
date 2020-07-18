@@ -19,9 +19,9 @@ import android.widget.Toast;
 
 import com.ehealthinformatics.RxShop;
 import com.ehealthinformatics.odoorx.core.base.auth.IConfigLoadListener;
+import com.ehealthinformatics.odoorx.core.base.auth.ISyncConfig;
 import com.ehealthinformatics.odoorx.rxshop.R;
 import com.ehealthinformatics.rxshop.utils.LoadingUtils;
-import com.ehealthinformatics.odoorx.core.data.dto.SyncConfig;
 import com.ehealthinformatics.odoorx.core.base.auth.ILoginProgressStatus;
 import com.ehealthinformatics.odoorx.core.base.auth.OUserAccount;
 import com.ehealthinformatics.odoorx.core.config.OConstants;
@@ -365,7 +365,7 @@ public class OdooLogin extends AppCompatActivity implements View.OnClickListener
     }
 
     @Override
-    public SyncConfig onStartConfigLoad() {
+    public ISyncConfig onStartConfigLoad() {
         display("Loading Config");
         RxShop.initDaos(userAccount);
         LoadingUtils.ArtifactsLoader artifactsLoader = new LoadingUtils.ArtifactsLoader(userAccount);
@@ -381,7 +381,7 @@ public class OdooLogin extends AppCompatActivity implements View.OnClickListener
     }
 
     @Override
-    public void onConfigLoadSuccess(SyncConfig syncConfig) {
+    public void onConfigLoadSuccess(ISyncConfig syncConfig) {
         display("Loaded Config Successfully");
         new Handler().postDelayed(new Runnable() {
             @Override

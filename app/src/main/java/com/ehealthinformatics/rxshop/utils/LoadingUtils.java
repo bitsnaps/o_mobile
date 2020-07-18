@@ -3,7 +3,6 @@ package com.ehealthinformatics.rxshop.utils;
 
 import com.ehealthinformatics.RxShop;
 import com.ehealthinformatics.odoorx.core.base.support.OUser;
-import com.ehealthinformatics.odoorx.core.data.dto.SyncConfig;
 import com.ehealthinformatics.odoorx.core.base.auth.OUserAccount;
 import com.ehealthinformatics.odoorx.core.base.auth.ServerDefaultsService;
 import com.ehealthinformatics.odoorx.core.data.dao.ProductDao;
@@ -11,6 +10,7 @@ import com.ehealthinformatics.odoorx.core.data.dao.QueryFields;
 import com.ehealthinformatics.odoorx.core.data.dto.AccountBankStatement;
 import com.ehealthinformatics.odoorx.core.data.dto.PosSession;
 import com.ehealthinformatics.odoorx.core.data.dto.User;
+import com.ehealthinformatics.odoorx.rxshop.dto.SyncConfig;
 
 import java.util.List;
 
