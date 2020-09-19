@@ -26,6 +26,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.ehealthinformatics.odoorx.core.base.auth.OUserAccount;
+import com.ehealthinformatics.odoorx.core.base.orm.IApp;
 import com.ehealthinformatics.odoorx.core.base.orm.ModelRegistryUtils;
 import com.ehealthinformatics.odoorx.core.base.orm.OModel;
 import com.ehealthinformatics.odoorx.core.base.orm.OSQLite;
@@ -36,7 +37,7 @@ import com.facebook.stetho.Stetho;
 
 import java.util.Map;
 
-public class RxShop extends Application {
+public class RxShop extends Application implements IApp {
 
     public static final String TAG = RxShop.class.getSimpleName();
     public static String APPLICATION_NAME;
@@ -50,21 +51,6 @@ public class RxShop extends Application {
         RxShop.APPLICATION_NAME = getPackageManager().getApplicationLabel(getApplicationInfo()).toString();
         context = this;
         Stetho.initializeWithDefaults(this);
-    }
-
-    /**
-     * Checks for network availability
-     *
-     * @return true, if network available
-     */
-    public boolean inNetwork() {
-        boolean isConnected = false;
-        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo nInfo = manager.getActiveNetworkInfo();
-        if (nInfo != null && nInfo.isConnectedOrConnecting()) {
-            isConnected = true;
-        }
-        return isConnected;
     }
 
     /**
@@ -107,4 +93,19 @@ public class RxShop extends Application {
         return oUserAccount.getOdoo();
    }
 
+    /**
+     * Checks for network availability
+     *
+     * @return true, if network available
+     */
+    @Override
+    public boolean inNetwork() {
+        boolean isConnected = false;
+        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo nInfo = manager.getActiveNetworkInfo();
+        if (nInfo != null && nInfo.isConnectedOrConnecting()) {
+            isConnected = true;
+        }
+        return isConnected;
+    }
 }

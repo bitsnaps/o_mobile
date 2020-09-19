@@ -106,7 +106,7 @@ public class DashboardStatistics extends BaseFragment implements ISyncStatusObse
         tvTotalProducts.setText(dashboardData.getNoOfProducts() +"");
         tvTotalOrders.setText(dashboardData.getNoOfOrders() +"");
         tvTotalPayments.setText(dashboardData.getTotalPayments() +"");
-        tvSessionId.setText(dashboardData.getPosSession().getName());
+        tvSessionId.setText(dashboardData.getPosSessionName());
         tvTotalOrders.setText(dashboardData.getNoOfOrders());
         tvOpeningBalance.setText(dashboardData.getOpeningBalance());
         tvClosingBalance.setText(dashboardData.getClosingBalance());

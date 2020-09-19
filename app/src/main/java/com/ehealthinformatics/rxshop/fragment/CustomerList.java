@@ -49,7 +49,7 @@ import com.ehealthinformatics.odoorx.rxshop.base.support.addons.fragment.BaseFra
 import com.ehealthinformatics.odoorx.rxshop.base.support.addons.fragment.IOnSearchViewChangeListener;
 import com.ehealthinformatics.odoorx.rxshop.base.support.addons.fragment.ISyncStatusObserverListener;
 import com.ehealthinformatics.odoorx.core.base.support.drawer.ODrawerItem;
-import com.ehealthinformatics.odoorx.core.base.support.list.OCursorListAdapter;
+import com.ehealthinformatics.odoorx.core.base.support.listtus.OCursorListAdapter;
 import com.ehealthinformatics.odoorx.core.base.utils.BitmapUtils;
 import com.ehealthinformatics.odoorx.core.base.utils.IntentUtils;
 import com.ehealthinformatics.odoorx.core.base.utils.OControls;

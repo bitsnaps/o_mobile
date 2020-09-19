@@ -1,6 +1,7 @@
 <component name="libraryTable">
   <library name="Gradle: com.klinkerapps:android-smsmms:3.4.6@aar">
     <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4175833010ef1fec63397851abab8a9e/android-smsmms-3.4.6/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4175833010ef1fec63397851abab8a9e/android-smsmms-3.4.6/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4175833010ef1fec63397851abab8a9e/android-smsmms-3.4.6/res" />
     </CLASSES>

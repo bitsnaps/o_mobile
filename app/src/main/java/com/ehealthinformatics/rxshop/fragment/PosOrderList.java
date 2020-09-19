@@ -46,6 +46,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ehealthinformatics.RxShop;
+import com.ehealthinformatics.odoorx.core.data.dao.AccountBankStatementLineDao;
+import com.ehealthinformatics.odoorx.core.data.dao.AccountInvoiceLineDao;
 import com.ehealthinformatics.rxshop.activity.shopping.PosOrderCart;
 import com.ehealthinformatics.rxshop.listeners.OnItemClickListener;
 import com.ehealthinformatics.rxshop.listeners.OnMoreButtonClickListener;
@@ -287,7 +289,8 @@ public class PosOrderList extends BaseFragment implements ISyncStatusObserverLis
 
     private void requestSync(){
         if (inNetwork()) {
-            parent().sync().requestSync(PosOrderDao.AUTHORITY);
+           // parent().sync().requestSync(PosOrderDao.AUTHORITY);
+            parent().sync().requestSync(AccountBankStatementLineDao.AUTHORITY);
         } else {
             hideRefreshingProgress();
             Toast.makeText(getActivity(), _s(R.string.toast_network_required), Toast.LENGTH_LONG)

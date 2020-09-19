@@ -44,6 +44,7 @@
         android:icon="@drawable/rx"
         android:largeHeap="true"
         android:theme="@style/AppTheme">
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
 
         <activity
             android:name="com.ehealthinformatics.rxshop.fragment.CustomerDetails"
