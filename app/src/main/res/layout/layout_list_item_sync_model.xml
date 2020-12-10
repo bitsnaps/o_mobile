@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/lyt_parent"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:clickable="true"
+android:orientation="vertical">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@android:color/white"
+    android:gravity="center_vertical"
+    android:minHeight="?attr/actionBarSize"
+    android:orientation="horizontal">
+
+    <View
+        android:layout_width="@dimen/spacing_large"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/img_social_envato" />
+
+    <View
+        android:layout_width="@dimen/spacing_large"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_sync_model_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Item Title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/grey_80" />
+
+    <View
+        android:layout_width="@dimen/spacing_large"
+        android:layout_height="wrap_content" />
+
+    <ImageButton
+        android:id="@+id/btn_toggle_expand"
+        android:layout_width="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:tint="@color/grey_60"
+        android:src="@drawable/ic_expand_arrow" />
+
+</LinearLayout>
+
+<LinearLayout
+    android:id="@+id/lyt_expand"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/grey_3"
+    android:orientation="vertical"
+    android:visibility="visible">
+
+    <TextView
+        android:id="@+id/tv_children"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_large"
+        android:text="@string/lorem_ipsum" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvSyncModelCount"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:text="s" />
+
+            <TextView
+                android:id="@+id/tvSyncModelStatus"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:text="Status" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llMiddle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvSyncModelStatusDetail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Last Synced"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llLower"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tvSyncModelLastSyncTime"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:text="Last Synced"/>
+            <TextView
+                android:id="@+id/tvSpaceBelow"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:text=""/>
+
+            <Button
+                android:id="@+id/btnSyncTrigger"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:text="Sync Now" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/pbSyncProgress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="1" />
+    </LinearLayout>
+
+</LinearLayout>
+
+</LinearLayout>

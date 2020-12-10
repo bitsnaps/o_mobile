@@ -1,49 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rxShop="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff">
+    android:orientation="vertical"
+    android:gravity="center">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl_items"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="#fff"
+        android:fillViewport="true">
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/data_list_no_item"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/ll_items_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_list"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_new_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/default_16dp"
+                    android:src="@drawable/ic_action_content_add"
+                    rxShop:borderWidth="0dp"
+                    rxShop:layout_behavior="odoo.controls.fab.FABScrollBehaviour" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_empty_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_find_in_page"
+                    android:tint="#aaaaaa" />
+
+                <TextView
+                    android:id="@+id/tv_empty_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@string/font_light"
+                    android:text="Your list is empty"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#aaaaaa"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_empty_sub_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@string/font_light"
+                    android:text="Tap to add an item"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#ababab"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+        <!--        <include layout="@layout/layout_loading_progress" />-->
+
+        <!--        <include layout="@layout/layout_sync_progress" />-->
+
+        <!--        <include layout="@layout/layout_items" />-->
+
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_marginEnd="@dimen/spacing_medium"
+        android:layout_marginRight="@dimen/spacing_medium"
+        android:layout_marginBottom="@dimen/spacing_medium"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/pb_loading"
+            style="@style/Widget.AppCompat.ProgressBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone">
+            android:indeterminate="true"
+            android:progressDrawable="@drawable/circular_progress_bar" />
 
-            <include layout="@layout/base_no_items_view" />
-        </android.support.v4.widget.SwipeRefreshLayout>
+        <TextView
+            android:id="@+id/tv_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_large"
+            android:text="Loading..." />
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone">
-
-            <ListView
-                android:id="@+id/listview"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" />
-        </android.support.v4.widget.SwipeRefreshLayout>
-
-        <include
-            android:id="@+id/loadingProgress"
-            layout="@layout/listview_data_loading_progress" />
     </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="@dimen/default_16dp"
-        android:src="@drawable/ic_action_content_add"
-        app:borderWidth="0dp"
-        app:layout_behavior="odoo.controls.fab.FABScrollBehaviour" />
-</RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_sync_progress"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/spacing_medium"
+        android:gravity="center"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/tv_sync_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_large"
+            android:text="Determine" />
+
+        <ProgressBar
+            android:id="@+id/pb_sync_progress"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/circle_shape"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="0"
+            android:progressDrawable="@drawable/circular_progress_bar" />
+
+    </LinearLayout>
+    </RelativeLayout>
+

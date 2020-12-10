@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
             android:layout_marginTop="40dp"
-            android:src="@drawable/odoo_small"
+            android:src="@mipmap/ic_rx_launch"
             android:tint="#ffffff" />
 
         <LinearLayout
@@ -88,7 +88,38 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/theme_primary_dark" />
+                    android:background="@color/colorPrimaryDark" />
+
+                <!-- Server Input -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/ic_action_user"
+                        android:tint="@color/body_text_3" />
+
+
+                    <Spinner
+                        android:id="@+id/spinnerServerList"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#ffffff"
+                        android:gravity="center_vertical" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimaryDark" />
 
                 <!-- Username Input -->
                 <LinearLayout
@@ -117,13 +148,14 @@
                         android:hint="@string/label_username_or_email"
                         android:singleLine="true"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColorHint="@color/body_text_3" />
+                        android:textColorHint="@color/body_text_3"
+                        android:text="admin@example.com"/>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/theme_primary_dark" />
+                    android:background="@color/colorPrimaryDark" />
 
                 <!-- User Password Input -->
                 <LinearLayout
@@ -153,14 +185,15 @@
                         android:inputType="textPassword"
                         android:singleLine="true"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColorHint="@color/body_text_3" />
+                        android:textColorHint="@color/body_text_3"
+                        android:text="admin"/>
                 </LinearLayout>
 
                 <View
                     android:id="@+id/layoutBorderDB"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/theme_primary_dark"
+                    android:background="@color/colorPrimaryDark"
                     android:visibility="gone" />
 
 

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cvProduct"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/default_50_dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?attr/selectableItemBackground"
+    >
+
+    <LinearLayout
+        android:paddingLeft="@dimen/default_8dp"
+        android:paddingStart="@dimen/default_8dp"
+        android:paddingRight="@dimen/default_8dp"
+        android:paddingEnd="@dimen/default_8dp"
+        android:paddingTop="@dimen/default_8dp"
+        android:paddingBottom="@dimen/default_8dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <odoo.controls.BezelImageView
+            android:id="@+id/biv_product_icon"
+            android:src="@drawable/ic_medical_drug_pill"
+            android:layout_gravity="center"
+            android:layout_width="@dimen/default_50_dp"
+            android:layout_height="@dimen/default_50_dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_6dp"
+            android:layout_marginStart="@dimen/default_6dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_product_id"
+                style="@style/ListTitleLayout"
+                android:layout_width="match_parent"
+                android:textAppearance="@style/ListTitleText"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/tv_product_name"
+                style="@style/ListTitleLayout"
+                android:layout_width="match_parent"
+                android:text=""
+                android:textAppearance="@style/ListTitleText" />
+            <TextView
+                android:id="@+id/tv_product_uom"
+                android:text=""
+                android:textAppearance="@style/ListSubtitleText"
+                style="@style/ListSubtitleLayout"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_product_category"
+                    android:fontFamily="@string/font_normal"
+                    android:text="@string/stub_qty"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:textAppearance="@style/ListInfo.Purple" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_product_item_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/default_6dp"
+            android:layout_marginLeft="@dimen/default_6dp"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/ib_pos_order_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_weight="1"
+                android:background="@color/colorPrimaryWhite"
+                android:contentDescription="@string/menu"
+                android:src="@drawable/ic_more_vert_black_24dp" />
+
+            <TextView
+                android:id="@+id/tv_product_price"
+                android:layout_width="@dimen/default_88dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_weight="1"
+                android:gravity="bottom|end"
+                android:text="@string/stub_price"
+                android:textColor="@color/colorPrimary" />
+
+        </LinearLayout>
+    </LinearLayout>
+    <View style="@style/Divider.Horizontal"/>
+</LinearLayout>
+

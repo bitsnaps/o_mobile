@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rxShop="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_5"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/nested_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:scrollingCache="true">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:scrollingCache="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_large" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/spacing_middle"
+                android:paddingRight="@dimen/spacing_middle">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_xsmall"
+                    android:layout_marginLeft="@dimen/spacing_xsmall"
+                    android:layout_marginRight="@dimen/spacing_xsmall"
+                    android:layout_marginTop="@dimen/spacing_xsmall"
+                    android:layout_weight="1"
+                    android:visibility="visible"
+                    rxShop:cardCornerRadius="2dp"
+                    rxShop:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/spacing_large">
+
+                        <RelativeLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:tint="@color/orange_400"
+                                android:src="@drawable/shape_circle" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_centerInParent="true"
+                                android:tint="@android:color/white"
+                                android:src="@drawable/ic_person" />
+
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="@dimen/spacing_middle"
+                            android:layout_height="0dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_dashstat_customers"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/grey_60"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Customers"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                                android:textColor="@color/grey_40" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <View
+                    android:layout_width="@dimen/spacing_middle"
+                    android:layout_height="0dp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_xsmall"
+                    android:layout_marginLeft="@dimen/spacing_xsmall"
+                    android:layout_marginRight="@dimen/spacing_xsmall"
+                    android:layout_marginTop="@dimen/spacing_xsmall"
+                    android:layout_weight="1"
+                    android:visibility="visible"
+                    rxShop:cardCornerRadius="2dp"
+                    rxShop:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/spacing_large">
+
+                        <RelativeLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:tint="@color/indigo_400"
+                                android:src="@drawable/shape_circle" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_centerInParent="true"
+                                android:tint="@android:color/white"
+                                android:src="@drawable/ic_file_download" />
+
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="@dimen/spacing_middle"
+                            android:layout_height="0dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_dashstat_orders"
+                                android:layout_width="wrap_content"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:text="0"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/grey_60"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Orders"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                                android:textColor="@color/grey_40" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_middle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/spacing_middle"
+                android:paddingRight="@dimen/spacing_middle">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_xsmall"
+                    android:layout_marginLeft="@dimen/spacing_xsmall"
+                    android:layout_marginRight="@dimen/spacing_xsmall"
+                    android:layout_marginTop="@dimen/spacing_xsmall"
+                    android:layout_weight="1"
+                    android:visibility="visible"
+                    rxShop:cardCornerRadius="2dp"
+                    rxShop:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/spacing_large">
+
+                        <RelativeLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:tint="@color/red_300"
+                                android:src="@drawable/shape_circle" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_centerInParent="true"
+                                android:tint="@android:color/white"
+                                android:src="@drawable/ic_shopping_basket" />
+
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="@dimen/spacing_middle"
+                            android:layout_height="0dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_dashstat_products"
+                                android:layout_width="wrap_content"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:text="0"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/grey_60"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Products"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                                android:textColor="@color/grey_40" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <View
+                    android:layout_width="@dimen/spacing_middle"
+                    android:layout_height="0dp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_xsmall"
+                    android:layout_marginLeft="@dimen/spacing_xsmall"
+                    android:layout_marginRight="@dimen/spacing_xsmall"
+                    android:layout_marginTop="@dimen/spacing_xsmall"
+                    android:layout_weight="1"
+                    android:visibility="visible"
+                    rxShop:cardCornerRadius="2dp"
+                    rxShop:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/spacing_large">
+
+                        <RelativeLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:tint="@color/light_green_500"
+                                android:src="@drawable/shape_circle" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_centerInParent="true"
+                                android:tint="@android:color/white"
+                                android:src="@drawable/ic_description" />
+
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="@dimen/spacing_middle"
+                            android:layout_height="0dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_dashstat_payments"
+                                android:layout_width="wrap_content"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:text="0"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/grey_60"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Payments"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                                android:textColor="@color/grey_40" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_middle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/spacing_middle"
+                android:paddingRight="@dimen/spacing_middle">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_xsmall"
+                    android:layout_marginLeft="@dimen/spacing_xsmall"
+                    android:layout_marginRight="@dimen/spacing_xsmall"
+                    android:layout_marginTop="@dimen/spacing_xsmall"
+                    android:visibility="visible"
+                    rxShop:cardCornerRadius="2dp"
+                    rxShop:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="?attr/actionBarSize"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="@dimen/spacing_large"
+                                android:layout_height="0dp" />
+
+                            <TextView
+                                android:id="@+id/tv_dash_welcome"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Welcome,"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/grey_60"
+                                android:textStyle="bold" />
+
+                            <ImageButton
+                                android:id="@+id/ib_new_order"
+                                android:layout_width="?attr/actionBarSize"
+                                android:layout_height="?attr/actionBarSize"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:tint="@color/colorPrimary"
+                                android:src="@drawable/ic_add" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey_10" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/spacing_middle" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/spacing_xmlarge"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="@dimen/spacing_large"
+                                android:layout_height="0dp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Current Session ID"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/grey_60" />
+
+                            <TextView
+                                android:id="@+id/tv_current_session"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="POS/0003/1232"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/grey_40" />
+
+                            <View
+                                android:layout_width="@dimen/spacing_large"
+                                android:layout_height="0dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/spacing_xmlarge"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="@dimen/spacing_large"
+                                android:layout_height="0dp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Opening Balance"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/grey_60" />
+
+                            <TextView
+                                android:id="@+id/tv_dash_opening_balance"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="200,000"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/grey_40" />
+
+                            <View
+                                android:layout_width="@dimen/spacing_large"
+                                android:layout_height="0dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/spacing_xmlarge"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="@dimen/spacing_large"
+                                android:layout_height="0dp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Closing Balance"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/grey_60" />
+
+                            <TextView
+                                android:id="@+id/tv_dash_closing_balance"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="200,000"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/grey_40" />
+
+                            <View
+                                android:layout_width="@dimen/spacing_large"
+                                android:layout_height="0dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/spacing_xmlarge"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="@dimen/spacing_large"
+                                android:layout_height="0dp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Last Synced"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/grey_60" />
+
+                            <TextView
+                                android:id="@+id/tv_dash_last_synced"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
+                                android:textColor="@color/grey_40" />
+
+                            <View
+                                android:layout_width="@dimen/spacing_large"
+                                android:layout_height="0dp" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/spacing_middle" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey_10" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="?attr/actionBarSize"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_dash_sync_now"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Sync Now"
+                                android:clickable="true"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/colorPrimary" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_middle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/spacing_middle"
+                android:paddingRight="@dimen/spacing_middle">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_medium"
+                    android:layout_marginLeft="@dimen/spacing_xsmall"
+                    android:layout_marginRight="@dimen/spacing_xsmall"
+                    android:layout_marginTop="@dimen/spacing_xsmall"
+                    android:visibility="visible"
+                    rxShop:cardCornerRadius="2dp"
+                    rxShop:cardElevation="2dp">
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center_horizontal"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        android:padding="@dimen/spacing_large">-->
+
+<!--                        <ImageView-->
+<!--                            android:layout_width="40dp"-->
+<!--                            android:layout_height="40dp"-->
+<!--                            android:foreground="?attr/selectableItemBackground"-->
+<!--                            android:src="@drawable/img_social_twitter" />-->
+
+<!--                        <View-->
+<!--                            android:layout_width="@dimen/spacing_large"-->
+<!--                            android:layout_height="0dp" />-->
+
+<!--                        <ImageView-->
+<!--                            android:layout_width="40dp"-->
+<!--                            android:layout_height="40dp"-->
+<!--                            android:foreground="?attr/selectableItemBackground"-->
+<!--                            android:src="@drawable/img_social_youtube" />-->
+
+<!--                        <View-->
+<!--                            android:layout_width="@dimen/spacing_large"-->
+<!--                            android:layout_height="0dp" />-->
+
+<!--                        <ImageView-->
+<!--                            android:layout_width="40dp"-->
+<!--                            android:layout_height="40dp"-->
+<!--                            android:foreground="?attr/selectableItemBackground"-->
+<!--                            android:src="@drawable/img_social_facebook" />-->
+
+<!--                        <View-->
+<!--                            android:layout_width="@dimen/spacing_large"-->
+<!--                            android:layout_height="0dp" />-->
+
+<!--                        <ImageView-->
+<!--                            android:layout_width="40dp"-->
+<!--                            android:layout_height="40dp"-->
+<!--                            android:foreground="?attr/selectableItemBackground"-->
+<!--                            android:src="@drawable/img_social_instagram" />-->
+
+<!--                    </LinearLayout>-->
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/spacing_large" />
+
+        </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</LinearLayout>

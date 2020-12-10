@@ -30,8 +30,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.odoo.core.orm.fields.OColumn;
-import com.odoo.core.utils.ODateUtils;
+import com.odoo.odoorx.core.base.orm.fields.OColumn;
+import com.odoo.odoorx.core.base.utils.ODateUtils;
 
 public class OEditTextField extends LinearLayout implements IOControlData,
         View.OnFocusChangeListener {

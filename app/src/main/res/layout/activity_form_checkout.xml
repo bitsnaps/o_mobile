@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rxShop="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/toolbar" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey_5"
+        android:clipToPadding="false"
+        android:padding="@dimen/spacing_mlarge"
+        android:scrollbars="none"
+        android:scrollingCache="true"
+        rxShop:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                    android:id="@+id/act_checkout_customer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Customer"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text=""
+                    android:focusable="false"
+                    android:editable="false"
+                    android:drawableEnd="@drawable/ic_expand_arrow"
+                    android:drawableRight="@drawable/ic_expand_arrow"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                    android:id="@+id/act_checkout_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Email"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                    android:id="@+id/act_checkout_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Phone"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:layout_height="@dimen/spacing_mlarge"
+                android:layout_width="0dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_checkout_payment_type"
+                    style="@style/EditText.Flat.Grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:drawableEnd="@drawable/ic_expand_arrow"
+                    android:drawableRight="@drawable/ic_expand_arrow"
+                    android:hint="Payment Type"
+                    android:text=""
+                    android:minHeight="@dimen/spacing_xmlarge"
+                    android:focusable="false"
+                    android:editable="false" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                    android:id="@+id/act_checkout_total_cost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Total Cost"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:inputType="numberDecimal"
+                    android:text=""
+                    android:focusable="false"
+                    android:editable="false"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                    android:id="@+id/act_checkout_total_paid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Total Paid"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:inputType="numberDecimal"
+                    android:text=""
+                    android:focusable="false"
+                    android:editable="false"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
+
+
+
+<!--                                <View-->
+<!--                    android:layout_width="@dimen/spacing_large"-->
+<!--                    android:layout_height="0dp" />-->
+
+<!--                <com.google.android.material.textfield.TextInputLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1">-->
+
+<!--                    <AutoCompleteTextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:hint="Security code"-->
+<!--                        android:maxLines="1"-->
+<!--                        android:singleLine="true"-->
+<!--                        android:text="***" />-->
+
+<!--                </com.google.android.material.textfield.TextInputLayout>-->
+<!--            </LinearLayout>-->
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/spacing_mlarge" />
+
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <AutoCompleteTextView-->
+<!--                    android:id="@+id/bt_exp_date"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:drawableEnd="@drawable/ic_arrow_drop_grey"-->
+<!--                    android:drawableRight="@drawable/ic_arrow_drop_grey"-->
+<!--                    android:editable="false"-->
+<!--                    android:hint="Expiration date"-->
+<!--                    android:focusable="false"-->
+<!--                    android:maxLines="1"-->
+<!--                    android:singleLine="true"-->
+<!--                    android:text="Aug 15, 2023" />-->
+
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--            <View-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="@dimen/spacing_mlarge" />-->
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/spacing_mlarge" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                    android:id="@+id/act_checkout_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Delivery Address"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/spacing_mlarge" />
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <com.google.android.material.textfield.TextInputLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="3">-->
+
+<!--                    <AutoCompleteTextView-->
+<!--                        android:id="@+id/act_checkout_city_area"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:hint="City / Area"-->
+<!--                        android:maxLines="1"-->
+<!--                        android:singleLine="true" />-->
+
+<!--                </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--                <View-->
+<!--                    android:layout_width="@dimen/spacing_large"-->
+<!--                    android:layout_height="0dp" />-->
+
+<!--                <com.google.android.material.textfield.TextInputLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="2">-->
+
+<!--                    <AutoCompleteTextView-->
+<!--                        android:id="@+id/act_checkout_locality_bustop"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:hint="Locality / Nearest Bustop"-->
+<!--                        android:maxLines="1"-->
+<!--                        android:singleLine="true" />-->
+
+<!--                </com.google.android.material.textfield.TextInputLayout>-->
+<!--            </LinearLayout>-->
+
+<!--]['-l;o-->
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/spacing_mlarge" />
+            <Button
+                android:id="@+id/btn_checkout_process"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="-4dp"
+                android:layout_marginRight="-4dp"
+                android:background="@drawable/btn_rect_primary"
+                android:text="PROCESS"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@android:color/white"
+                android:enabled="false"/>
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
+</LinearLayout>

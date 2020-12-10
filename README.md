@@ -4,7 +4,7 @@
 Odoo Mobile v2.3.0 (Framework)
 ==============================
 
-Odoo Mobile is open-source framework allows you to integrate Odoo into your Android app.
+Odoo Mobile is open-source framework allows you to integrate Odoo into your Android rxShop.
 
 Odoo is a powerful open source framework. With help of this framework we can rapidly develop almost any application.
 
@@ -21,6 +21,10 @@ It has pre-developed services,providers, controls and more other features to mak
 CHANGELOG
 =========
 
+- November 2020
+    - Added Odoo 11.0 support
+    - Update some dependencies
+    - Fix some bugs
 - November 2016
     - odoo-rpc-v3 source merged with Framework
     - Added Odoo 10.0 support
@@ -42,17 +46,18 @@ SUPPORTED ODOO VERSIONS
 - [x] Odoo 8.0
 - [x] Odoo 9.0
 - [x] Odoo 10.0
+- [x] Odoo 11.0
 
 HOW TO START
 ============
 
-Learn more about the integrating odoo apps with your android app, accessing source code, and more at [http://mobile.odoo.co.in/v2/](http://mobile.odoo.co.in/v2/)
+Learn more about the integrating odoo apps with your android rxShop, accessing source code, and more at [http://mobile.odoo.co.in/v2/](http://mobile.odoo.co.in/v2/)
  
 REQUIRES
 ========
 
- - Java JDK 1.6 or greater
- - Android Studio 1.0+
+ - Java JDK 1.7 or greater
+ - Android Studio 3.0+
  - Android SDK [http://developer.android.com](http://developer.android.com)
 
 GIVE FEEDBACK

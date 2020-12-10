@@ -25,7 +25,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
-import com.odoo.core.utils.ODateUtils;
+import com.odoo.odoorx.core.base.utils.ODateUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

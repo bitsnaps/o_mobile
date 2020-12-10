@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rxShop="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_pos_order_sync_now"
+        android:orderInCategory="100"
+        android:title="Sync Now"
+        rxShop:showAsAction="never" />
+    <item
+        android:id="@+id/action_pos_order_send_offline"
+        android:orderInCategory="100"
+        android:title="Send Offline"
+        rxShop:showAsAction="never" />
+    <item
+        android:id="@+id/action_pos_order_delete"
+        android:orderInCategory="100"
+        android:title="Delete"
+        rxShop:showAsAction="never" />
+
+</menu>

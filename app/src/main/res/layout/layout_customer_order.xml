@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rxShop="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_3">
+
+
+<!--    <com.google.android.material.appbar.AppBarLayout-->
+<!--        android:id="@+id/appbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">-->
+
+<!--        <androidx.appcompat.widget.Toolbar-->
+<!--            android:id="@+id/toolbar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="?attr/actionBarSize"-->
+<!--            android:theme="@style/ThemeOverlay.AppCompat.Light"-->
+<!--            rxShop:contentInsetStartWithNavigation="0dp"-->
+<!--            rxShop:popupTheme="@style/ThemeOverlay.AppCompat.Light">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:background="@color/colorPrimaryDark"-->
+<!--                android:padding="10dp">-->
+
+<!--                <EditText-->
+<!--                    android:id="@+id/et_customer_order_search"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@android:color/white"-->
+<!--                    android:hint="Search for Medicine or Prescription here"-->
+<!--                    android:imeOptions="actionSearch"-->
+<!--                    android:maxLines="1"-->
+<!--                    android:singleLine="true"-->
+<!--                    android:clickable="true"-->
+<!--                    android:inputType="none"-->
+<!--                    android:drawableRight="@drawable/ic_microphone"-->
+<!--                    android:drawableLeft="@drawable/ic_action_search">-->
+
+<!--                </EditText>-->
+
+<!--            </LinearLayout>-->
+
+<!--        </androidx.appcompat.widget.Toolbar>-->
+
+<!--    </com.google.android.material.appbar.AppBarLayout>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_advertisement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingLeft="@dimen/spacing_xmedium"
+                android:paddingTop="@dimen/spacing_medium"
+                android:paddingRight="@dimen/spacing_xmedium"
+                android:paddingBottom="@dimen/spacing_medium"
+                android:scrollbars="none" />
+
+        </LinearLayout>
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            style="@style/RippleStyleBlack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    rxShop:cardCornerRadius="6dp"
+                    rxShop:cardElevation="0dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        >
+
+                    <ImageView
+                        android:id="@+id/image"
+                        android:layout_width="60dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_presription" />
+
+                    <TextView
+                        android:id="@+id/brief"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="Upload your Prescription"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                        android:textColor="@color/grey_60" />
+
+                        <Button
+                            android:id="@+id/btn_customer_order_upload_prescription"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:layout_gravity="right"
+                            android:text="UPLOAD"
+                            android:theme="@style/Button.White.Primary" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/spacing_large"
+            android:paddingRight="@dimen/spacing_large">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shop By Category"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Popular Categories"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/grey_40" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/rv_category"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:clipToPadding="false"-->
+<!--                android:paddingLeft="@dimen/spacing_xmedium"-->
+<!--                android:paddingTop="@dimen/spacing_medium"-->
+<!--                android:paddingRight="@dimen/spacing_xmedium"-->
+<!--                android:paddingBottom="@dimen/spacing_medium"-->
+<!--                android:scrollbars="none" />-->
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

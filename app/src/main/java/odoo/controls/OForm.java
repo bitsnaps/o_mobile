@@ -29,21 +29,20 @@ import android.os.Build;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.odoo.R;
-import com.odoo.base.addons.mail.widget.MailChatterView;
-import com.odoo.core.orm.ODataRow;
-import com.odoo.core.orm.OModel;
-import com.odoo.core.orm.OValues;
-import com.odoo.core.orm.fields.OColumn;
-import com.odoo.core.orm.fields.utils.DomainFilterParser;
-import com.odoo.core.utils.OResource;
+import com.odoo.odoorx.rxshop.R;
+import com.odoo.rxshop.mail.widget.MailChatterView;
+import com.odoo.odoorx.core.base.orm.ODataRow;
+import com.odoo.odoorx.core.base.orm.OModel;
+import com.odoo.odoorx.core.base.orm.OValues;
+import com.odoo.odoorx.core.base.orm.fields.OColumn;
+import com.odoo.odoorx.core.base.orm.fields.utils.DomainFilterParser;
+import com.odoo.odoorx.core.base.utils.OResource;
 
 import java.util.HashMap;
 
@@ -184,7 +183,7 @@ public class OForm extends LinearLayout {
             }
         }
 
-        // Adding chatter view if model requested
+        // Adding chatter view if modelName requested
         if (loadChatter) {
             if (!mEditable) {
                 if (model != null && model.hasMailChatter()
@@ -226,6 +225,8 @@ public class OForm extends LinearLayout {
         OValues values = getValues(false);
         if (mRecord != null && values != null) {
             for (String key : values.keys()) {
+
+                System.err.println(key);
                 if (values.get(key).toString().equals("false") &&
                         !mRecord.get(key).toString().equals("false")) {
                     values.put(key, mRecord.get(key));

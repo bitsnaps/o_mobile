@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:rxShop="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
@@ -18,33 +18,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:modelName="res.partner">
+            rxShop:modelName="res.partner">
 
             <odoo.controls.OField
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:fieldName="is_company"
-                app:fieldTextAppearance="?android:textAppearanceMedium"
-                app:showLabel="false"></odoo.controls.OField>
+                rxShop:fieldName="is_company"
+                rxShop:fieldTextAppearance="?android:textAppearanceMedium"
+                rxShop:showLabel="false"></odoo.controls.OField>
 
             <odoo.controls.OField
                 android:id="@+id/website"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:fieldLabelColor="@color/theme_secondary"
-                app:fieldName="website"
-                app:fieldTextAppearance="?android:textAppearanceMedium"
-                app:iconResource="@drawable/ic_action_universe"></odoo.controls.OField>
+                rxShop:fieldLabelColor="@color/colorSecondary"
+                rxShop:fieldName="website"
+                rxShop:fieldTextAppearance="?android:textAppearanceMedium"
+                rxShop:iconResource="@drawable/ic_action_universe"></odoo.controls.OField>
 
 
             <odoo.controls.OField
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:fieldLabelColor="@color/theme_secondary"
-                app:fieldName="email"
-                app:fieldTextAppearance="?android:textAppearanceMedium"
-                app:iconResource="@drawable/ic_action_message"></odoo.controls.OField>
+                rxShop:fieldLabelColor="@color/colorSecondary"
+                rxShop:fieldName="email"
+                rxShop:fieldTextAppearance="?android:textAppearanceMedium"
+                rxShop:iconResource="@drawable/ic_action_message"></odoo.controls.OField>
 
             <View
                 style="@style/ViewSeparator"
@@ -54,19 +54,19 @@
                 android:id="@+id/phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:fieldLabelColor="@color/theme_secondary"
-                app:fieldName="phone"
-                app:fieldTextAppearance="?android:textAppearanceMedium"
-                app:iconResource="@drawable/ic_action_phone"></odoo.controls.OField>
+                rxShop:fieldLabelColor="@color/colorSecondary"
+                rxShop:fieldName="phone"
+                rxShop:fieldTextAppearance="?android:textAppearanceMedium"
+                rxShop:iconResource="@drawable/ic_action_phone"></odoo.controls.OField>
 
             <odoo.controls.OField
                 android:id="@+id/mobile_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:fieldLabelColor="@color/theme_secondary"
-                app:fieldName="mobile"
-                app:fieldTextAppearance="?android:textAppearanceMedium"
-                app:iconResource="@drawable/ic_action_mobile"></odoo.controls.OField>
+                rxShop:fieldLabelColor="@color/colorSecondary"
+                rxShop:fieldName="mobile"
+                rxShop:fieldTextAppearance="?android:textAppearanceMedium"
+                rxShop:iconResource="@drawable/ic_action_mobile"></odoo.controls.OField>
 
             <View
                 style="@style/ViewSeparator"
@@ -76,25 +76,25 @@
                 android:id="@+id/full_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:controlLabel="@string/label_address"
-                app:fieldLabelColor="@color/theme_secondary"
-                app:fieldName="full_address"
-                app:fieldTextAppearance="?android:textAppearanceMedium"
-                app:iconResource="@drawable/ic_action_location"></odoo.controls.OField>
+                rxShop:controlLabel="@string/label_address"
+                rxShop:fieldLabelColor="@color/colorSecondary"
+                rxShop:fieldName="full_address"
+                rxShop:fieldTextAppearance="?android:textAppearanceMedium"
+                rxShop:iconResource="@drawable/ic_action_location"></odoo.controls.OField>
 
             <odoo.controls.OField
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:fieldLabelColor="@color/theme_secondary"
-                app:fieldName="state_id"
-                app:fieldTextAppearance="?android:textAppearanceMedium"></odoo.controls.OField>
+                rxShop:fieldLabelColor="@color/colorSecondary"
+                rxShop:fieldName="state_id"
+                rxShop:fieldTextAppearance="?android:textAppearanceMedium"></odoo.controls.OField>
 
             <odoo.controls.OField
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:fieldLabelColor="@color/theme_secondary"
-                app:fieldName="country_id"
-                app:fieldTextAppearance="?android:textAppearanceMedium"></odoo.controls.OField>
+                rxShop:fieldLabelColor="@color/colorSecondary"
+                rxShop:fieldName="country_id"
+                rxShop:fieldTextAppearance="?android:textAppearanceMedium"></odoo.controls.OField>
 
             <View
                 style="@style/ViewSeparator"
@@ -103,10 +103,10 @@
             <odoo.controls.OField
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:fieldLabelColor="@color/theme_secondary"
-                app:fieldName="comment"
-                app:fieldTextAppearance="?android:textAppearanceMedium"
-                app:iconResource="@drawable/ic_action_notes_content"></odoo.controls.OField>
+                rxShop:fieldLabelColor="@color/colorSecondary"
+                rxShop:fieldName="comment"
+                rxShop:fieldTextAppearance="?android:textAppearanceMedium"
+                rxShop:iconResource="@drawable/ic_action_notes_content"></odoo.controls.OField>
         </odoo.controls.OForm>
     </LinearLayout>
     <!--Edit Layout-->
@@ -124,7 +124,7 @@
             android:layout_height="wrap_content"
             android:background="#ffffff"
             android:orientation="vertical"
-            app:modelName="res.partner">
+            rxShop:modelName="res.partner">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -137,10 +137,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/default_8dp"
-                    app:fieldName="name"
-                    app:fieldTextAppearance="?android:textAppearanceLarge"
-                    app:showIcon="false"
-                    app:showLabel="false"></odoo.controls.OField>
+                    rxShop:fieldName="name"
+                    rxShop:fieldTextAppearance="?android:textAppearanceLarge"
+                    rxShop:showIcon="false"
+                    rxShop:showLabel="false"></odoo.controls.OField>
 
                 <View style="@style/ViewSeparator" />
 
@@ -148,61 +148,18 @@
                     android:id="@+id/is_company_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:fieldName="is_company"
-                    app:fieldTextAppearance="?android:textAppearanceMedium"
-                    app:showLabel="false"></odoo.controls.OField>
+                    rxShop:fieldName="is_company"
+                    rxShop:fieldTextAppearance="?android:textAppearanceMedium"
+                    rxShop:showLabel="false"></odoo.controls.OField>
 
-                <odoo.controls.OField
-                    android:id="@+id/parent_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:fieldName="parent_id"
-                    app:fieldTextAppearance="?android:textAppearanceMedium"
-                    app:showLabel="false"
-                    app:widgetType="SearchableLive"></odoo.controls.OField>
-
-                <View
-                    style="@style/ViewSeparator"
-                    android:layout_marginLeft="72dp" />
-
-                <odoo.controls.OField
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:fieldName="street"
-                    app:fieldTextAppearance="?android:textAppearanceMedium"
-                    app:iconResource="@drawable/ic_action_location"></odoo.controls.OField>
-
-                <odoo.controls.OField
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:fieldName="street2"
-                    app:fieldTextAppearance="?android:textAppearanceMedium"></odoo.controls.OField>
-
-                <odoo.controls.OField
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:fieldName="city"
-                    app:fieldTextAppearance="?android:textAppearanceMedium"></odoo.controls.OField>
-
-                <odoo.controls.OField
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:fieldName="zip"
-                    app:fieldTextAppearance="?android:textAppearanceMedium"></odoo.controls.OField>
-
-                <odoo.controls.OField
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:fieldName="state_id"
-                    app:widgetType="SearchableLive"
-                    app:fieldTextAppearance="?android:textAppearanceMedium"></odoo.controls.OField>
-
-                <odoo.controls.OField
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:fieldName="country_id"
-                    app:fieldTextAppearance="?android:textAppearanceMedium"
-                    app:widgetType="SearchableLive"></odoo.controls.OField>
+<!--                <odoo.controls.OField-->
+<!--                    android:id="@+id/parent_id"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    rxShop:fieldName="parent_id"-->
+<!--                    rxShop:fieldTextAppearance="?android:textAppearanceMedium"-->
+<!--                    rxShop:showLabel="false"-->
+<!--                    rxShop:widgetType="SearchableLive"></odoo.controls.OField>-->
 
                 <View
                     style="@style/ViewSeparator"
@@ -211,16 +168,59 @@
                 <odoo.controls.OField
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:fieldName="email"
-                    app:fieldTextAppearance="?android:textAppearanceMedium"
-                    app:iconResource="@drawable/ic_action_message"></odoo.controls.OField>
+                    rxShop:fieldName="street"
+                    rxShop:fieldTextAppearance="?android:textAppearanceMedium"
+                    rxShop:iconResource="@drawable/ic_action_location"></odoo.controls.OField>
 
                 <odoo.controls.OField
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:fieldName="website"
-                    app:fieldTextAppearance="?android:textAppearanceMedium"
-                    app:iconResource="@drawable/ic_action_universe"></odoo.controls.OField>
+                    rxShop:fieldName="street2"
+                    rxShop:fieldTextAppearance="?android:textAppearanceMedium"></odoo.controls.OField>
+
+                <odoo.controls.OField
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    rxShop:fieldName="city"
+                    rxShop:fieldTextAppearance="?android:textAppearanceMedium"></odoo.controls.OField>
+
+                <odoo.controls.OField
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    rxShop:fieldName="zip"
+                    rxShop:fieldTextAppearance="?android:textAppearanceMedium"></odoo.controls.OField>
+
+                <odoo.controls.OField
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    rxShop:fieldName="state_id"
+                    rxShop:widgetType="SearchableLive"
+                    rxShop:fieldTextAppearance="?android:textAppearanceMedium"></odoo.controls.OField>
+
+                <odoo.controls.OField
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    rxShop:fieldName="country_id"
+                    rxShop:fieldTextAppearance="?android:textAppearanceMedium"
+                    rxShop:widgetType="SearchableLive"></odoo.controls.OField>
+
+                <View
+                    style="@style/ViewSeparator"
+                    android:layout_marginLeft="72dp" />
+
+                <odoo.controls.OField
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    rxShop:fieldName="email"
+                    rxShop:fieldTextAppearance="?android:textAppearanceMedium"
+                    rxShop:iconResource="@drawable/ic_action_message"></odoo.controls.OField>
+
+                <odoo.controls.OField
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    rxShop:fieldName="website"
+                    rxShop:fieldTextAppearance="?android:textAppearanceMedium"
+                    rxShop:iconResource="@drawable/ic_action_universe"></odoo.controls.OField>
 
                 <View
                     style="@style/ViewSeparator"
@@ -230,16 +230,16 @@
                 <odoo.controls.OField
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:fieldName="phone"
-                    app:fieldTextAppearance="?android:textAppearanceMedium"
-                    app:iconResource="@drawable/ic_action_phone"></odoo.controls.OField>
+                    rxShop:fieldName="phone"
+                    rxShop:fieldTextAppearance="?android:textAppearanceMedium"
+                    rxShop:iconResource="@drawable/ic_action_phone"></odoo.controls.OField>
 
                 <odoo.controls.OField
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:fieldName="mobile"
-                    app:fieldTextAppearance="?android:textAppearanceMedium"
-                    app:iconResource="@drawable/ic_action_mobile"></odoo.controls.OField>
+                    rxShop:fieldName="mobile"
+                    rxShop:fieldTextAppearance="?android:textAppearanceMedium"
+                    rxShop:iconResource="@drawable/ic_action_mobile"></odoo.controls.OField>
 
                 <View
                     style="@style/ViewSeparator"
@@ -248,9 +248,9 @@
                 <odoo.controls.OField
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:fieldName="comment"
-                    app:fieldTextAppearance="?android:textAppearanceMedium"
-                    app:iconResource="@drawable/ic_action_notes_content"></odoo.controls.OField>
+                    rxShop:fieldName="comment"
+                    rxShop:fieldTextAppearance="?android:textAppearanceMedium"
+                    rxShop:iconResource="@drawable/ic_action_notes_content"></odoo.controls.OField>
             </LinearLayout>
         </odoo.controls.OForm>
 

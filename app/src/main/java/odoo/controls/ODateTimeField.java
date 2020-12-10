@@ -31,8 +31,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.odoo.core.orm.fields.OColumn;
-import com.odoo.core.utils.ODateUtils;
+import com.odoo.odoorx.core.base.orm.fields.OColumn;
+import com.odoo.odoorx.core.base.utils.ODateUtils;
 
 import java.util.Date;
 

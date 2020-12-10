@@ -1,37 +1,88 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'checkstyle'
+
+// apply plugin: 'groovyx.android'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25'
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
     defaultConfig {
         useLibrary 'org.apache.http.legacy'
-        manifestPlaceholders = [applicationName: "Odoo"]
-        applicationId "com.odoo"
-        minSdkVersion 14
-        targetSdkVersion 25
+        manifestPlaceholders = [applicationName: "Rx One"]
+        applicationId "com.odoo.odoorx.rxshop"
+        minSdkVersion 16
         versionCode 7
         versionName "2.3.0"
     }
     buildTypes {
         debug {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
+            multiDexEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        sourceCompatibility = '1.7'
+        targetCompatibility = '1.7'
     }
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.android.support:cardview-v7:25.1.0'
-    compile 'com.google.android.gms:play-services-gcm:10.0.1'
-    compile 'com.android.support:design:25.1.0'
-    compile 'com.android.volley:volley:1.0.0'
-    compile project(':intro-slider-lib')
+    implementation 'com.facebook.stetho:stetho:1.5.1'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.google.android.gms:play-services-gcm:10.0.1'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.klinkerapps:android-smsmms:3.4.6'
+    implementation 'com.klinkerapps:logger:+'
+    implementation 'com.android.volley:volley:1.1.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation project(':intro-slider-lib')
+//    implementation project(':odoorxcore')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation 'androidx.core:core-ktx:1.0.2'
+
+    // google support library ---------------------------------------------------------------------
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.legacy:legacy-support-v13:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.vectordrawable:vectordrawable:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+//    // google maps library ------------------------------------------------------------------------
+//    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+//    implementation('com.google.android.libraries.places:places:1.0.0') {
+//        exclude module: 'glide'
+//    }
+
+    // third party dependencies -------------------------------------------------------------------
+    implementation 'com.balysv:material-ripple:1.0.2'                  // ripple effect
+    implementation 'com.github.bumptech.glide:glide:3.7.0'             // imageMedium loader
+    implementation 'com.wdullaer:materialdatetimepicker:3.2.0'         // date & time picker
+    implementation 'com.mikhaellopez:circularimageview:3.2.0'          // circle imageMedium view
+    implementation 'com.github.pchmn:MaterialChipsInput:1.0.5'         // material chip
+    implementation 'com.hootsuite.android:nachos:1.1.1'                // material chips
+    implementation 'com.google.android:flexbox:0.3.2'                  // google flexible box
+    implementation 'com.crystal:crystalrangeseekbar:1.1.3'             // range seek bar
+    implementation 'com.github.avito-tech:krop:0.5'                    // image crop
+
+}
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots/'
+    }
+    maven { url "https://jitpack.io" }
+
 }

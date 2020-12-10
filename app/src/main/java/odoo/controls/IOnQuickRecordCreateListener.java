@@ -19,7 +19,7 @@
  */
 package odoo.controls;
 
-import com.odoo.core.orm.ODataRow;
+import com.odoo.odoorx.core.base.orm.ODataRow;
 
 public interface IOnQuickRecordCreateListener {
     public void onRecordCreated(ODataRow row);

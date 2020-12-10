@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/rel"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/transparent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:id="@+id/ll_payment_success_success"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BALANCE"
+            android:textColor="#000"
+            android:layout_marginTop="100dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_check_mark"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Done"
+            android:textStyle="bold"
+            android:textColor="#383737"
+            android:layout_marginTop="6dp"
+            android:layout_gravity="center_horizontal"
+            />
+
+        <TextView
+            android:id="@+id/et_payment_success_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₦110.00"
+            android:layout_gravity="center"
+            android:textColor="#585757"
+            android:inputType="numberDecimal"
+            android:textSize="40sp"
+            />
+
+        <TextView
+            android:id="@+id/et_payment_success_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change: ₦ 110.00"
+            android:textColor="#000"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="center_horizontal"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        >
+        <Button
+            android:id="@+id/receipt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Receipt"
+            android:background="@drawable/bt_rounded_transparent"
+            android:textAllCaps="false"
+            android:layout_marginTop="@dimen/default_6dp"
+            android:layout_marginBottom="@dimen/default_6dp"
+            android:layout_marginLeft="@dimen/default_6dp"
+            android:layout_marginRight="@dimen/default_6dp"
+            />
+
+
+    <Button
+        android:id="@+id/btn_payment_success_new_sale"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="Start a new sale"
+        android:textSize="20sp"
+        android:textColor="@color/white_transparency"
+        android:background="@drawable/bt_rounded_primary"
+        android:textAllCaps="false"
+        />
+    </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_payment_success_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include
+            layout="@layout/layout_loading_progress"
+            />
+    </LinearLayout>
+</RelativeLayout>
