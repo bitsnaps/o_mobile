@@ -220,8 +220,10 @@ public class CustomerList2 extends BaseFragment implements ISyncStatusObserverLi
             if (itemsLayout != null)
             itemsLayout.setVisibility(View.GONE);
         } else {
-            noItemLayout.setVisibility(View.GONE);
-            itemsLayout.setVisibility(View.VISIBLE);
+            if (noItemLayout != null)
+                noItemLayout.setVisibility(View.GONE);
+            if (itemsLayout != null)
+                itemsLayout.setVisibility(View.VISIBLE);
         }
     }
 

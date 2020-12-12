@@ -210,7 +210,7 @@ public class OdooLogin extends AppCompatActivity implements View.OnClickListener
 
     // User Login
     private void loginUser() {
-        Log.v("", "LoginUser()");
+        Log.d("DEBUG", "LoginUser()");
         String serverURL = createServerURL((mSelfHostedURL) ? edtSelfHosted.getText().toString() :
                 OConstants.URL_ODOO);
         List<String> databases = userAccount.getDatabases();

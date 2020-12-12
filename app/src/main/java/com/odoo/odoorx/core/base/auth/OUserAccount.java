@@ -12,8 +12,10 @@ import com.odoo.odoorx.core.base.rpc.listeners.IOdooConnectionListener;
 import com.odoo.odoorx.core.base.rpc.listeners.IOdooLoginCallback;
 import com.odoo.odoorx.core.base.rpc.listeners.OdooError;
 import com.odoo.odoorx.core.base.support.OUser;
+import com.odoo.odoorx.core.config.OConstants;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class OUserAccount implements IOdooLoginCallback, IOdooConnectionListener {

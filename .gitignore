@@ -62,6 +62,8 @@ proguard/
 .navigation/
 
 .idea/
+*.iml
+app/app.iml
 
 # Mac
 .DS_Store
